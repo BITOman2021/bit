@@ -3,7 +3,7 @@ import { addDays, formatDateOnly, parseDateOnly, startOfMonth, startOfYear, toda
 import { allocateByWeights, type Baisa, formatOMR, sum, toBaisa } from "@/lib/money";
 import { assertCan, type Ctx } from "../context";
 import { prisma } from "../db";
-import { notFound } from "../errors";
+import { forbidden, notFound } from "../errors";
 import { accountBalances, accountLedger, balanceSheet, cashFlow, incomeStatement, trialBalance } from "./accounting";
 import { arrears } from "./billing";
 import { resolvePropertyIds } from "./dashboard";
@@ -514,10 +514,18 @@ export async function runReport(ctx: Ctx, key: string, params: ReportParams): Pr
   assertCan(ctx, "report.read");
   const def = getReportDef(key);
   if (!def) throw notFound("التقرير غير موجود / Report not found");
+  if (!listReportDefs(ctx).some((d) => d.key === key)) throw forbidden();
   const clean: ReportParams = {};
   for (const k of def.params) {
     const v = params[k];
     if (v && /^[\w-]{1,40}$/.test(v)) clean[k] = v;
+  }
+  // إظهار الفترة الفعلية المستخدمة عند عدم تحديدها (لتوثيق التقرير)
+  if (!["lease-expiry", "warranty-insurance", "tenant-statement"].includes(key)) {
+    const today = todayInZone(ctx.timezone);
+    if (def.params.includes("from") && !clean.from) clean.from = formatDateOnly(startOfYear(today));
+    if (def.params.includes("to") && !clean.to) clean.to = formatDateOnly(today);
+    if (def.params.includes("asOf") && !clean.asOf) clean.asOf = formatDateOnly(today);
   }
   const r = await def.run(ctx, clean);
   return { ...r, key, titleAr: def.titleAr, titleEn: def.titleEn, filters: clean as Record<string, string>, generatedAt: new Date() };

@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* ===== نظام التصميم: أزرق داكن + ذهبي + أبيض ===== */
+@theme {
+  --color-navy-950: #050f1f;
+  --color-navy-900: #0b1f3a;
+  --color-navy-800: #12294b;
+  --color-navy-700: #1b3a66;
+  --color-navy-600: #26508a;
+  --color-navy-100: #e6ecf5;
+  --color-navy-50: #f3f6fb;
+  --color-gold-700: #8a6a1f;
+  --color-gold-600: #a88330;
+  --color-gold-500: #c8a24a;
+  --color-gold-300: #e3cc8f;
+  --color-gold-100: #f7efd9;
+  --color-ink: #1a2433;
+  --color-muted: #5d6b80;
+  --color-line: #dfe5ee;
+  --color-surface: #ffffff;
+  --color-canvas: #f6f8fb;
+  --color-success: #1f7a4d;
+  --color-success-bg: #e5f4ec;
+  --color-warning: #9a6200;
+  --color-warning-bg: #fdf1dc;
+  --color-danger: #b42318;
+  --color-danger-bg: #fdeceb;
+  --color-info: #26508a;
+  --color-info-bg: #e6ecf5;
+  --font-sans: "Segoe UI", "SF Arabic", "Geeza Pro", "Noto Sans Arabic", "Noto Sans", Tahoma, system-ui, -apple-system, sans-serif;
+  --radius-card: 14px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    font-size: 15px;
+  }
+  @media (min-width: 768px) {
+    html { font-size: 15.5px; }
+  }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    min-height: 100dvh;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-gold-500);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  /* الأرقام والمبالغ بخط ثابت العرض لسهولة المقارنة */
+  .num { font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; }
+  input, select, textarea { font-size: 16px; } /* يمنع تكبير iOS عند التركيز */
+  @media (min-width: 768px) { input, select, textarea { font-size: 0.95rem; } }
+}
+
+@utility card {
+  @apply bg-surface rounded-[var(--radius-card)] border border-line shadow-[0_1px_2px_rgba(11,31,58,0.04)];
+}
+@utility input {
+  @apply w-full rounded-lg border border-line bg-white px-3 py-2.5 text-ink placeholder:text-muted/70
+      focus:border-navy-600 focus:outline-none focus:ring-2 focus:ring-navy-600/20 disabled:bg-navy-50 disabled:text-muted;
+}
+@utility label {
+  @apply mb-1.5 block text-sm font-semibold text-ink;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition
+      disabled:cursor-not-allowed disabled:opacity-60 min-h-[42px] select-none whitespace-nowrap;
+}
+@utility btn-primary {
+  @apply btn bg-navy-900 text-white hover:bg-navy-800 active:bg-navy-950;
+}
+@utility btn-gold {
+  @apply btn bg-gold-500 text-navy-950 hover:bg-gold-600 hover:text-white;
+}
+@utility btn-secondary {
+  @apply btn border border-line bg-white text-navy-900 hover:bg-navy-50;
+}
+@utility btn-ghost {
+  @apply btn text-navy-700 hover:bg-navy-50;
+}
+@utility btn-danger {
+  @apply btn bg-danger text-white hover:opacity-90;
+}
+@utility btn-sm {
+  @apply min-h-[34px]! px-3! py-1.5! text-xs!;
+}
+@utility dtable {
+  @apply w-full border-collapse text-sm;
+}
+@utility link {
+  @apply font-semibold text-navy-700 underline-offset-2 hover:underline;
+}
+@utility kpi {
+  @apply card p-4;
+}
+
+@layer components {
+  .input[aria-invalid="true"] { @apply border-danger ring-2 ring-danger/15; }
+  .dtable th { @apply sticky top-0 z-[1] bg-navy-50 px-3 py-2.5 text-start text-xs font-bold uppercase tracking-wide text-muted whitespace-nowrap; }
+  .dtable td { @apply border-t border-line px-3 py-2.5 align-top; }
+  .dtable tbody tr:hover { @apply bg-navy-50/60; }
+}
+
+/* ===== الطباعة ===== */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  body { background: #fff !important; font-size: 11pt; }
+  .no-print, nav, aside, header.app-header, .bottom-nav { display: none !important; }
+  .print-only { display: block !important; }
+  .card { box-shadow: none !important; border-color: #ccc !important; }
+  .dtable th { position: static; background: #eee !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: inherit !important; text-decoration: none !important; }
+  main { padding: 0 !important; margin: 0 !important; }
+}
+.print-only { display: none; }

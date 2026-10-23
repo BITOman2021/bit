@@ -1,0 +1,33 @@
+# تشغيل الإنتاج: docker compose up -d --build
+# ضع الأسرار في ملف .env.production (لا يُرفع إلى Git)
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: gsw_erp
+      POSTGRES_USER: gsw
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gsw -d gsw_erp"]
+      interval: 10s
+      retries: 5
+    # لا تنشر منفذ قاعدة البيانات للعموم
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env.production
+    environment:
+      DATABASE_URL: postgresql://gsw:${POSTGRES_PASSWORD}@db:5432/gsw_erp?schema=public
+    volumes:
+      - storage:/data/storage
+    ports:
+      - "127.0.0.1:3000:3000"   # خلف reverse proxy مع HTTPS (Caddy/Nginx)
+volumes:
+  pgdata:
+  storage:
