@@ -1,6 +1,6 @@
 import data from './storyboard.json';
 
-export type DialogueLine = {id: string; from: number; to: number; text: string; voiceText?: string};
+export type DialogueLine = {id: string; from: number; to: number; text: string; msa?: string};
 export type Scene = {
   id: string;
   title: string;

@@ -9,7 +9,8 @@
     "typecheck": "tsc -p .",
     "render": "node scripts/scan-voice.mjs && remotion render src/index.ts LoliKidsLaunch out/loli_kids_launch_60s.mp4",
     "preview": "bash scripts/preview.sh out/loli_kids_launch_60s.mp4",
-    "voice": "python3 scripts/make_voice.py && python3 scripts/make_audio.py && node scripts/scan-voice.mjs"
+    "voice": "python3 scripts/make_voice_elevenlabs.py && python3 scripts/make_audio.py && node scripts/scan-voice.mjs",
+    "deliver": "bash scripts/export_deliverables.sh"
   },
   "license": "ISC",
   "dependencies": {
