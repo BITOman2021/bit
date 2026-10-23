@@ -100,7 +100,7 @@ loli_kids_launch/
 
 | layer | source | status |
 |---|---|---|
-| Loli's voice (Omani Gulf boy) | ElevenLabs via `remotion/scripts/make_voice_elevenlabs.py` → `public/audio/voice/<lineId>.wav` | ⏳ **waiting for ElevenLabs access** (see below) |
+| Loli's voice (Omani Gulf boy) | ElevenLabs via `remotion/scripts/make_voice_elevenlabs.py` → `public/audio/voice/<lineId>.wav` | ✅ ElevenLabs library voice **ALI** (Omani accent, `ru5xIfU6L5uUJi5V0843`, `eleven_multilingual_v2`) |
 | Music | `public/audio/music.wav`: original, synthesised by `make_audio.py` (C major, 120 bpm, "Lo-li Kids!" signature at 00:58) | ✅ |
 | SFX | `public/audio/sfx.wav`: whooshes, chimes, shimmer, pops, flutter, hops, water, footsteps, dings | ✅ |
 
@@ -113,6 +113,22 @@ The music ducks to 22% and the SFX step back while Loli speaks (0.25 s ramps).
 earlier Modern Standard Arabic lines are kept in `dialogue[].msa`. The previous
 MSA voice-over (offline Piper TTS) is archived in
 `public/audio/voice_msa_piper/` and is what the currently committed MP4 uses.
+
+### Current voice-over
+
+All 12 Omani lines were generated with the ElevenLabs connector (flow
+`JtHlgL13dRBkzzvxh0Yu`), then mastered and timed with
+`python3 scripts/make_voice_elevenlabs.py --from-takes .cache/elevenlabs/takes`.
+No pitch shifting; scenes 1 and 6 needed only ×1.05 and ×1.03 tempo. Notes:
+
+- ElevenLabs **refused to design a child's voice** ("this prompt potentially
+  doesn't follow our safety guidelines"), so ALI is a young adult Omani voice
+  performing the role. A real boy's voice requires a recording, made with a
+  guardian's consent.
+- Scene 6's approved lines ran 12.2 s in a 10 s scene, so
+  «يالله، نبدأ مغامرتنا!» was dropped (`dialogue[].approved` keeps the full line).
+- QC: all automated checks pass (`out/QC_REPORT.md`). Listening checks are
+  still for a native Omani speaker.
 
 ### Generating the Omani voice (ElevenLabs)
 

@@ -14,6 +14,7 @@ Usage:
   python3 scripts/make_voice_elevenlabs.py --design-presets   # the 3 approved descriptions
   python3 scripts/make_voice_elevenlabs.py --create <generated_voice_id> --name "Loli (OM boy)"
   python3 scripts/make_voice_elevenlabs.py                                       # all 12 lines
+  python3 scripts/make_voice_elevenlabs.py --from-takes .cache/elevenlabs/takes  # use downloaded takes
 
 Per line: TTS (with previous/next line as context for consistent delivery and a
 fixed seed) -> trim silence -> gentle mastering (high-pass, light EQ, de-ess,
@@ -161,10 +162,13 @@ def build_master_stem(placements, path):
     os.remove(tmp)
 
 
-def generate():
-    key()
-    voice_id = os.environ.get("ELEVENLABS_VOICE_ID") or sys.exit("ELEVENLABS_VOICE_ID is not set (see --list-voices / --design).")
-    model = os.environ.get("ELEVENLABS_MODEL", "eleven_multilingual_v2")
+def generate(takes_dir=None):
+    """takes_dir: use already-generated takes (<lineId>.mp3, e.g. downloaded from the
+    ElevenLabs connector) instead of calling the API."""
+    if not takes_dir:
+        key()
+        voice_id = os.environ.get("ELEVENLABS_VOICE_ID") or sys.exit("ELEVENLABS_VOICE_ID is not set (see --list-voices / --design).")
+        model = os.environ.get("ELEVENLABS_MODEL", "eleven_multilingual_v2")
     os.makedirs(VOICE_OUT, exist_ok=True)
     os.makedirs(MASTER_DIR, exist_ok=True)
     lines = all_lines()
@@ -176,7 +180,12 @@ def generate():
             k = lines.index((scene, line))
             prev_text = lines[k - 1][1]["text"] if k > 0 else None
             next_text = lines[k + 1][1]["text"] if k + 1 < len(lines) else None
-            raw = tts(voice_id, model, line, prev_text, next_text)
+            if takes_dir:
+                raw = os.path.join(takes_dir, f"{line['id']}.mp3")
+                if not os.path.exists(raw):
+                    sys.exit(f"missing take {raw}")
+            else:
+                raw = tts(voice_id, model, line, prev_text, next_text)
             dst = os.path.join(MASTER_DIR, f"{line['id']}.wav")
             master(raw, dst)
             masters.append(dst)
@@ -216,6 +225,7 @@ if __name__ == "__main__":
     ap.add_argument("--design", metavar="DESCRIPTION")
     ap.add_argument("--design-presets", action="store_true", help="design every approved preset in src/data/voice_presets.json")
     ap.add_argument("--create", metavar="GENERATED_VOICE_ID")
+    ap.add_argument("--from-takes", metavar="DIR", help="master/time existing <lineId>.mp3 takes instead of calling the API")
     ap.add_argument("--name", default="Loli - Omani boy")
     ap.add_argument("--description", default="Warm, bright young Omani boy, natural Omani Gulf Arabic accent, friendly and expressive cartoon lead")
     a = ap.parse_args()
@@ -231,4 +241,4 @@ if __name__ == "__main__":
     elif a.create:
         create(a.create, a.name, a.description)
     else:
-        generate()
+        generate(a.from_takes)

@@ -26,7 +26,7 @@ export const Scene01Welcome: React.FC = () => {
       <MagicalBackground cam={cam} />
       <SparkleParticles seed="s1" strength={1} />
       <CameraLayer cam={cam}>
-        <SparkleGather start={0.1} dur={0.9} cx={540} cy={1150} seed="s1g" />
+        <SparkleGather start={0} dur={0.5} cx={540} cy={1150} seed="s1g" />
         <LoliCharacter
           sceneId="s1"
           x={540}
