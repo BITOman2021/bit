@@ -11,6 +11,7 @@ and network access to api.elevenlabs.io.
 Usage:
   python3 scripts/make_voice_elevenlabs.py --list-voices
   python3 scripts/make_voice_elevenlabs.py --design "warm young Omani boy ..."   # saves previews
+  python3 scripts/make_voice_elevenlabs.py --design-presets   # the 3 approved descriptions
   python3 scripts/make_voice_elevenlabs.py --create <generated_voice_id> --name "Loli (OM boy)"
   python3 scripts/make_voice_elevenlabs.py                                       # all 12 lines
 
@@ -104,13 +105,13 @@ def list_voices():
         print(f"{v['voice_id']}  {v['name']}  [{labels}]")
 
 
-def design(description):
+def design(description, tag="custom"):
     sample = " ".join(l["text"] for _, l in all_lines()[:3])
     data = json.loads(call("POST", "/text-to-voice/design",
                            {"voice_description": description, "text": sample, "model_id": "eleven_multilingual_ttv_v2"}))
     os.makedirs(os.path.join(ROOT, "out", "voice_previews"), exist_ok=True)
     for i, p in enumerate(data.get("previews", [])):
-        path = os.path.join(ROOT, "out", "voice_previews", f"preview_{i + 1}_{p['generated_voice_id']}.mp3")
+        path = os.path.join(ROOT, "out", "voice_previews", f"{tag}_{i + 1}_{p['generated_voice_id']}.mp3")
         open(path, "wb").write(base64.b64decode(p["audio_base_64"]))
         print("preview:", path)
     print("Listen, then: --create <generated_voice_id> --name \"Loli\"")
@@ -213,6 +214,7 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--list-voices", action="store_true")
     ap.add_argument("--design", metavar="DESCRIPTION")
+    ap.add_argument("--design-presets", action="store_true", help="design every approved preset in src/data/voice_presets.json")
     ap.add_argument("--create", metavar="GENERATED_VOICE_ID")
     ap.add_argument("--name", default="Loli - Omani boy")
     ap.add_argument("--description", default="Warm, bright young Omani boy, natural Omani Gulf Arabic accent, friendly and expressive cartoon lead")
@@ -221,6 +223,11 @@ if __name__ == "__main__":
         list_voices()
     elif a.design:
         design(a.design)
+    elif a.design_presets:
+        presets = json.load(open(os.path.join(ROOT, "src", "data", "voice_presets.json"), encoding="utf-8"))["presets"]
+        for tag, desc in presets.items():
+            print(f"== {tag}: {desc}")
+            design(desc, tag)
     elif a.create:
         create(a.create, a.name, a.description)
     else:

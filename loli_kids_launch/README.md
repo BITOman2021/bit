@@ -128,7 +128,7 @@ Library, a designed voice, or a clone recorded **with a guardian's consent**:
 
 ```bash
 python3 scripts/make_voice_elevenlabs.py --list-voices
-python3 scripts/make_voice_elevenlabs.py --design "Warm, bright young Omani boy, natural Omani Gulf accent, expressive cartoon lead"
+python3 scripts/make_voice_elevenlabs.py --design-presets   # 3 approved descriptions (src/data/voice_presets.json)
 python3 scripts/make_voice_elevenlabs.py --create <generated_voice_id> --name "Loli"   # prints the voice id
 ```
 
