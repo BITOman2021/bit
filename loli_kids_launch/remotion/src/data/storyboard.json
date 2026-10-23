@@ -1,0 +1,74 @@
+{
+  "fps": 30,
+  "width": 1080,
+  "height": 1920,
+  "sceneSeconds": 10,
+  "brand": {
+    "latin": "Loli Kids",
+    "arabic": "لولي كيدز",
+    "full": "Loli Kids | لولي كيدز",
+    "slogan": "معاً نتعلم ونكتشف عالماً أجمل"
+  },
+  "scenes": [
+    {
+      "id": "s1",
+      "title": "Welcome to Loli Kids",
+      "onScreen": "Loli Kids | لولي كيدز",
+      "dialogue": [
+        {"id": "s1_l1", "from": 1.4, "to": 4.3, "text": "مرحباً يا أصدقائي الصغار! أنا لولي!"},
+        {"id": "s1_l2", "from": 4.5, "to": 9.6, "text": "أهلاً بكم في عالم لولي كيدز، عالم المرح والتعلّم والمغامرات الجميلة!"}
+      ],
+      "cues": {"loliEnter": 0.9, "titleIn": 2.6}
+    },
+    {
+      "id": "s2",
+      "title": "Meet the Friends",
+      "onScreen": "صفصوف — بوني — بِرّو — سارة",
+      "dialogue": [
+        {"id": "s2_l1", "from": 0.4, "to": 5.8, "text": "وهؤلاء أصدقائي الرائعون! صفصوف وبوني وبِرّو وسارة!"},
+        {"id": "s2_l2", "from": 6.0, "to": 9.6, "text": "سنلعب ونتعلم ونكتشف أشياء جميلة معاً!"}
+      ],
+      "cues": {"safsoof": 1.7, "bony": 2.8, "birro": 3.9, "sarah": 5.0}
+    },
+    {
+      "id": "s3",
+      "title": "Discover and Learn",
+      "onScreen": "نتعلّم • نكتشف • نلعب",
+      "dialogue": [
+        {"id": "s3_l1", "from": 0.3, "to": 5.0, "text": "هل تحبون الألوان والأرقام والحيوانات؟ وهل أنتم مستعدون لحل الألغاز؟"},
+        {"id": "s3_l2", "from": 5.2, "to": 9.6, "text": "رائع! لدينا مغامرات كثيرة تنتظرنا!"}
+      ],
+      "cues": {"colors": 0.9, "numbers": 1.7, "animals": 2.7, "puzzle": 4.0, "title": 5.2}
+    },
+    {
+      "id": "s4",
+      "title": "Learning Good Values",
+      "onScreen": "الصدق • الاحترام • التعاون",
+      "dialogue": [
+        {"id": "s4_l1", "from": 0.3, "to": 5.0, "text": "وفي عالمنا، نتعلم الصدق والاحترام والتعاون!"},
+        {"id": "s4_l2", "from": 5.2, "to": 9.6, "text": "لأننا عندما نساعد بعضنا، يصبح عالمنا أجمل!"}
+      ],
+      "cues": {"title": 1.6, "birroHelps": 1.2, "watering": 2.2, "grow": 2.6, "bloom": 5.2, "celebrate": 5.6}
+    },
+    {
+      "id": "s5",
+      "title": "Join the Adventure",
+      "onScreen": "اشتركوا في قناة لولي كيدز",
+      "dialogue": [
+        {"id": "s5_l1", "from": 0.3, "to": 4.6, "text": "هل أنتم مستعدون لتكونوا أبطال مغامراتنا؟"},
+        {"id": "s5_l2", "from": 4.8, "to": 9.7, "text": "لا تنسوا الاشتراك في قناة لولي كيدز، حتى نلتقي دائماً ونكتشف أشياء جديدة!"}
+      ],
+      "cues": {"logoIn": 0.4, "invite": 5.0}
+    },
+    {
+      "id": "s6",
+      "title": "Official Channel Finale",
+      "onScreen": "Loli Kids | لولي كيدز — معاً نتعلم ونكتشف عالماً أجمل",
+      "dialogue": [
+        {"id": "s6_l1", "from": 0.3, "to": 4.9, "text": "أنا لولي، وأصدقائي معكم دائماً! تذكّروا: معاً نتعلم ونكتشف عالماً أجمل!"},
+        {"id": "s6_l2", "from": 5.0, "to": 7.8, "text": "هيا، نبدأ مغامرتنا! أحبكم يا أصدقائي!"}
+      ],
+      "cues": {"logoIn": 0.6, "lockup": 8.0, "signature": 8.0}
+    }
+  ]
+}
