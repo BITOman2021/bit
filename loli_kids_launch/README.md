@@ -6,7 +6,7 @@ channel **Loli Kids | لولي كيدز**, built programmatically with
 
 **Rendered output:** `remotion/out/loli_kids_launch_60s.mp4` (1800 frames, H.264 + AAC)
 · preview: `remotion/out/contact_sheet.jpg`, `remotion/out/preview.gif`
-· Arabic subtitles: `remotion/out/loli_kids_launch_ar.srt`
+· Arabic voice + subtitles: `remotion/out/loli_kids_launch_ar.srt`
 
 ## Render it (one command)
 
@@ -25,6 +25,7 @@ Other scripts:
 |---|---|
 | `npm run studio` | open Remotion Studio to scrub the timeline |
 | `npm run audio` | regenerate music + SFX stems and the `.srt` (`python3`, `numpy`) |
+| `npm run voice` | synthesise Loli's Arabic voice, re-time the dialogue, rebuild audio + SRT |
 | `npm run voices` | rescan `public/audio/voice/` and rebuild the voice manifest |
 | `npm run typecheck` | TypeScript check |
 | `npm run preview` | contact sheet + GIF from the rendered MP4 (`ffmpeg`) |
@@ -96,30 +97,50 @@ loli_kids_launch/
 
 ## Audio
 
-| layer | source | status |
-|---|---|---|
-| Music | `public/audio/music.wav`: original, synthesised by `make_audio.py` (C major, 120 bpm, ends with a "Lo-li Kids!" signature at 00:58) | ✅ included |
-| SFX | `public/audio/sfx.wav`: whooshes on transitions, chimes, shimmer, pops, wing flutter, hops, water, footsteps, dings, all synthesised and timed from storyboard cues | ✅ included |
-| Loli's voice | `public/audio/voice/<lineId>.wav` | ⚠️ **not included.** No Arabic TTS service was reachable from the build environment, so no voice was generated or faked |
+| layer | source |
+|---|---|
+| Loli's voice | `remotion/public/audio/voice/<lineId>.wav`: 12 Arabic lines synthesised locally by `scripts/make_voice.py` |
+| Music | `public/audio/music.wav`: original, synthesised by `make_audio.py` (C major, 120 bpm, ends with a "Lo-li Kids!" signature at 00:58) |
+| SFX | `public/audio/sfx.wav`: whooshes, chimes, shimmer, pops, wing flutter, hops, water, footsteps, dings, timed from storyboard cues |
 
-### Adding the voice
+The music ducks to 22% and the SFX step back while Loli speaks (0.25 s ramps).
 
-1. Record (or generate with a TTS of your choice) the 12 lines in
-   `src/data/storyboard.json`, one file per line, named by its `id`:
-   `s1_l1.wav, s1_l2.wav, s2_l1.wav … s6_l2.wav`. Each must fit its `from`→`to`
-   slot. Speaking direction: warm, enthusiastic, clear Modern Standard Arabic.
-2. Convert to 16-bit PCM WAV if needed:
-   `ffmpeg -i take.mp3 -ac 1 -ar 44100 -c:a pcm_s16le public/audio/voice/s1_l1.wav`
-3. `npm run render`. `scan-voice.mjs` picks the files up automatically and warns if
-   a take is longer than its slot. Each line then plays at its cue. The music
-   **ducks** to 22% under every recorded line (0.25 s ramps), and Loli's speech
-   bounce follows the recording's real loudness envelope instead of the
-   placeholder rhythm.
+### Loli's voice
+
+- **Engine:** [Piper TTS](https://github.com/rhasspy/piper) running offline with the
+  open Arabic voice `ar_JO-kareem-medium` (downloaded once from the sherpa-onnx
+  GitHub release into `remotion/.cache/`). No cloud service is used.
+- **Pronunciation:** each line has a fully voweled `voiceText` in
+  `storyboard.json`, with a few silent alifs spelled phonetically (e.g.
+  «وَلِحْتِرَامَ», «لِتَكُونُو»). Without diacritics the engine mispronounced the
+  names («لولي كيدز» came out roughly as "liwali kaidaz"). The phonemes of every
+  line were checked; the on-screen subtitles keep the normal spelling.
+- **Character voice:** the source voice is an adult male (~100 Hz). It's turned
+  into Loli with a child-like timbre shift (formants ×1.30) and pitch shift
+  (×1.62, formants preserved), about +13 semitones overall. Median pitch is
+  ~226 Hz.
+- **Timing:** sentences are synthesised separately and joined with short gaps.
+  Each scene is sped up uniformly only as much as it needs to fit its 10 s (pitch
+  kept; ×1.08–×1.22). Then the dialogue `from`/`to` in `storyboard.json` are
+  rewritten to the real recording lengths, so subtitles, ducking and the SRT match.
+- **Script changes to fit 10 s scenes** (allowed by the brief, meaning kept):
+  - s1: «…والمغامرات الجميلة!» → «…والمغامرات!»
+  - s5: «…حتى نلتقي دائماً ونكتشف أشياء جديدة!» → «…لنلتقي دائماً ونكتشف الجديد!»
+  - s6: «تذكّروا:» removed from Loli's last line
+
+Regenerate everything after editing a line: `pip install piper-tts numpy` then
+`npm run voice && npm run render`.
+
+**Replacing it with a human voice actor:** record the 12 lines as
+`public/audio/voice/s1_l1.wav … s6_l2.wav`, 16-bit PCM WAV
+(`ffmpeg -i take.mp3 -ac 1 -ar 44100 -c:a pcm_s16le s1_l1.wav`). Set each line's
+`from`/`to` in `storyboard.json` to fit the take, then `npm run audio && npm run render`.
+`scan-voice.mjs` warns if a take overruns its slot.
 
 **Lip-sync:** the artwork has a single fixed open-mouth smile, so true lip-sync
-isn't possible without a rigged character or mouth replacements. Loli's body
-"talks" (squash/bob) in time with the dialogue instead. Real mouth shapes would
-need per-viseme mouth artwork for Loli.
+isn't possible without mouth replacements. Loli's body squash/bob follows the
+real loudness envelope of each recording instead, so she visibly "talks" in time
+with her voice. Real mouth shapes would need per-viseme mouth artwork for Loli.
 
 ## Fonts
 

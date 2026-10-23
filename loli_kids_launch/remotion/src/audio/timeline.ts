@@ -18,8 +18,8 @@ export const voiceFor = (lineId: string): VoiceEntry | undefined => VOICE[lineId
 
 export const VOICE_CUES = ALL_LINES.map((l) => ({...l, voice: voiceFor(l.id)}));
 
-/** Music volume at absolute time t: ducks smoothly under every recorded line. */
-export const musicVolume = (t: number) => {
+/** 0..1 how much to duck at absolute time t (1 while a recorded line plays). */
+export const duckAmount = (t: number) => {
   let duck = 0;
   for (const c of VOICE_CUES) {
     if (!c.voice) continue;
@@ -28,8 +28,15 @@ export const musicVolume = (t: number) => {
     const outAmt = 1 - smooth((t - end) / DUCK_RAMP);
     duck = Math.max(duck, Math.min(inAmt, outAmt));
   }
-  return MUSIC_LEVEL + (MUSIC_DUCKED - MUSIC_LEVEL) * duck;
+  return duck;
 };
+
+/** Music volume at absolute time t: ducks smoothly under every recorded line. */
+export const musicVolume = (t: number) => MUSIC_LEVEL + (MUSIC_DUCKED - MUSIC_LEVEL) * duckAmount(t);
+
+export const SFX_LEVEL = 0.6;
+/** SFX stay audible under dialogue but step back a little. */
+export const sfxVolume = (t: number) => SFX_LEVEL * (1 - 0.35 * duckAmount(t));
 
 /** 0..1 "how much Loli is talking" at absolute time t. Uses the recording's
  *  per-frame loudness envelope when available, else a syllable-rhythm placeholder
