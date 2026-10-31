@@ -1,60 +1,72 @@
 # voice.md
 
-Copy this to `~/.claude/instagram/voice.md` and fill it in. Every skill in the
-pack reads it. Ten minutes here is the difference between scripts you shoot and
-scripts you rewrite.
-
-If you would rather not fill it in by hand, send Claude three of your own reels
-or captions and say "write my voice.md from these". That works better than
-guessing at the answers.
-
-This file matters more on Instagram than anywhere else, because you have to say
-the words out loud. A line you would never say is not a draft, it is a retake.
+مصدر هذا الملف: كابشنات حساب @yellow.blue.om (38 منشورًا، حتى 30 أكتوبر 2026).
+ما كُتب هنا مأخوذ من الكابشنات فقط. أي حقل عليه علامة **[أكّد]** لا دليل عليه
+في الكابشنات، وعليك تعبئته أو تصحيحه قبل أن تعتمد عليه المهارات.
 
 ---
 
 ## Who I am
 
-- **Name:**
-- **Handle:**
-- **What I do, in one sentence:**
-- **Who I am talking to:** (be specific: "photographers charging under $2,000",
-  not "creatives")
-- **What I sell:**
+- **Name:** Y&B — Yellow & Blue Advertising (يلو اند بلو للدعاية والإعلان)
+- **Handle:** @yellow.blue.om
+- **What I do, in one sentence:** استوديو دعاية وإعلان في مسقط، عُمان: هوية بصرية
+  وتصميم وموشن جرافيك وريلز وإعلانات ممولة وإدارة حسابات التواصل، كل شيء تحت سقف واحد.
+- **Who I am talking to:** أصحاب المشاريع والشركات في عُمان الذين حساباتهم
+  "ما تجيب نتيجة" أو ليس لديهم هوية واضحة. **[أكّد]** القطاع والحجم بدقة
+  (مقاولات؟ مطاعم؟ محلات؟). يوجد عميل مقاولات ظاهر في الحساب.
+- **What I sell:** باقات الخدمات أعلاه، وعرض "استشارة تسويقية مجانية"
+  (تحليل الهوية والحسابات، أفكار محتوى جاهزة، خطة إعلانات حسب الميزانية).
 
 ## What I sound like
 
-- **Three of my own reels or captions that sound most like me:** (paste them)
-- **On camera I am:** (fast and loud / dry / calm / funny / deadpan)
-- **Words I actually use:**
-- **Words I would never say out loud:**
-- **Do I swear:** (yes / mild / no)
-- **Emoji in captions:** (never / one, rarely / freely)
-- **Face on camera:** (always / sometimes / faceless)
-- **Voiceover or to-camera:**
-- **Pace:** (words per minute, if you have timed yourself reading a script.
-  `beats.py --wpm` uses this. Most people are between 150 and 200.)
+- **ثلاثة كابشنات تشبهني أكثر** (من الحساب نفسه، وهي الأقرب لصوتك الحقيقي):
+  1. "حساباتك ما تجيب نتيجة؟ 📉 لا تحاتي! … احجز الحين على الواتساب"
+  2. "عندك فكرة… بس محد شافها؟ 💡 في Yellow & Blue نحوّل فكرتك لعلامة تجارية تِنشاف ✨"
+  3. "شعارك هو أول ما يراه عميلك… فهل يخدم مشروعك أم يُضعفه؟ 🤔 3 أخطاء نراها كثيراً في شعارات المشاريع"
+- **On camera I am:** **[أكّد]** لا أعرف كيف تتكلم على الكاميرا. الكابشنات تدل على
+  نبرة قريبة وواثقة وخفيفة.
+- **اللغة:** مزيج من الفصحى المبسطة واللهجة الخليجية/العُمانية في الريلز والعروض
+  ("لا تحاتي"، "الحين"، "محد شافها"، "تِنشاف"). المنشورات الرسمية أقرب للفصحى.
+  وبعض المنشورات ثنائية اللغة (عربي ثم إنجليزي).
+- **Words I actually use:** فكرتك، تستاهل تنشاف / تستحق أن تُرى، تحت سقف واحد،
+  نحوّل فكرتك إلى علامة، تُرى وتُحَس وتبقى، نتائج مميزة، ابدأ حملتك الآن.
+- **Words I would never say out loud:** **[أكّد]**
+- **Do I swear:** لا يوجد أي دليل على الشتائم. اعتبرها **لا** حتى تقول غير ذلك.
+- **Emoji in captions:** بحرية (💡📉📣🚀✅🎁📞💛💙). نمط ثابت: إيموجي في سطر الافتتاح،
+  وقوائم ✅، وأيقونات الاتصال 📞📩.
+- **Face on camera:** **[أكّد]**
+- **Voiceover or to-camera:** **[أكّد]**
+- **Pace:** **[أكّد]** لم يُقَس. جرّب قراءة سكربت بصوت عالٍ مع مؤقت.
 
 ## My positions
 
-Three to five things I believe that some of my audience does not. These are
-where the good reels come from.
+مأخوذة مما كتبته فعلًا، وراجعها لأنها ما استنتجته أنا لا ما قلته:
 
-1.
-2.
-3.
+1. الشعار الضعيف يضر المشروع قبل أن يخدمه، وأخطاؤه الثلاثة: التعقيد الزائد،
+   تقليد المنافسين، ألوان وخطوط بلا قاعدة.
+2. الفكرة الجيدة لا تكفي إن لم يرها أحد، والعلامة يجب أن "تُرى وتُحَس وتبقى".
+3. الدعاية الكاملة (فكرة، تصميم، نشر، قياس نتائج) أفضل من خدمة مفردة.
+
+**[أكّد]** أضف موقفًا أو اثنين تخالف فيهما السوق، وهذا مصدر أفضل الريلز.
 
 ## Off limits
 
-- **Topics I do not post about:**
-- **Clients, numbers or names I cannot say publicly:**
-- **Claims I am not allowed to make:** (regulated industry, employer policy, NDA)
+- **Topics I do not post about:** **[أكّد]**
+- **Clients, numbers or names I cannot say publicly:** **[أكّد]**
+  ملاحظة: ذكرت علنًا عميل "الجناح الثلجي العالمية / @gsw.oman" في منشور بتاريخ
+  28 أكتوبر، فهو عميل معلن.
+- **Claims I am not allowed to make:** **[أكّد]**
 
 ## Proof I can use
 
-Real numbers, outcomes and stories I am happy to put my name on. The skills will
-never invent one, so if this section is empty, every draft comes back with
-`{{your number}}` in it.
+لا توجد حاليًا أرقام نتائج عملاء منشورة في الحساب، ولن تخترعها المهارات. بيانات
+الحساب الحالية للمرجعية فقط، وليست "إثباتًا" للتسويق:
+
+- 247 متابعًا و40 منشورًا (حتى 31 أكتوبر 2026).
+- أفضل ريل: نحو 206 مشاهدات (7 أغسطس 2026). معظم الريلز بين 30 و160 مشاهدة.
+- **[أكّد]** أضف هنا نتائج حقيقية (نمو متابعين لعميل، مبيعات، عدد مشاريع، سنوات
+  خبرة) بأرقامها وبموافقة أصحابها.
 
 -
 -
@@ -62,6 +74,18 @@ never invent one, so if this section is empty, every draft comes back with
 
 ## The ask
 
-- **My keyword CTA, if I use one:** (one word, sayable, no spaces)
-- **What the keyword sends them:**
-- **Where my link goes:**
+- **My keyword CTA, if I use one:** غير مستخدمة حاليًا. الدعوة الحالية "راسلنا في
+  الخاص" أو "احجز الحين على الواتساب". **[أكّد]** هل تريد كلمة واحدة مثل "استشارة"؟
+- **What the keyword sends them:** الاستشارة التسويقية المجانية.
+- **Where my link goes:** واتساب +968 76761808، والبريد Yellow.blue.om@gmail.com.
+  الرابط في البروفايل غير مضبوط حاليًا (لا يوجد website).
+
+---
+
+## ملاحظات من قراءة الحساب (للمهارات، لا للنشر)
+
+- معظم الريلز القديمة كابشنها هاشتاقات فقط وبلا جملة افتتاحية. المهارات تفترض
+  جملة افتتاحية تظهر قبل "… المزيد"، فابدأ بها دائمًا.
+- التعليقات على كل منشورات الحساب تقريبًا صفر، فالدعوة للتفاعل ("اكتب رقمه في
+  التعليقات") لم تنجح بعد، وجرّب سؤالًا أسهل أو كلمة CTA واحدة.
+- هاشتاق دعاء الاستغفار الطويل يظهر في ريلزين، وهو لا يخدم البحث ولا الهوية.
