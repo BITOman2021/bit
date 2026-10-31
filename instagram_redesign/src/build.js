@@ -131,6 +131,36 @@ assets['10_profile_preview'] = { w: 1080, h: 2200, html: page(1080, 2200, `
   </div>
 </div>`) };
 
+// 5) Stories 1080x1920 (UI-safe: nothing in top 250px / bottom 340px)
+const storyShell = (label, title, body, ic) => page(1080, 1920, `
+<div class="rtl" style="width:1080px;height:1920px;background:${C.deep};position:relative;overflow:hidden">
+  <div style="position:absolute;right:-250px;bottom:-250px;width:900px;height:900px;border-radius:50%;background:${C.blue};opacity:.35"></div>
+  <div style="position:absolute;right:80px;top:270px;display:flex;align-items:center;gap:22px">
+    <div style="width:92px;height:92px;border-radius:50%;padding:4px;background:${GOLD}"><div style="width:100%;height:100%;border-radius:50%;background:${C.blue};display:flex;align-items:center;justify-content:center">${icon(ic, 50, '#E8C271', 1.7)}</div></div>
+    <div style="font-size:40px;font-weight:800;${gtxt}">${label}</div>
+  </div>
+  <div style="position:absolute;right:80px;left:80px;top:420px;font-weight:800;font-size:80px;line-height:1.25;color:${C.white}">${title}</div>
+  <div style="position:absolute;right:80px;left:80px;top:690px">${body}</div>
+  <img src="${MARK}" style="position:absolute;left:60px;top:240px;width:190px;opacity:.95">
+  <div style="position:absolute;right:80px;bottom:262px;font-size:32px;font-weight:600;color:${C.white};opacity:.75;direction:ltr">@yellow.blue.om</div>
+</div>`);
+
+const row = (t, sub) => `<div style="background:linear-gradient(160deg,#252E7A,${C.blue});border:2px solid rgba(226,187,106,.5);border-radius:28px;padding:24px 36px;margin-bottom:20px">
+  <div style="font-size:42px;font-weight:800;color:${C.white}">${t}</div>${sub ? `<div style="font-size:30px;margin-top:6px;color:${C.cream};opacity:.85">${sub}</div>` : ''}</div>`;
+const cta = (t, n) => `<div style="background:${GOLD};border-radius:30px;padding:32px 40px;margin-top:34px;display:flex;justify-content:space-between;align-items:center">
+  <div style="font-size:44px;font-weight:800;color:${C.ink}">${t}</div><div style="font-size:42px;font-weight:800;color:${C.ink};direction:ltr">${n}</div></div>`;
+
+assets['11_story_services'] = { w: 1080, h: 1920, html: storyShell('الخدمات', 'كل اللي يحتاجه مشروعك<br><span style="' + gtxt + '">تحت سقف واحد</span>',
+  row('الهوية البصرية والشعارات') + row('تصميم السوشيال ميديا') + row('فيديو وموشن جرافيك') + row('إدارة حسابات التواصل') + row('الإعلانات الممولة') + row('المطبوعات واللوحات الإعلانية'), 'services') };
+assets['12_story_works'] = { w: 1080, h: 1920, html: storyShell('أعمالنا', 'من الفكرة<br><span style="' + gtxt + '">إلى علامة تُرى</span>',
+  row('الجناح الثلجي العالمية', 'Global Snow Wing International') + row('تصميم المحتوى: Yellow & Blue') + `<div style="font-size:36px;font-weight:600;color:${C.white};opacity:.8;margin-top:28px">شاهد المنشور في الملف ←</div>`, 'works') };
+assets['13_story_consult'] = { w: 1080, h: 1920, html: storyShell('استشارة مجانية', 'حساباتك ما تجيب نتيجة؟<br><span style="' + gtxt + '">لا تحاتي</span>',
+  row('نحلل هويتك وحساباتك') + row('أفكار محتوى جاهزة') + row('خطة إعلانات تناسب ميزانيتك') + cta('احجز على الواتساب', '76761808'), 'gift') };
+assets['14_story_process'] = { w: 1080, h: 1920, html: storyShell('كيف نشتغل', 'من الفكرة<br><span style="' + gtxt + '">إلى قياس النتيجة</span>',
+  row('1. الفكرة', 'نفهم مشروعك وجمهورك') + row('2. التصميم', 'هوية وتصاميم وفيديو') + row('3. النشر', 'سوشيال وإعلانات ممولة') + row('4. قياس النتائج', 'تقارير أداء واضحة'), 'steps') };
+assets['15_story_contact'] = { w: 1080, h: 1920, html: storyShell('تواصل', 'فكرتك<br><span style="' + gtxt + '">تستحق أن تُرى</span>',
+  row('واتساب', '<span style="direction:ltr;display:inline-block">+968 76761808</span>') + row('البريد الإلكتروني', '<span style="direction:ltr;display:inline-block">Yellow.blue.om@gmail.com</span>') + row('الموقع', 'مسقط، سلطنة عُمان'), 'phone') };
+
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   const browser = await chromium.launch();
