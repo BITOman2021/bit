@@ -7,7 +7,10 @@ const ROOT = path.resolve(__dirname, '..');
 const OUT = path.join(ROOT, 'out');
 const FONTS = path.join(ROOT, 'fonts');
 
-const C = { blue: '#0A2463', deep: '#061741', yellow: '#FFC400', cream: '#FFF6D6', white: '#FFFFFF' };
+const C = { blue: '#1F2766', deep: '#1B1F23', yellow: '#E2BB6A', cream: '#F3E3B5', white: '#F6F1E4', ink: '#14171B' };
+const GOLD = 'linear-gradient(135deg,#F3D58A,#D4AF5F 45%,#A57743)';
+const MARK = `file://${ROOT}/logo/mark.png`;
+const gtxt = `background:${GOLD};-webkit-background-clip:text;background-clip:text;color:transparent;`;
 
 const css = `
 @font-face{font-family:'CairoAr';font-weight:600;src:url('file://${FONTS}/cairo-arabic-600-normal.woff2')}
@@ -42,79 +45,64 @@ const page = (w, h, body) => `<!doctype html><html><head><meta charset="utf-8"><
 
 const assets = {};
 
-// 1) Avatar 1080x1080 (circle-safe: content stays inside the central 70%)
+// 1) Avatar 1080x1080 (circle-safe)
 assets['01_avatar'] = { w: 1080, h: 1080, html: page(1080, 1080, `
-<div style="width:1080px;height:1080px;background:radial-gradient(circle at 30% 25%,#13398F 0%,${C.blue} 45%,${C.deep} 100%);display:flex;align-items:center;justify-content:center;position:relative">
-  <div style="position:absolute;width:760px;height:760px;border-radius:50%;border:8px solid ${C.yellow};opacity:.9"></div>
-  ${mono(330)}
+<div style="width:1080px;height:1080px;background:${C.deep};display:flex;align-items:center;justify-content:center;position:relative">
+  <div style="position:absolute;width:800px;height:800px;border-radius:50%;padding:6px;background:${GOLD}"><div style="width:100%;height:100%;border-radius:50%;background:${C.deep}"></div></div>
+  <img src="${MARK}" style="position:relative;width:600px">
 </div>`) };
 
-// 2) Highlight covers 1080x1920 (icon in the central circle)
+// 2) Highlight covers 1080x1920
 const hl = [['02_hl_services', 'services'], ['03_hl_works', 'works'], ['04_hl_consult', 'gift'], ['05_hl_process', 'steps'], ['06_hl_contact', 'phone']];
 for (const [name, ic] of hl) {
   assets[name] = { w: 1080, h: 1920, html: page(1080, 1920, `
-<div style="width:1080px;height:1920px;background:linear-gradient(160deg,${C.blue},${C.deep});display:flex;align-items:center;justify-content:center">
-  <div style="width:620px;height:620px;border-radius:50%;background:${C.yellow};display:flex;align-items:center;justify-content:center">
-    ${icon(ic, 340, C.blue, 1.5)}
+<div style="width:1080px;height:1920px;background:${C.deep};display:flex;align-items:center;justify-content:center">
+  <div style="width:640px;height:640px;border-radius:50%;padding:8px;background:${GOLD}">
+    <div style="width:100%;height:100%;border-radius:50%;background:${C.blue};display:flex;align-items:center;justify-content:center">${icon(ic, 330, '#E8C271', 1.4)}</div>
   </div>
 </div>`) };
 }
 
-// 3) Pinned posts 1080x1440 (3:4)
-const footer = (dark) => `<div style="position:absolute;bottom:64px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;direction:ltr">
-  <div style="font-size:30px;font-weight:600;color:${dark ? C.cream : C.blue};opacity:.85">@yellow.blue.om</div>
-  ${dark ? mono(56) : `<span style="font-weight:800;font-size:56px;color:${C.blue}">Y<span style="font-size:36px">&amp;</span>B</span>`}
+// 3) Posts 1080x1350 (4:5)
+const footer = `<div style="position:absolute;bottom:60px;left:72px;right:72px;display:flex;justify-content:space-between;align-items:center;direction:ltr">
+  <div style="font-size:30px;font-weight:600;color:${C.white};opacity:.7">@yellow.blue.om</div>
+  <div style="width:150px;height:6px;background:${GOLD};border-radius:3px"></div>
 </div>`;
 
 assets['07_pin1_intro'] = { w: 1080, h: 1350, html: page(1080, 1350, `
-<div class="rtl" style="width:1080px;height:1350px;background:${C.yellow};position:relative;overflow:hidden">
-  <div style="position:absolute;left:-260px;bottom:-260px;width:820px;height:820px;border-radius:50%;background:${C.blue}"></div>
-  <div style="position:absolute;right:70px;top:80px;background:${C.blue};color:${C.yellow};font-size:30px;font-weight:800;padding:12px 28px;border-radius:40px;direction:ltr">YELLOW &amp; BLUE ADVERTISING</div>
-  <div style="position:absolute;right:72px;left:72px;top:290px;font-weight:800;font-size:170px;line-height:1.15;color:${C.blue}">فكرتك<br>تستحق<br>أن تُرى</div>
-  <div style="position:absolute;right:72px;top:910px;font-size:42px;color:${C.blue};font-weight:600">دعاية وإعلان • مسقط، عُمان</div>
-  <div style="position:absolute;left:96px;bottom:80px;direction:ltr">${mono(150)}</div>
+<div class="rtl" style="width:1080px;height:1350px;background:radial-gradient(circle at 70% 25%,#262B33 0%,${C.deep} 60%);position:relative;overflow:hidden">
+  <div style="position:absolute;right:72px;top:90px;font-size:28px;font-weight:600;color:${C.yellow};letter-spacing:6px;direction:ltr">YELLOW &amp; BLUE ADVERTISING</div>
+  <div style="position:absolute;right:72px;left:72px;top:250px;font-weight:800;font-size:172px;line-height:1.15;${gtxt}">فكرتك<br>تستحق<br>أن تُرى</div>
+  <div style="position:absolute;right:72px;top:830px;font-size:42px;color:${C.white};font-weight:600">دعاية وإعلان • مسقط، عُمان</div>
+  <img src="${MARK}" style="position:absolute;left:96px;bottom:130px;width:430px">
+  ${footer}
 </div>`) };
 
 const services = [['brand', 'الهوية البصرية والشعارات'], ['social', 'تصميم السوشيال ميديا'], ['video', 'فيديو وموشن جرافيك'], ['steps', 'إدارة حسابات التواصل'], ['ads', 'الإعلانات الممولة'], ['print', 'المطبوعات واللوحات']];
 assets['08_pin2_offer'] = { w: 1080, h: 1350, html: page(1080, 1350, `
-<div class="rtl" style="width:1080px;height:1350px;background:linear-gradient(170deg,${C.blue},${C.deep});position:relative">
-  <div style="position:absolute;right:72px;left:72px;top:90px;font-weight:800;font-size:78px;line-height:1.25;color:${C.white}">كل اللي يحتاجه مشروعك<br><span style="color:${C.yellow}">تحت سقف واحد</span></div>
+<div class="rtl" style="width:1080px;height:1350px;background:radial-gradient(circle at 20% 0%,#262B33 0%,${C.deep} 60%);position:relative">
+  <div style="position:absolute;right:72px;left:72px;top:90px;font-weight:800;font-size:78px;line-height:1.25;color:${C.white}">كل اللي يحتاجه مشروعك<br><span style="${gtxt}">تحت سقف واحد</span></div>
   <div style="position:absolute;right:72px;left:72px;top:380px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
-    ${services.map(([ic, t]) => `<div style="background:rgba(255,255,255,.07);border:2px solid rgba(255,196,0,.35);border-radius:28px;padding:28px 30px;display:flex;flex-direction:column;gap:16px;min-height:190px">
-      ${icon(ic, 66, C.yellow, 1.6)}<div style="font-size:38px;font-weight:800;color:${C.white};line-height:1.25">${t}</div></div>`).join('')}
+    ${services.map(([ic, t]) => `<div style="background:linear-gradient(160deg,#252E7A,${C.blue});border:2px solid rgba(226,187,106,.55);border-radius:28px;padding:28px 30px;display:flex;flex-direction:column;gap:16px;min-height:190px">
+      ${icon(ic, 66, '#E8C271', 1.6)}<div style="font-size:38px;font-weight:800;color:${C.white};line-height:1.25">${t}</div></div>`).join('')}
   </div>
-  <div style="position:absolute;right:72px;left:72px;bottom:150px;background:${C.yellow};border-radius:30px;padding:30px 40px;display:flex;justify-content:space-between;align-items:center">
-    <div style="font-size:44px;font-weight:800;color:${C.blue}">استشارة تسويقية مجانية</div>
-    <div style="font-size:40px;font-weight:800;color:${C.blue};direction:ltr">76761808</div>
+  <div style="position:absolute;right:72px;left:72px;bottom:150px;background:${GOLD};border-radius:30px;padding:30px 40px;display:flex;justify-content:space-between;align-items:center">
+    <div style="font-size:44px;font-weight:800;color:${C.ink}">استشارة تسويقية مجانية</div>
+    <div style="font-size:40px;font-weight:800;color:${C.ink};direction:ltr">76761808</div>
   </div>
-  ${footer(true)}
+  ${footer}
 </div>`) };
 
-assets['09_pin3_work'] = { w: 1080, h: 1350, html: page(1080, 1350, `
-<div class="rtl" style="width:1080px;height:1350px;background:${C.cream};position:relative;overflow:hidden">
-  <div style="position:absolute;right:-180px;top:-180px;width:640px;height:640px;border-radius:50%;background:${C.yellow}"></div>
-  <div style="position:absolute;right:72px;top:90px;background:${C.blue};color:${C.yellow};font-size:40px;font-weight:800;padding:14px 38px;border-radius:44px">من أعمالنا</div>
-  <div style="position:absolute;right:72px;left:72px;top:470px;font-weight:800;font-size:132px;line-height:1.15;color:${C.blue}">الجناح الثلجي<br>العالمية</div>
-  <div style="position:absolute;right:72px;top:830px;font-size:48px;font-weight:600;color:${C.blue};direction:ltr;text-align:right;width:936px">Global Snow Wing International</div>
-  <div style="position:absolute;right:72px;top:950px;font-size:38px;font-weight:600;color:${C.blue};opacity:.8">تصميم المحتوى: Yellow &amp; Blue</div>
-  <div style="position:absolute;right:72px;top:1040px;font-size:40px;font-weight:800;color:${C.blue}">اسحب لترى العمل ←</div>
-  ${footer(false)}
-</div>`) };
-
-// 4) Profile mockup 1080x2100
-const filler = (i) => {
-  const dark = i % 2 === 0;
-  return `<div style="aspect-ratio:3/4;background:${dark ? C.blue : C.yellow};display:flex;align-items:center;justify-content:center">
-  <span style="font-weight:800;font-size:90px;color:${dark ? C.yellow : C.blue};opacity:.9">Y<span style="font-size:56px">&amp;</span>B</span></div>`;
-};
+// 4) Profile mockup
+const filler = (i) => `<div style="aspect-ratio:3/4;background:${C.deep};display:flex;align-items:center;justify-content:center"><img src="${MARK}" style="width:62%;opacity:.9"></div>`;
 const hlLabels = [['services', 'الخدمات'], ['works', 'أعمالنا'], ['gift', 'استشارة مجانية'], ['steps', 'كيف نشتغل'], ['phone', 'تواصل']];
-const avatarSvg = `<div style="width:210px;height:210px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#13398F,${C.blue} 50%,${C.deep});border:5px solid ${C.yellow};display:flex;align-items:center;justify-content:center">${mono(84)}</div>`;
+const avatarSvg = `<div style="width:210px;height:210px;border-radius:50%;padding:4px;background:${GOLD}"><div style="width:100%;height:100%;border-radius:50%;background:${C.deep};display:flex;align-items:center;justify-content:center"><img src="${MARK}" style="width:76%"></div></div>`;
 assets['10_profile_preview'] = { w: 1080, h: 2200, html: page(1080, 2200, `
 <div style="width:1080px;height:2200px;background:#fff;color:#111;position:relative">
   <div style="padding:70px 56px 0;display:flex;align-items:center;gap:56px;direction:ltr">
     ${avatarSvg}
     <div style="display:flex;gap:56px;flex:1;justify-content:space-around;text-align:center">
-      <div><div style="font-weight:800;font-size:46px">40</div><div style="font-size:30px;color:#555">posts</div></div>
+      <div><div style="font-weight:800;font-size:46px">42</div><div style="font-size:30px;color:#555">posts</div></div>
       <div><div style="font-weight:800;font-size:46px">247</div><div style="font-size:30px;color:#555">followers</div></div>
       <div><div style="font-weight:800;font-size:46px">–</div><div style="font-size:30px;color:#555">following</div></div>
     </div>
@@ -132,15 +120,14 @@ assets['10_profile_preview'] = { w: 1080, h: 2200, html: page(1080, 2200, `
   </div>
   <div style="padding:44px 40px 0;display:flex;justify-content:space-between;direction:rtl">
     ${hlLabels.map(([ic, t]) => `<div style="width:176px;text-align:center">
-      <div style="width:150px;height:150px;border-radius:50%;margin:0 auto;background:${C.yellow};border:6px solid ${C.blue};display:flex;align-items:center;justify-content:center">${icon(ic, 76, C.blue, 1.7)}</div>
+      <div style="width:150px;height:150px;border-radius:50%;margin:0 auto;padding:4px;background:${GOLD}"><div style="width:100%;height:100%;border-radius:50%;background:${C.blue};display:flex;align-items:center;justify-content:center">${icon(ic, 76, '#E8C271', 1.7)}</div></div>
       <div style="font-size:26px;margin-top:12px;font-weight:600">${t}</div></div>`).join('')}
   </div>
   <div style="margin-top:44px;border-top:2px solid #ddd"></div>
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:4px">
-    <div style="position:relative;aspect-ratio:3/4;overflow:hidden"><iframe style="display:none"></iframe><img src="file://${OUT}/07_pin1_intro.png" style="width:100%;height:100%;object-fit:cover"></div>
-    <div style="position:relative;aspect-ratio:3/4;overflow:hidden"><img src="file://${OUT}/08_pin2_offer.png" style="width:100%;height:100%;object-fit:cover"></div>
-    <div style="position:relative;aspect-ratio:3/4;overflow:hidden"><img src="file://${OUT}/09_pin3_work.png" style="width:100%;height:100%;object-fit:cover"></div>
-    ${[0, 1, 2, 3, 4, 5].map(filler).join('')}
+    <div style="aspect-ratio:3/4;overflow:hidden"><img src="file://${OUT}/07_pin1_intro.png" style="width:100%;height:100%;object-fit:cover"></div>
+    <div style="aspect-ratio:3/4;overflow:hidden"><img src="file://${OUT}/08_pin2_offer.png" style="width:100%;height:100%;object-fit:cover"></div>
+    ${[0, 1, 2, 3, 4, 5, 6].map(filler).join('')}
   </div>
 </div>`) };
 
