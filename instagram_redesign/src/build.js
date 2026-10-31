@@ -161,6 +161,17 @@ assets['14_story_process'] = { w: 1080, h: 1920, html: storyShell('كيف نشت
 assets['15_story_contact'] = { w: 1080, h: 1920, html: storyShell('تواصل', 'فكرتك<br><span style="' + gtxt + '">تستحق أن تُرى</span>',
   row('واتساب', '<span style="direction:ltr;display:inline-block">+968 76761808</span>') + row('البريد الإلكتروني', '<span style="direction:ltr;display:inline-block">Yellow.blue.om@gmail.com</span>') + row('الموقع', 'مسقط، سلطنة عُمان'), 'phone') };
 
+// 6) Reel cover 1080x1920. Key content stays inside the central 1080x1080 square (y 420-1500),
+// which survives the 3:4 grid crop and the 1:1 profile preview crop.
+assets['16_reel_cover_logo_mistakes'] = { w: 1080, h: 1920, html: page(1080, 1920, `
+<div class="rtl" style="width:1080px;height:1920px;background:${C.deep};position:relative;overflow:hidden">
+  <div style="position:absolute;left:50%;top:1180px;width:1100px;height:1100px;margin:-550px 0 0 -550px;border-radius:50%;background:radial-gradient(circle,rgba(31,39,102,.75) 0%,rgba(31,39,102,0) 62%)"></div>
+  <img src="${MARK}" style="position:absolute;left:50%;top:480px;width:200px;margin-left:-100px">
+  <div style="position:absolute;left:0;right:0;top:660px;text-align:center;font-family:'CairoLa';font-weight:800;font-size:430px;line-height:1;${gtxt}">3</div>
+  <div style="position:absolute;left:0;right:0;top:1130px;text-align:center;font-weight:800;font-size:108px;line-height:1.15;color:${C.white}">أخطاء تضعّف<br>شعارك</div>
+  <div style="position:absolute;left:0;right:0;top:1420px;text-align:center"><span style="display:inline-block;width:170px;height:6px;border-radius:3px;background:${GOLD}"></span></div>
+</div>`) };
+
 (async () => {
   fs.mkdirSync(OUT, { recursive: true });
   const browser = await chromium.launch();
