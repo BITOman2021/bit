@@ -66,38 +66,38 @@ const footer = (dark) => `<div style="position:absolute;bottom:64px;left:72px;ri
   ${dark ? mono(56) : `<span style="font-weight:800;font-size:56px;color:${C.blue}">Y<span style="font-size:36px">&amp;</span>B</span>`}
 </div>`;
 
-assets['07_pin1_intro'] = { w: 1080, h: 1440, html: page(1080, 1440, `
-<div class="rtl" style="width:1080px;height:1440px;background:${C.yellow};position:relative;overflow:hidden">
+assets['07_pin1_intro'] = { w: 1080, h: 1350, html: page(1080, 1350, `
+<div class="rtl" style="width:1080px;height:1350px;background:${C.yellow};position:relative;overflow:hidden">
   <div style="position:absolute;left:-260px;bottom:-260px;width:820px;height:820px;border-radius:50%;background:${C.blue}"></div>
   <div style="position:absolute;right:70px;top:80px;background:${C.blue};color:${C.yellow};font-size:30px;font-weight:800;padding:12px 28px;border-radius:40px;direction:ltr">YELLOW &amp; BLUE ADVERTISING</div>
-  <div style="position:absolute;right:72px;left:72px;top:330px;font-weight:800;font-size:170px;line-height:1.15;color:${C.blue}">فكرتك<br>تستحق<br>أن تُرى</div>
-  <div style="position:absolute;right:72px;top:960px;font-size:42px;color:${C.blue};font-weight:600">دعاية وإعلان • مسقط، عُمان</div>
-  <div style="position:absolute;left:96px;bottom:110px;direction:ltr">${mono(150)}</div>
+  <div style="position:absolute;right:72px;left:72px;top:290px;font-weight:800;font-size:170px;line-height:1.15;color:${C.blue}">فكرتك<br>تستحق<br>أن تُرى</div>
+  <div style="position:absolute;right:72px;top:910px;font-size:42px;color:${C.blue};font-weight:600">دعاية وإعلان • مسقط، عُمان</div>
+  <div style="position:absolute;left:96px;bottom:80px;direction:ltr">${mono(150)}</div>
 </div>`) };
 
 const services = [['brand', 'الهوية البصرية والشعارات'], ['social', 'تصميم السوشيال ميديا'], ['video', 'فيديو وموشن جرافيك'], ['steps', 'إدارة حسابات التواصل'], ['ads', 'الإعلانات الممولة'], ['print', 'المطبوعات واللوحات']];
-assets['08_pin2_offer'] = { w: 1080, h: 1440, html: page(1080, 1440, `
-<div class="rtl" style="width:1080px;height:1440px;background:linear-gradient(170deg,${C.blue},${C.deep});position:relative">
+assets['08_pin2_offer'] = { w: 1080, h: 1350, html: page(1080, 1350, `
+<div class="rtl" style="width:1080px;height:1350px;background:linear-gradient(170deg,${C.blue},${C.deep});position:relative">
   <div style="position:absolute;right:72px;left:72px;top:90px;font-weight:800;font-size:78px;line-height:1.25;color:${C.white}">كل اللي يحتاجه مشروعك<br><span style="color:${C.yellow}">تحت سقف واحد</span></div>
-  <div style="position:absolute;right:72px;left:72px;top:400px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
-    ${services.map(([ic, t]) => `<div style="background:rgba(255,255,255,.07);border:2px solid rgba(255,196,0,.35);border-radius:28px;padding:28px 30px;display:flex;flex-direction:column;gap:16px;min-height:204px">
+  <div style="position:absolute;right:72px;left:72px;top:380px;display:grid;grid-template-columns:1fr 1fr;gap:26px">
+    ${services.map(([ic, t]) => `<div style="background:rgba(255,255,255,.07);border:2px solid rgba(255,196,0,.35);border-radius:28px;padding:28px 30px;display:flex;flex-direction:column;gap:16px;min-height:190px">
       ${icon(ic, 66, C.yellow, 1.6)}<div style="font-size:38px;font-weight:800;color:${C.white};line-height:1.25">${t}</div></div>`).join('')}
   </div>
-  <div style="position:absolute;right:72px;left:72px;bottom:176px;background:${C.yellow};border-radius:30px;padding:30px 40px;display:flex;justify-content:space-between;align-items:center">
+  <div style="position:absolute;right:72px;left:72px;bottom:150px;background:${C.yellow};border-radius:30px;padding:30px 40px;display:flex;justify-content:space-between;align-items:center">
     <div style="font-size:44px;font-weight:800;color:${C.blue}">استشارة تسويقية مجانية</div>
     <div style="font-size:40px;font-weight:800;color:${C.blue};direction:ltr">76761808</div>
   </div>
   ${footer(true)}
 </div>`) };
 
-assets['09_pin3_work'] = { w: 1080, h: 1440, html: page(1080, 1440, `
-<div class="rtl" style="width:1080px;height:1440px;background:${C.cream};position:relative;overflow:hidden">
+assets['09_pin3_work'] = { w: 1080, h: 1350, html: page(1080, 1350, `
+<div class="rtl" style="width:1080px;height:1350px;background:${C.cream};position:relative;overflow:hidden">
   <div style="position:absolute;right:-180px;top:-180px;width:640px;height:640px;border-radius:50%;background:${C.yellow}"></div>
   <div style="position:absolute;right:72px;top:90px;background:${C.blue};color:${C.yellow};font-size:40px;font-weight:800;padding:14px 38px;border-radius:44px">من أعمالنا</div>
-  <div style="position:absolute;right:72px;left:72px;top:520px;font-weight:800;font-size:132px;line-height:1.15;color:${C.blue}">الجناح الثلجي<br>العالمية</div>
-  <div style="position:absolute;right:72px;top:880px;font-size:48px;font-weight:600;color:${C.blue};direction:ltr;text-align:right;width:936px">Global Snow Wing International</div>
-  <div style="position:absolute;right:72px;top:1000px;font-size:38px;font-weight:600;color:${C.blue};opacity:.8">تصميم المحتوى: Yellow &amp; Blue</div>
-  <div style="position:absolute;right:72px;top:1090px;font-size:40px;font-weight:800;color:${C.blue}">اسحب لترى العمل ←</div>
+  <div style="position:absolute;right:72px;left:72px;top:470px;font-weight:800;font-size:132px;line-height:1.15;color:${C.blue}">الجناح الثلجي<br>العالمية</div>
+  <div style="position:absolute;right:72px;top:830px;font-size:48px;font-weight:600;color:${C.blue};direction:ltr;text-align:right;width:936px">Global Snow Wing International</div>
+  <div style="position:absolute;right:72px;top:950px;font-size:38px;font-weight:600;color:${C.blue};opacity:.8">تصميم المحتوى: Yellow &amp; Blue</div>
+  <div style="position:absolute;right:72px;top:1040px;font-size:40px;font-weight:800;color:${C.blue}">اسحب لترى العمل ←</div>
   ${footer(false)}
 </div>`) };
 
