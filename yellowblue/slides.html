@@ -4,23 +4,20 @@
 .y{background:var(--y);color:var(--bd)} .b{background:var(--b);color:var(--w)}
 .s::before{content:"";position:absolute;width:760px;height:760px;border-radius:50%;left:-300px;bottom:-300px;opacity:.9}
 .y::before{background:var(--b)} .b::before{background:var(--y)}
-.brand{position:absolute;top:60px;right:90px;font-weight:900;font-size:34px;letter-spacing:1px;display:flex;gap:12px;align-items:center}
-.brand i{width:26px;height:26px;border-radius:50%;display:inline-block}
-.y .brand i:first-child{background:var(--y);outline:4px solid var(--bd)} .y .brand i:last-child{background:var(--b)}
-.b .brand i:first-child{background:var(--y)} .b .brand i:last-child{background:#fff}
+.brand{position:absolute;top:48px;right:90px;z-index:3}
 .num{position:absolute;top:60px;left:90px;font-weight:600;font-size:30px;opacity:.7;direction:ltr}
 .swipe{position:absolute;bottom:60px;right:90px;font-weight:900;font-size:34px;z-index:2}
-.y .swipe{color:var(--bd)} .b .swipe{color:var(--k)}
+.y .swipe{color:var(--bd)} .b .swipe{color:var(--y)}
 h1{font-weight:900;font-size:122px;line-height:1.15;position:relative;z-index:1}
 h2{font-weight:900;font-size:92px;line-height:1.25;position:relative;z-index:1}
 p{font-weight:600;font-size:48px;line-height:1.5;margin-top:36px;position:relative;z-index:1}
 .hl{background:var(--y);color:var(--bd);padding:0 .2em;border-radius:14px}
-.y .hl{background:var(--b);color:var(--y)}
+.y .hl{background:var(--b);color:var(--ys)}
 .ba{display:flex;gap:30px;align-items:stretch;margin-top:60px;position:relative;z-index:1;direction:rtl}
 .card{flex:1;border-radius:40px;padding:50px 30px;text-align:center}
 .card small{display:block;font-size:36px;font-weight:600}
 .card strong{font-size:110px;font-weight:900;display:block;direction:ltr}
-.c1{background:rgba(255,255,255,.18)} .c2{background:var(--y);color:var(--bd)}
+.c1{background:rgba(245,246,250,.14)} .c2{background:var(--y);color:var(--bd)}
 .arrow{align-self:center;font-size:90px;font-weight:900}
 ol{list-style:none;margin-top:50px;position:relative;z-index:1}
 li{font-weight:900;font-size:60px;margin-bottom:34px;display:flex;gap:28px;align-items:center}
@@ -28,28 +25,28 @@ li b{background:var(--y);color:var(--bd);width:90px;height:90px;border-radius:50
 .cta{display:inline-block;margin-top:50px;background:var(--bd);color:var(--y);font-weight:900;font-size:80px;padding:20px 60px;border-radius:999px;position:relative;z-index:1}
 .y .cta{background:var(--b);color:var(--y)}
 </style></head><body>
-<section class="s y" id="s1"><div class="brand"><i></i><i></i>يلو اند بلو</div><div class="num">01/06</div>
+<section class="s y" id="s1"><div class="brand"><img class="logo" src="assets/logo.jpg"></div><div class="num">01/06</div>
 <h1>كيف حوّلنا حساباً <span class="hl">ميتاً</span> إلى طلبات؟</h1><p>القصة كاملة، شريحة بشريحة</p><div class="swipe">اسحب ←</div></section>
 
-<section class="s b" id="s2"><div class="brand"><i></i><i></i>يلو اند بلو</div><div class="num">02/06</div>
+<section class="s b" id="s2"><div class="brand"><img class="logo" src="assets/logo.jpg"></div><div class="num">02/06</div>
 <h2>أول <span class="ph">XX</span> ريل نزّلناها…</h2><h1 style="margin-top:20px"><span class="hl">فشلت.</span></h1><p>ولا عميل واحد اتصل.</p><div class="swipe">اسحب ←</div></section>
 
-<section class="s y" id="s3"><div class="brand"><i></i><i></i>يلو اند بلو</div><div class="num">03/06</div>
+<section class="s y" id="s3"><div class="brand"><img class="logo" src="assets/logo.jpg"></div><div class="num">03/06</div>
 <h2>غيّرنا شيئاً واحداً فقط</h2><p style="font-size:64px;font-weight:900">صرنا نبدأ كل ريل<br>بـ<span class="hl">نتيجة العميل</span><br>مو بشعارنا.</p><div class="swipe">اسحب ←</div></section>
 
-<section class="s b" id="s4"><div class="brand"><i></i><i></i>يلو اند بلو</div><div class="num">04/06</div>
+<section class="s b" id="s4"><div class="brand"><img class="logo" src="assets/logo.jpg"></div><div class="num">04/06</div>
 <h2>أول عميل: قبل وبعد</h2>
 <div class="ba"><div class="card c1"><small>قبل</small><strong>XX</strong></div><div class="arrow">←</div><div class="card c2"><small>بعد</small><strong>XX</strong></div></div>
 <p style="text-align:center">في <span class="ph">XX</span> شهر</p><div class="swipe">اسحب ←</div></section>
 
-<section class="s y" id="s5"><div class="brand"><i></i><i></i>يلو اند بلو</div><div class="num">05/06</div>
+<section class="s y" id="s5"><div class="brand"><img class="logo" src="assets/logo.jpg"></div><div class="num">05/06</div>
 <h2>٣ قواعد نمشي عليها</h2>
 <ol><li><b>١</b>أول ٣ ثواني = النتيجة</li><li><b>٢</b>رقم واحد حقيقي في كل ريل</li><li><b>٣</b>طلب واحد في النهاية</li></ol><div class="swipe">اسحب ←</div></section>
 
-<section class="s b" id="s6"><div class="brand"><i></i><i></i>يلو اند بلو</div><div class="num">06/06</div>
-<h1>تبي حسابك<br>يشتغل لك؟</h1><div class="cta">علّق «ابدأ»</div><p>نرسل لك الخطة في الخاص.</p></section>
+<section class="s b" id="s6"><div class="brand"><img class="logo" src="assets/logo.jpg"></div><div class="num">06/06</div>
+<h1>تبي حسابك<br>يشتغل لك؟</h1><div class="cta">علّق «ابدأ»</div><p>إعلانك يُرى من بعيد.</p><p style="margin-top:10px;direction:ltr;text-align:right;color:var(--y)">@yellow.blue.om</p></section>
 
-<section class="s y" id="s7"><div class="brand"><i></i><i></i>يلو اند بلو</div>
-<h2>نتيجة عميل</h2><div class="ba" style="direction:rtl"><div class="card" style="background:var(--b);color:#fff"><small>المتابعون</small><strong>+XX%</strong></div><div class="card" style="background:var(--bd);color:var(--y)"><small>الطلبات</small><strong>+XX</strong></div></div>
+<section class="s y" id="s7"><div class="brand"><img class="logo" src="assets/logo.jpg"></div>
+<h2 style="margin-top:80px">نتيجة عميل</h2><div class="ba" style="direction:rtl"><div class="card" style="background:var(--b);color:var(--w)"><small>المتابعون</small><strong>+XX%</strong></div><div class="card" style="background:var(--bd);color:var(--y)"><small>الطلبات</small><strong>+XX</strong></div></div>
 <p>العميل: <span class="ph">اسم العميل</span> · المدة: <span class="ph">XX</span></p></section>
 </body></html>

@@ -1,6 +1,7 @@
-@font-face{font-family:Cairo;font-weight:600;src:url(fonts/Cairo-600.ttf)}
-@font-face{font-family:Cairo;font-weight:900;src:url(fonts/Cairo-900.ttf)}
-:root{--y:#FFC700;--b:#0A2FD6;--bd:#061A7A;--w:#FFFFFF;--k:#0B0B14}
+@font-face{font-family:YB;font-weight:900;src:url(fonts/ReemKufi-700.ttf)}
+@font-face{font-family:YB;font-weight:600;src:url(fonts/PlexArabic-600.ttf)}
+:root{--y:#C9A24A;--ys:#EADBB0;--b:#1E2A5A;--bd:#141C40;--w:#F5F6FA;--k:#16181C}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Cairo,'DejaVu Sans',sans-serif;direction:rtl;background:#222}
+body{font-family:YB,'DejaVu Sans',sans-serif;direction:rtl;background:#222}
 .ph{background:var(--k);color:var(--y);padding:0 .25em;border-radius:12px;display:inline-block;direction:ltr}
+.logo{height:84px;border-radius:14px;display:block}
