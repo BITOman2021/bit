@@ -1,0 +1,41 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><link rel="stylesheet" href="base.css">
+<style>
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--k)}
+.sc{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:230px 120px 480px}
+.sc.on{display:flex}
+.sc.y{background:var(--y);color:var(--bd)} .sc.b{background:var(--b);color:#fff} .sc.k{background:var(--k);color:var(--y)}
+.big{font-weight:900;font-size:190px;line-height:1.3;animation:pop .35s cubic-bezier(.2,1.6,.4,1) both}
+.mid{font-weight:900;font-size:120px;line-height:1.3;animation:pop .35s .15s cubic-bezier(.2,1.6,.4,1) both}
+.sm{font-weight:600;font-size:64px;margin-top:40px;animation:up .5s .35s both}
+.hl{background:var(--y);color:var(--bd);padding:0 .2em;border-radius:20px;display:inline-block;line-height:1.35;margin-top:24px}
+.y .hl{background:var(--b);color:var(--y)}
+.row{display:flex;gap:40px;align-items:center;direction:rtl;margin-top:70px}
+.card{width:380px;border-radius:50px;padding:60px 20px;background:rgba(255,255,255,.18);animation:pop .4s both}
+.card.a{background:var(--y);color:var(--bd);animation-delay:.5s}
+.card small{display:block;font-size:50px;font-weight:600}.card strong{font-size:170px;font-weight:900;direction:ltr;display:block}
+.ar{font-size:120px;font-weight:900}
+.bar{position:absolute;top:0;left:0;height:14px;background:var(--y);width:0}
+.top{color:var(--bd);transition:none;position:absolute;top:110px;right:80px;font-weight:900;font-size:46px;display:flex;gap:14px;align-items:center;z-index:5}
+.top i{width:34px;height:34px;border-radius:50%;display:inline-block;background:var(--y);outline:5px solid var(--bd)}
+.top i+i{background:var(--b);outline:0}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+</style></head><body>
+<div class="top" id="top"><i></i><i></i>يلو اند بلو</div><div class="bar" id="bar"></div>
+<div class="sc y" data-t="0"><div class="big"><span class="ph" style="background:var(--bd)">XX</span> ريل<br><span class="hl">فاشلة</span></div></div>
+<div class="sc k" data-t="3"><div class="mid">ولا عميل<br>واحد اتصل.</div></div>
+<div class="sc b" data-t="6"><div class="mid">نحن <span class="hl">يلو اند بلو</span></div><div class="sm">وحسابنا كان ميت.</div></div>
+<div class="sc y" data-t="9"><div class="sm" style="margin:0 0 30px">غيّرنا شيئاً واحداً</div><div class="mid">نبدأ بـ<span class="hl">نتيجة العميل</span><br>مو بالشعار.</div></div>
+<div class="sc b" data-t="14"><div class="sm" style="margin:0">أول عميل</div><div class="row"><div class="card"><small>قبل</small><strong>XX</strong></div><div class="ar">←</div><div class="card a"><small>بعد</small><strong>XX</strong></div></div></div>
+<div class="sc k" data-t="19"><div class="mid">تبي حسابك<br>يشتغل لك؟</div><div class="big hl" style="font-size:130px;margin-top:60px;animation-delay:.3s;padding:10px 60px">علّق «ابدأ»</div></div>
+<div class="sc y" data-t="22.5"><div class="mid">وأول <span class="ph" style="background:var(--bd)">XX</span> ريل؟</div><div class="big" style="font-size:150px;margin-top:30px"><span class="hl">كانت تدريب.</span></div></div>
+<script>
+const sc=[...document.querySelectorAll('.sc')],END=26;let t0=null;
+function tick(ts){if(t0===null)t0=ts;const t=(ts-t0)/1000;let cur=-1;
+ sc.forEach((s,i)=>{if(t>=+s.dataset.t)cur=i});
+ sc.forEach((s,i)=>{const on=i===cur;if(on&&!s.classList.contains('on')){s.classList.add('on')}else if(!on&&s.classList.contains('on')){s.classList.remove('on')}});
+ document.getElementById('top').style.color=(cur>=0&&sc[cur].classList.contains('y'))?'#061A7A':'#fff';
+ document.getElementById('bar').style.width=Math.min(100,t/END*100)+'%';
+ window.__t=t;if(t<END+.5)requestAnimationFrame(tick);else window.__done=true}
+requestAnimationFrame(tick);
+</script></body></html>
