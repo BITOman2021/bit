@@ -19,17 +19,20 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:var(--k)}
 .top img{height:110px;border-radius:18px}
 @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes up{from{transform:translateY(60px);opacity:0}to{transform:none;opacity:1}}
+.note{position:absolute;bottom:430px;left:0;right:0;text-align:center;font-size:34px;font-weight:600;color:var(--w);opacity:.75;z-index:6;direction:rtl}
 </style></head><body>
 <div class="top" id="top"><img src="assets/logo.jpg"></div><div class="bar" id="bar"></div>
-<div class="sc y" data-t="0"><div class="big"><span class="ph" style="background:var(--bd)">XX</span> ريل<br><span class="hl">فاشلة</span></div></div>
-<div class="sc k" data-t="3"><div class="mid">ولا عميل<br>واحد اتصل.</div></div>
-<div class="sc b" data-t="6"><div class="mid">نحن <span class="hl">يلو اند بلو</span></div><div class="sm">وحسابنا كان ميت.</div></div>
-<div class="sc y" data-t="9"><div class="sm" style="margin:0 0 30px">غيّرنا شيئاً واحداً</div><div class="mid">نبدأ بـ<span class="hl">نتيجة العميل</span><br>مو بالشعار.</div></div>
-<div class="sc b" data-t="14"><div class="sm" style="margin:0">أول عميل</div><div class="row"><div class="card"><small>قبل</small><strong>XX</strong></div><div class="ar">←</div><div class="card a"><small>بعد</small><strong>XX</strong></div></div></div>
-<div class="sc k" data-t="19"><div class="mid">تبي حسابك<br>يشتغل لك؟</div><div class="big hl" style="font-size:130px;margin-top:60px;animation-delay:.3s;padding:10px 60px">علّق «ابدأ»</div></div>
-<div class="sc y" data-t="22.5"><div class="mid">وأول <span class="ph" style="background:var(--bd)">XX</span> ريل؟</div><div class="big" style="font-size:150px;margin-top:30px"><span class="hl">كانت تدريب.</span></div><div class="sm" style="direction:ltr">@yellow.blue.om</div></div>
+<div class="sc y" data-t="0"><div class="big" style="font-size:230px"><span style="direction:ltr;display:inline-block">248</span><br>متابع بس.</div></div>
+<div class="sc k" data-t="3"><div class="mid">ونحن وكالة<br><span class="hl">إعلان.</span></div></div>
+<div class="sc b" data-t="6"><div class="mid">قررنا نوثّق<br>الرحلة <span class="hl">قدامك.</span></div></div>
+<div class="sc y" data-t="9"><div class="sm" style="margin:0 0 20px">أفضل ريل عندنا</div><div class="big" style="font-size:200px"><span style="direction:ltr;display:inline-block">206</span></div><div class="mid">مشاهدة.</div></div>
+<div class="sc b" data-t="13"><div class="mid">ومعظم ريلزنا الأخيرة<br>ما تعدّت <span class="hl" style="direction:ltr">40</span></div></div>
+<div class="sc k" data-t="17"><div class="mid">كل أسبوع:<br>الأرقام الحقيقية.</div><div class="sm">اللي نجح، واللي فشل.</div></div>
+<div class="sc y" data-t="21"><div class="mid">تبي تتابع<br>الرحلة؟</div><div class="big hl" style="font-size:120px;margin-top:50px;padding:10px 60px">تابعنا</div><div class="sm" style="direction:ltr">@yellow.blue.om</div></div>
+<div class="sc b" data-t="24"><div class="big" style="font-size:200px"><span class="hl" style="direction:ltr">248</span></div><div class="mid">لين الحين.</div></div>
+<div class="note">الأرقام من حساب @yellow.blue.om بتاريخ 2 نوفمبر 2026</div>
 <script>
-const sc=[...document.querySelectorAll('.sc')],END=26;let t0=null;
+const sc=[...document.querySelectorAll('.sc')],END=27;let t0=null;
 function tick(ts){if(t0===null)t0=ts;const t=(ts-t0)/1000;let cur=-1;
  sc.forEach((s,i)=>{if(t>=+s.dataset.t)cur=i});
  sc.forEach((s,i)=>{const on=i===cur;if(on&&!s.classList.contains('on')){s.classList.add('on')}else if(!on&&s.classList.contains('on')){s.classList.remove('on')}});
