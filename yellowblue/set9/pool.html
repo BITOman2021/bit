@@ -1,0 +1,52 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas>
+<div id="h1" class="p" style="top:170px;font:700 118px/1.25 Kufi;color:#f2eee6;direction:rtl;opacity:0">من الحفر</div>
+<div id="h2" class="p" style="top:310px;font:700 118px/1.25 Kufi;color:#d1b177;direction:rtl;opacity:0">إلى الماء</div>
+<div id="en" class="p" style="top:1560px;font:600 24px Cinz;color:#d1b177;letter-spacing:3px;direction:ltr;opacity:0">EXCAVATION · STRUCTURE · WATERPROOFING · FINISH</div>
+<div id="st1" class="p" style="top:1620px;font:700 62px Kufi;color:#f2eee6;direction:rtl;opacity:0"></div>
+<div id="end" class="p" style="inset:0;opacity:0;background:#0d1114"><img src="assets/gsw-logo.jpg" style="position:absolute;left:60px;top:330px;width:960px;border:2px solid #be9a4f"><div style="position:absolute;left:0;right:0;top:1460px;text-align:center;font:600 28px Plex;color:#d1b177;direction:rtl">تصميم وإنشاء أحواض السباحة</div><div style="position:absolute;left:0;right:0;top:1530px;text-align:center;font:600 70px Cinz;color:#d1b177;direction:ltr;letter-spacing:3px">+968 9508 7873</div><div style="position:absolute;left:0;right:0;top:1645px;text-align:center;font:600 46px Plex;color:#f2eee6;direction:ltr">@gsw.oman &nbsp;·&nbsp; snow.wing.oman@gmail.com</div></div></div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3),io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const g=document.getElementById('c').getContext('2d'),$=id=>document.getElementById(id);
+const L=150,R=930,TOP=800,DEEP=520;
+window.DUR=11;
+window.render=t=>{
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#0a1420');bg.addColorStop(.42,'#16314a');bg.addColorStop(1,'#0d1114');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ // sun glow
+ const sg=g.createRadialGradient(850,640,10,850,640,260);sg.addColorStop(0,'rgba(190,154,79,.55)');sg.addColorStop(1,'rgba(190,154,79,0)');g.fillStyle=sg;g.fillRect(500,380,580,520);
+ // ground
+ const gr=g.createLinearGradient(0,TOP,0,1500);gr.addColorStop(0,'#6b5a42');gr.addColorStop(1,'#2d2418');g.fillStyle=gr;g.fillRect(0,TOP,1080,700);
+ g.fillStyle='#7d6a4d';g.fillRect(0,TOP-14,1080,14);
+ // strata lines
+ g.strokeStyle='rgba(0,0,0,.22)';g.lineWidth=3;for(let i=1;i<6;i++){g.beginPath();g.moveTo(0,TOP+i*130);g.lineTo(1080,TOP+i*130+Math.sin(i)*20);g.stroke()}
+ // pit
+ const d=io(seg(t,.6,3.4))*DEEP;
+ if(d>0){g.fillStyle='#0f1d2c';g.beginPath();g.moveTo(L-30,TOP-14);g.lineTo(L,TOP+d);g.lineTo(R,TOP+d);g.lineTo(R+30,TOP-14);g.fill()}
+ // excavator bucket early
+ if(t<3.6){const ex=seg(t,0,.6)*(1-seg(t,3,3.6));g.save();g.globalAlpha=ex;g.strokeStyle='#be9a4f';g.lineWidth=14;g.lineCap='round';const bx=540+Math.sin(t*3)*40,by=TOP-120+Math.sin(t*6)*18;g.beginPath();g.moveTo(960,TOP-330);g.lineTo(bx+160,by-120);g.lineTo(bx,by);g.stroke();g.fillStyle='#be9a4f';g.beginPath();g.moveTo(bx-30,by);g.lineTo(bx+40,by+10);g.lineTo(bx+20,by+60);g.lineTo(bx-40,by+50);g.fill();g.restore()}
+ // concrete shell
+ const sh=io(seg(t,3.4,5.2));
+ if(sh>0){const th=34,yb=TOP+DEEP;g.lineWidth=4;g.strokeStyle='#be9a4f';g.fillStyle='#26384c';
+  const k=sh;
+  g.beginPath();g.rect(L,TOP-14+(yb-(TOP-14))*(1-k),th,(yb-(TOP-14))*k);g.fill();g.stroke();
+  g.beginPath();g.rect(R-th,TOP-14+(yb-(TOP-14))*(1-k),th,(yb-(TOP-14))*k);g.fill();g.stroke();
+  g.beginPath();g.rect(L,yb-th,(R-L)*k,th);g.fill();g.stroke()}
+ // tiles
+ const tl=seg(t,5.2,6.4);
+ if(tl>0){g.save();g.beginPath();g.rect(L+34,TOP-14,R-L-68,DEEP-34+14);g.clip();g.strokeStyle=`rgba(242,238,230,${.35*tl})`;g.lineWidth=2;for(let x=L+34;x<R-34;x+=52){g.beginPath();g.moveTo(x,TOP-14);g.lineTo(x,TOP+DEEP);g.stroke()}for(let y=TOP;y<TOP+DEEP;y+=52){g.beginPath();g.moveTo(L+34,y);g.lineTo(R-34,y);g.stroke()}g.restore()}
+ // water
+ const w=io(seg(t,6.4,9));
+ if(w>0){const wl=TOP+DEEP-34-(DEEP-34-60)*w;g.save();g.beginPath();g.rect(L+34,TOP-14,R-L-68,DEEP-34+14);g.clip();
+  const wg=g.createLinearGradient(0,wl,0,TOP+DEEP);wg.addColorStop(0,'rgba(80,190,230,.85)');wg.addColorStop(1,'rgba(10,90,150,.95)');g.fillStyle=wg;
+  g.beginPath();g.moveTo(L+34,TOP+DEEP);for(let x=L+34;x<=R-34;x+=8)g.lineTo(x,wl+Math.sin(x*.03+t*4)*8);g.lineTo(R-34,TOP+DEEP);g.fill();
+  g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=3;for(let i=0;i<5;i++){g.beginPath();for(let x=L+34;x<=R-34;x+=8){const y=wl+40+i*55+Math.sin(x*.04+t*3+i)*6;if(y<TOP+DEEP-34)(x==L+34?g.moveTo(x,y):g.lineTo(x,y))}g.stroke()}g.restore()}
+ // ladder
+ const la=seg(t,6,7);if(la>0){g.strokeStyle=`rgba(210,215,225,${la})`;g.lineWidth=7;g.beginPath();g.moveTo(R-90,TOP-40);g.lineTo(R-90,TOP+210);g.moveTo(R-130,TOP-40);g.lineTo(R-130,TOP+210);for(let y=TOP;y<TOP+200;y+=50){g.moveTo(R-130,y);g.lineTo(R-90,y)}g.stroke()}
+ // labels
+ const labs=[[0.6,'01  الحفر والتأسيس'],[3.4,'02  الهيكل الخرساني'],[5.2,'03  العزل والتشطيب'],[6.4,'04  التجهيز والتعبئة']];
+ let cur='';for(const l of labs)if(t>=l[0])cur=l[1];$('st1').textContent=cur;$('st1').style.opacity=t<9.2?oc(seg(t,.6,1.2)):1-seg(t,9.2,9.7);
+ $('h1').style.opacity=oc(seg(t,.2,.9))*(1-seg(t,9.2,9.7));$('h2').style.opacity=oc(seg(t,7.6,8.6))*(1-seg(t,9.2,9.7));
+ $('en').style.opacity=oc(seg(t,1,2))*(1-seg(t,9.2,9.7));
+ $('end').style.opacity=seg(t,9.3,10);
+ $('st').style.opacity=seg(t,0,.3)*(1-seg(t,10.6,11));
+};
+</script></body></html>
