@@ -1,0 +1,7 @@
+@font-face{font-family:Cinz;font-weight:600;src:url(fonts/Cinzel-600.ttf)}
+@font-face{font-family:Kufi;font-weight:700;src:url(fonts/NotoKufi-700.ttf)}
+@font-face{font-family:Reem;font-weight:700;src:url(fonts/ReemKufi-700.ttf)}
+@font-face{font-family:Mont;font-weight:700;src:url(fonts/Montserrat-700.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(fonts/PlexArabic-600.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#05060d}
+#st{position:absolute;inset:0;overflow:hidden}canvas{position:absolute;inset:0}.p{position:absolute;left:0;right:0;text-align:center;will-change:opacity,transform}
