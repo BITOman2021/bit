@@ -1,0 +1,28 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas>
+<div id="h1" class="p" style="top:170px;font:700 96px/1.25 Reem;color:#fff;direction:rtl;opacity:0">مشاهداتنا اليومية<br><span style="color:#ffd24a">تضاعفت في 5 أيام</span></div>
+<div id="big" class="p" style="top:1330px;font:700 230px/1 Mont;color:#ffd24a;direction:ltr;opacity:0"></div>
+<div id="cap" class="p" style="top:1580px;font:700 62px Reem;color:#f3ead7;direction:rtl;opacity:0">مشاهدة في يوم واحد · 4 نوفمبر</div>
+<div id="src" class="p" style="top:1690px;font:600 38px Plex;color:#9aa0c8;direction:rtl;opacity:0">أرقام حقيقية من إحصائيات حساب @yellow.blue.om</div>
+<div id="end" class="p" style="inset:0;opacity:0;background:#07070f"><img src="assets/yb-logo.jpg" style="position:absolute;left:50%;top:360px;height:400px;transform:translateX(-50%);border-radius:34px;box-shadow:0 0 120px rgba(255,210,74,.35)"><div style="position:absolute;left:0;right:0;top:850px;text-align:center;font:700 72px Reem;color:#fff;direction:rtl">الأفكار حين تُرى… تنتشر</div><div style="position:absolute;left:0;right:0;top:980px;text-align:center;font:700 60px Mont;color:#ffd24a;direction:ltr">WE MAKE IDEAS VISIBLE.</div><div style="position:absolute;left:0;right:0;top:1200px;text-align:center;font:600 52px Plex;color:#d9dcff;direction:rtl">واتساب · <span style="font:700 56px Mont;direction:ltr;display:inline-block">76761808</span></div></div></div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3);
+const g=document.getElementById('c').getContext('2d');
+const D=[['30/10',6],['31/10',134],['1/11',21],['2/11',353],['3/11',804],['4/11',1025]];
+const $=id=>document.getElementById(id);
+window.DUR=12;
+window.render=t=>{
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#14172e');bg.addColorStop(1,'#07070f');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ const x0=110,W=860,base=1240,H=760;
+ g.strokeStyle='rgba(255,255,255,.10)';g.lineWidth=2;for(let i=0;i<=4;i++){const y=base-H*i/4;g.beginPath();g.moveTo(x0,y);g.lineTo(x0+W,y);g.stroke()}
+ const bw=100,gap=(W-bw*6)/5;
+ D.forEach((d,i)=>{const k=oc(seg(t,1+i*.55,2.2+i*.55));const h=Math.max(6,H*(d[1]/1100)*k);const x=x0+i*(bw+gap);
+  const last=i===5;g.fillStyle=last?'#ffd24a':'#4d5bb8';g.beginPath();g.roundRect(x,base-h,bw,h,14);g.fill();
+  g.fillStyle='#fff';g.font='700 40px Mont';g.textAlign='center';g.fillText(String(Math.round(d[1]*k)),x+bw/2,base-h-18);
+  g.fillStyle='#9aa0c8';g.font='600 32px Mont';g.fillText(d[0],x+bw/2,base+50)});
+ $('h1').style.opacity=oc(seg(t,.3,1));
+ const nk=oc(seg(t,5,7));$('big').textContent=Math.round(1025*nk).toLocaleString('en-US');$('big').style.opacity=seg(t,5,5.4);
+ $('cap').style.opacity=oc(seg(t,6.8,7.6));$('src').style.opacity=oc(seg(t,7.6,8.4));
+ $('end').style.opacity=seg(t,9.2,9.8);
+ $('st').style.opacity=seg(t,0,.3)*(1-seg(t,11.6,12));
+};
+</script></body></html>
