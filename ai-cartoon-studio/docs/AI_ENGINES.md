@@ -11,6 +11,7 @@ Every engine is an adapter (`backend/app/engines/`). The platform never reports 
 | eSpeak-NG | `apt install espeak-ng` | Tested end-to-end (Arabic + English). Robotic quality. |
 | edge-tts | `pip install edge-tts`, internet | Adapter implemented; online Microsoft service, not local, not tested here. |
 | Ollama LLM | `ollama serve` + `ollama pull qwen2.5:7b-instruct` | Adapter implemented; not run here. |
+| OpenAI-compatible gateway (OmniRoute) | `npx omniroute` (dashboard http://localhost:20128, API `/v1`), add provider accounts/keys in its dashboard, create an API key, set `ACS_LLM_URL`, `ACS_LLM_KEY`, `ACS_LLM_MODEL` | Adapter tested against a protocol double (key check, chat completions, JSON story). OmniRoute 3.8.52 installed and started here; **no providers were configured, so no real text was generated**. Free upstream tiers are external services with limits. |
 | Template scaffold | nothing | Works; structures timing/scenes only (no creative text). |
 | Audio-reactive animation | CPU | Works. Not phoneme lip-sync. |
 | Wav2Lip / SadTalker | GPU + your wrapper script in `ACS_WAV2LIP_CMD` | Reported unavailable. Original Wav2Lip weights are non-commercial. |

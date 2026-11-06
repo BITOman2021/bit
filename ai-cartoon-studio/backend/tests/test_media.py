@@ -227,3 +227,43 @@ def test_samkidz_workspace(client, user):
     assert client.patch(f"/api/samkidz/episodes/{ep['id']}/status", headers=h, json={"status": "production"}).json()["status"] == "production"
     assert client.patch(f"/api/samkidz/episodes/{ep['id']}/status", headers=h, json={"status": "bogus"}).status_code == 422
     assert not any(p["kind"] != "general" for p in client.get("/api/projects", headers=h).json())  # episodes not mixed into general projects
+
+
+def test_openai_compatible_gateway_engine(client, user):
+    """OmniRoute-style gateway: /v1/models + /v1/chat/completions with bearer key (protocol double)."""
+    from fastapi import Header
+    api = FastAPI()
+    seen = {}
+
+    @api.get("/v1/models")
+    def models(authorization: str = Header(default="")):
+        if authorization != "Bearer k123":
+            return Response(status_code=401)
+        return {"data": [{"id": "auto"}]}
+
+    @api.post("/v1/chat/completions")
+    async def chat(req: Request):
+        seen["body"] = await req.json()
+        story = {"title": "T", "synopsis": "S", "moral": "M", "scenes": [{"title": "A", "duration": 5, "characters": ["x"], "description": "d", "action": "a",
+                                                                          "dialogue": [{"character": "x", "line": "مرحبا", "emotion": "happy"}]}]}
+        return {"choices": [{"message": {"content": json.dumps(story, ensure_ascii=False)}}]}
+
+    s = socket.socket(); s.bind(("127.0.0.1", 0)); port = s.getsockname()[1]; s.close()
+    srv = uvicorn.Server(uvicorn.Config(api, host="127.0.0.1", port=port, log_level="error"))
+    threading.Thread(target=srv.run, daemon=True).start()
+    while not srv.started:
+        time.sleep(0.05)
+    old = (settings.llm_url, settings.llm_key)
+    h = user[0]
+    try:
+        settings.llm_url, settings.llm_key = f"http://127.0.0.1:{port}/v1", ""
+        j = wait_job(client, h, client.post("/api/jobs", headers=h, json={"kind": "story.generate", "params": {"idea": "x", "engine": "gateway"}}).json()["id"])
+        assert j["status"] == "failed" and "key" in j["error"]  # honest: key missing
+        settings.llm_key = "k123"
+        j = wait_job(client, h, client.post("/api/jobs", headers=h, json={"kind": "story.generate", "params": {"idea": "فكرة", "engine": "gateway"}}).json()["id"])
+        assert j["status"] == "done", j["error"]
+        assert j["result"]["story"]["engine"] == "gateway" and j["result"]["story"]["scenes"][0]["subtitle"] == "مرحبا"
+        assert seen["body"]["messages"][-1]["role"] == "user"
+    finally:
+        settings.llm_url, settings.llm_key = old
+        srv.should_exit = True

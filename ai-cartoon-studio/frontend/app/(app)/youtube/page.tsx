@@ -22,7 +22,7 @@ export default function YouTube() {
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="card space-y-3 p-5"><h3 className="font-bold">{tr("العنوان والوصف والوسوم", "Title, description & tags")}</h3>
             <div className="grid grid-cols-2 gap-3"><Field label={tr("اللغة", "Language")}><select className="inp" value={ml} onChange={(e) => { setMl(e.target.value as any); setM(p?.data?.youtube?.[e.target.value] || null); }}><option value="ar">العربية</option><option value="en">English</option></select></Field>
-              <Field label={tr("المحرك", "Engine")}><select className="inp" value={eng} onChange={(e) => setEng(e.target.value)}><option value="template">{tr("قالب (بدون AI)", "Template (no AI)")}</option><option value="ollama">Ollama</option></select></Field></div>
+              <Field label={tr("المحرك", "Engine")}><select className="inp" value={eng} onChange={(e) => setEng(e.target.value)}><option value="template">{tr("قالب (بدون AI)", "Template (no AI)")}</option><option value="ollama">Ollama</option><option value="gateway">OmniRoute / OpenAI-compatible</option></select></Field></div>
             <Field label={tr("كلمات مفتاحية", "Keywords")}><input className="inp" value={kw} onChange={(e) => setKw(e.target.value)} /></Field>
             <button className="btn-primary" disabled={busy} onClick={gen}>{busy && <Spinner />}{tr("توليد", "Generate")}</button>
             {m && <div className="space-y-2 text-sm"><div className="rounded-xl bg-panel2 p-3"><b>{tr("عناوين مقترحة", "Title options")}</b>{m.titles?.map((x: string, i: number) => <div key={i} className="flex justify-between gap-2"><span>{x}</span><button className="text-xs text-brand" onClick={() => copy(x)}>{tr("نسخ", "Copy")}</button></div>)}</div>

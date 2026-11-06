@@ -4,7 +4,7 @@ Run: `cd backend && python -m pytest -q tests`
 Result at the time of writing:
 ```
 ...................                                                      [100%]
-19 passed in 14.45s
+20 passed in 14.45s
 ```
 Covered (real code paths, no mocks of our own logic): registration/login/logout/session revocation, login rate limit, single-use password reset, project CRUD/duplicate/revisions/restore/zip export, per-user isolation (404 for other users),
 upload validation (fake image, .exe, .html, fake wav rejected; files private; nosniff), character consistency rules and locks, job queue incl. honest failure when ComfyUI is down and retry, quota enforcement, admin permissions + backup,

@@ -13,7 +13,7 @@ Bilingual (Arabic RTL / English LTR) web platform for cartoon images, characters
 | YouTube Studio (metadata, Arabic thumbnail, SRT, package) | ✅ implemented + tested. **Auto-upload not implemented** |
 | SAM KIDZ workspace (reference import unchanged + locked, episodes, status, bible) | ✅ implemented + tested |
 | AI image generation (ComfyUI/SDXL) | ⚠️ adapter tested against an API double only; needs your ComfyUI + GPU |
-| AI video generation, Wav2Lip lip-sync, Ollama writing | ⚠️ adapter slots; need your install (reported *unavailable* until then) |
+| AI video generation, Wav2Lip lip-sync, Ollama / OmniRoute writing (OmniRoute runs; needs providers configured in its dashboard) | ⚠️ adapter slots; need your install (reported *unavailable* until then) |
 | Docker / PostgreSQL / S3 mirror | ⚠️ written, **not run** in the authoring environment |
 
 Real phoneme lip-sync and character-identity locking beyond prompt + reference img2img need extra GPU models; see `docs/AI_ENGINES.md`.

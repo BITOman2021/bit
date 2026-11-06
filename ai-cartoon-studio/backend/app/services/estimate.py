@@ -36,6 +36,6 @@ def estimate(kind: str, p: dict) -> dict:
     if kind == "tts.synthesize":
         return {"seconds": max(2, round(len(p.get("text", "")) / 60)), "vram_gb": 0, "ram_gb": 1, "money": 0, "note": "CPU only"}
     if kind == "story.generate":
-        return {"seconds": 60 if p.get("engine") == "ollama" else 1, "vram_gb": 0, "ram_gb": 8 if p.get("engine") == "ollama" else 0, "money": 0,
-                "note": "Local LLM on CPU can take minutes" if p.get("engine") == "ollama" else "Instant (template scaffold)"}
+        return {"seconds": 60 if p.get("engine") in ("ollama", "gateway") else 1, "vram_gb": 0, "ram_gb": 8 if p.get("engine") == "ollama" else 0, "money": 0,
+                "note": "Local LLM on CPU can take minutes" if p.get("engine") in ("ollama", "gateway") else "Instant (template scaffold)"}
     return {"seconds": 5, "vram_gb": 0, "ram_gb": 1, "money": 0, "note": ""}

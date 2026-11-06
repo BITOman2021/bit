@@ -39,6 +39,10 @@ class Settings:
         self.workflows_dir = Path(_env("ACS_WORKFLOWS_DIR", str(Path(__file__).resolve().parent.parent / "workflows")))
         self.ollama_url = _env("ACS_OLLAMA_URL", "http://127.0.0.1:11434")
         self.ollama_model = _env("ACS_OLLAMA_MODEL", "qwen2.5:7b-instruct")
+        # OpenAI-compatible gateway (OmniRoute, LiteLLM, vLLM, LM Studio...). Key is optional and never shipped.
+        self.llm_url = _env("ACS_LLM_URL", "http://127.0.0.1:20128/v1")
+        self.llm_key = _env("ACS_LLM_KEY")
+        self.llm_model = _env("ACS_LLM_MODEL", "auto")
         self.piper_bin = _env("ACS_PIPER_BIN", "piper")
         self.piper_models_dir = Path(_env("ACS_PIPER_MODELS", str(self.data_dir / "piper-models")))
         self.ffmpeg = _env("ACS_FFMPEG", "ffmpeg")

@@ -22,7 +22,7 @@ export default function Story() {
   return (
     <>
       <PageHeader title={tr("مولّد القصص والسيناريو", "Story & Script Generator")} />
-      <EngineStatus ids={["ollama", "template"]} />
+      <EngineStatus ids={["gateway", "ollama", "template"]} />
       <div className="grid gap-4 lg:grid-cols-5">
         <div className="card space-y-3 p-5 lg:col-span-2">
           <Field label={tr("الفكرة", "Idea")}><textarea className="inp" rows={3} value={f.idea} onChange={(e) => set("idea", e.target.value)} /></Field>
@@ -34,7 +34,7 @@ export default function Story() {
             <Field label={tr("عدد المشاهد", "Scenes")}><input className="inp" type="number" min={1} max={30} value={f.scenes} onChange={(e) => set("scenes", Number(e.target.value))} /></Field>
             <Field label={tr("الكوميديا (0-5)", "Comedy (0-5)")}><input className="inp" type="number" min={0} max={5} value={f.comedy} onChange={(e) => set("comedy", Number(e.target.value))} /></Field>
             <Field label={tr("المستوى التعليمي (0-5)", "Educational (0-5)")}><input className="inp" type="number" min={0} max={5} value={f.education} onChange={(e) => set("education", Number(e.target.value))} /></Field>
-            <Field label={tr("المحرك", "Engine")}><select className="inp" value={f.engine} onChange={(e) => set("engine", e.target.value)}><option value="template">{tr("هيكل جاهز (بدون ذكاء اصطناعي)", "Scaffold (no AI)")}</option><option value="ollama">Ollama (LLM)</option></select></Field>
+            <Field label={tr("المحرك", "Engine")}><select className="inp" value={f.engine} onChange={(e) => set("engine", e.target.value)}><option value="template">{tr("هيكل جاهز (بدون ذكاء اصطناعي)", "Scaffold (no AI)")}</option><option value="ollama">Ollama (LLM)</option><option value="gateway">OmniRoute / OpenAI-compatible</option></select></Field>
           </div>
           <Field label={tr("الشخصيات (مفصولة بفاصلة)", "Characters (comma separated)")}><input className="inp" value={f.characters} onChange={(e) => set("characters", e.target.value)} /></Field>
           <Field label={tr("الرسالة التعليمية / القيمة", "Moral / value")}><input className="inp" value={f.moral} onChange={(e) => set("moral", e.target.value)} /></Field>

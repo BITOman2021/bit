@@ -42,19 +42,19 @@ def llm_story(p: dict) -> dict:
               'Return JSON: {"title": str, "synopsis": str, "moral": str, "scenes": [{"title": str, "duration": seconds(number), '
               '"characters": [str], "description": str (setting and visuals), "action": str (movement and facial expressions), '
               '"dialogue": [{"character": str, "line": str, "emotion": str}]}]}. Start with a catchy hook and end with a strong ending.')
-    data = llm.parse_json(llm.ollama_generate(prompt, SYSTEM, as_json=True))
+    data = llm.parse_json(llm.generate(p.get("engine"), prompt, SYSTEM, as_json=True))
     if not isinstance(data.get("scenes"), list) or not data["scenes"]:
         raise EngineUnavailable("LLM returned no scenes")
     for s in data["scenes"]:
         s.setdefault("dialogue", [])
         s["duration"] = float(s.get("duration") or 8)
         s["subtitle"] = " ".join(d.get("line", "") for d in s["dialogue"] if isinstance(d, dict))
-    data.update({"language": p.get("language", "ar"), "engine": "ollama"})
+    data.update({"language": p.get("language", "ar"), "engine": p.get("engine")})
     return data
 
 
 def generate(p: dict) -> dict:
-    if p.get("engine") == "ollama":
+    if p.get("engine") in ("ollama", "gateway"):
         return llm_story(p)
     return template_story(p)
 
@@ -63,11 +63,11 @@ def youtube_meta(p: dict, chapters: list[tuple[str, str]]) -> dict:
     """p: title, synopsis, language, keywords[]. chapters: [(timestamp,title)] from real scene durations."""
     lang, title, syn = p.get("language", "ar"), p.get("title", ""), p.get("synopsis", "")
     kws = [k.strip() for k in p.get("keywords", []) if k.strip()]
-    if p.get("engine") == "ollama":
+    if p.get("engine") in ("ollama", "gateway"):
         prompt = (f"YouTube metadata for a kids' cartoon video. Language: {'Arabic' if lang == 'ar' else 'English'}. Title idea: {title}. Synopsis: {syn}. "
                   'Return JSON {"titles":[3 catchy titles under 70 chars], "description": str, "tags":[up to 15 strings], "hashtags":[up to 5 starting with #]}.')
-        d = llm.parse_json(llm.ollama_generate(prompt, SYSTEM, as_json=True))
-        d["engine"] = "ollama"
+        d = llm.parse_json(llm.generate(p.get("engine"), prompt, SYSTEM, as_json=True))
+        d["engine"] = p.get("engine")
     else:
         tags = list(dict.fromkeys(kws + [w for w in title.split() if len(w) > 2]))[:15]
         suffix = ("رسوم متحركة للأطفال" if lang == "ar" else "Kids Cartoon")
