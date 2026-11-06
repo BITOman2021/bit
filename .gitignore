@@ -44,3 +44,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# AI Cartoon Studio
+ai-cartoon-studio/backend/data/
+ai-cartoon-studio/frontend/node_modules/
+ai-cartoon-studio/frontend/.next/
+ai-cartoon-studio/.env
+__pycache__/
+.pytest_cache/
