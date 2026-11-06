@@ -190,6 +190,12 @@ def h_render(job: Job, ctx: Ctx) -> dict:
             raise EngineUnavailable("project not found")
         timeline = (proj.data or {}).get("timeline") or {}
         export = {**(proj.data or {}).get("export", {}), **{k: v for k, v in p.items() if k in ("aspect", "resolution", "fps", "subtitles")}}
+        only = p.get("only_scene")
+        if only is not None:  # scene preview: render one scene only, never recorded as the project export
+            scenes = timeline.get("scenes", [])
+            if not 0 <= int(only) < len(scenes):
+                raise EngineUnavailable("scene index out of range")
+            return _render_to_asset(db, job, ctx, {"scenes": [scenes[int(only)]]}, {**export, "resolution": 720, "fps": min(int(export.get("fps", 24)), 24)}, "preview")
         res = _render_to_asset(db, job, ctx, timeline, export, "export")
         proj.data = {**proj.data, "last_export": {"asset_id": res["asset_ids"][0], "at": now().isoformat()}}
         return res
