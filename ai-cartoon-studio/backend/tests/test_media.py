@@ -103,7 +103,7 @@ def test_tts_espeak_arabic(client, user):
         pytest.skip("espeak-ng not installed")
     r = client.post("/api/voices/preview", headers=h, json={"engine": "espeak", "voice": ar[0]["id"], "text": "مرحبا يا أصدقائي", "emotion": "happy"})
     assert r.status_code == 200 and r.content[:4] == b"RIFF"
-    j = client.post("/api/jobs", headers=h, json={"kind": "tts.synthesize", "params": {"engine": "espeak", "voice": ar[0]["id"], "text": "مرحبا يا أصدقائي، هيا نلعب", "name": "loli"}}).json()
+    j = client.post("/api/jobs", headers=h, json={"kind": "tts.synthesize", "params": {"engine": "espeak", "voice": ar[0]["id"], "text": "مرحبا يا أصدقائي، هيا نلعب", "name": "bonnie"}}).json()
     d = wait_job(client, h, j["id"])
     assert d["status"] == "done", d["error"]
     assert d["assets"][0]["meta"]["duration"] > 0.5
@@ -153,7 +153,7 @@ def test_full_video_pipeline_with_arabic_subtitles(client, user):
     # metadata -> thumbnail -> package
     m = client.post("/api/youtube/metadata", headers=h, json={"project_id": p["id"], "language": "ar", "keywords": ["كرتون", "أطفال"]}).json()
     assert m["titles"] and m["engine"] == "template" and "كرتون" in m["tags"]
-    t = client.post("/api/youtube/thumbnail", headers=h, json={"title": "مغامرة لولي الجديدة", "background_asset_id": imgs[0], "badge": "سام كيدز", "project_id": p["id"]})
+    t = client.post("/api/youtube/thumbnail", headers=h, json={"title": "مغامرة بوني الجديدة", "background_asset_id": imgs[0], "badge": "سام كيدز", "project_id": p["id"]})
     assert t.status_code == 200 and (t.json()["meta"]["width"], t.json()["meta"]["height"]) == (1280, 720)
     pkg = client.post(f"/api/youtube/package/{p['id']}", headers=h)
     assert pkg.status_code == 200
@@ -203,7 +203,7 @@ def test_image_tools(client, user):
 
 def test_story_template_and_engine_labels(client, user):
     h = user[0]
-    j = wait_job(client, h, client.post("/api/jobs", headers=h, json={"kind": "story.generate", "params": {"idea": "لولي تتعلم ترتيب غرفتها", "scenes": 6, "duration_minutes": 3, "language": "ar", "characters": ["لولي", "بوني"]}}).json()["id"])
+    j = wait_job(client, h, client.post("/api/jobs", headers=h, json={"kind": "story.generate", "params": {"idea": "بوني تتعلم ترتيب غرفتها", "scenes": 6, "duration_minutes": 3, "language": "ar", "characters": ["بوني", "بوني"]}}).json()["id"])
     s = j["result"]["story"]
     assert s["engine"] == "template" and len(s["scenes"]) == 6 and abs(sum(x["duration"] for x in s["scenes"]) - 180) < 1 and "notice" in s
     ol = wait_job(client, h, client.post("/api/jobs", headers=h, json={"kind": "story.generate", "params": {"idea": "x", "engine": "ollama"}}).json()["id"])
@@ -213,15 +213,15 @@ def test_story_template_and_engine_labels(client, user):
 def test_samkidz_workspace(client, user):
     h = user[0]
     ov = client.get("/api/samkidz", headers=h).json()
-    assert ov["missing_references"] == ["Loli", "Bonnie", "Bro", "Safsoof", "Sara"]
+    assert ov["missing_references"] == ["Bonnie", "Bro", "Safsoof", "Sara"]
     raw = png_bytes((250, 200, 50), (300, 300))
-    r = client.post("/api/samkidz/characters/import", headers=h, data={"name": "Loli", "description": "reference"}, files={"file": ("loli.png", raw)})
+    r = client.post("/api/samkidz/characters/import", headers=h, data={"name": "Bonnie", "description": "reference"}, files={"file": ("bonnie.png", raw)})
     assert r.status_code == 200 and r.json()["reference_locked"]
     # the reference image is stored byte-for-byte (not redesigned / re-encoded)
     stored = client.get(f"/api/assets/{r.json()['reference_asset_id']}/file", headers=h).content
     assert stored == raw
-    assert client.post("/api/samkidz/characters/import", headers=h, data={"name": "Loli"}, files={"file": ("l.png", raw)}).status_code == 409
-    assert "Loli" not in client.get("/api/samkidz", headers=h).json()["missing_references"]
+    assert client.post("/api/samkidz/characters/import", headers=h, data={"name": "Bonnie"}, files={"file": ("l.png", raw)}).status_code == 409
+    assert "Bonnie" not in client.get("/api/samkidz", headers=h).json()["missing_references"]
     ep = client.post("/api/samkidz/episodes", headers=h, json={"name": "الحلقة 1"}).json()
     assert ep["kind"] == "samkidz_episode" and ep["data"]["number"] == 1
     assert client.patch(f"/api/samkidz/episodes/{ep['id']}/status", headers=h, json={"status": "production"}).json()["status"] == "production"

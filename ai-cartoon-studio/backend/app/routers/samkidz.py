@@ -13,7 +13,7 @@ from .characters import cdict
 from .projects import pdict
 
 router = APIRouter(prefix="/api/samkidz", tags=["samkidz"])
-REFERENCE_NAMES = ["Loli", "Bonnie", "Bro", "Safsoof", "Sara"]
+REFERENCE_NAMES = ["Bonnie", "Bro", "Safsoof", "Sara"]
 STATUSES = ["idea", "script", "production", "review", "published", "archived"]
 
 
