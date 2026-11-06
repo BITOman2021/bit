@@ -1,0 +1,87 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas></div>
+<script>
+const V=new URLSearchParams(location.search).get('v');
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3),io=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const bo=x=>{x=cl(x);const n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d)return n*(x-=1.5/d)*x+.75;if(x<2.5/d)return n*(x-=2.25/d)*x+.9375;return n*(x-=2.625/d)*x+.984375};
+const g=document.getElementById('c').getContext('2d');
+function tx(s,x,y,sz,col,f='Reem',a=1,ls=0){g.save();g.globalAlpha=a;g.font=`700 ${sz}px ${f}`;g.textAlign='center';g.textBaseline='middle';g.direction='rtl';g.fillStyle=col;if(ls)g.letterSpacing=ls+'px';g.fillText(s,x,y);g.restore()}
+const imgs={};function img(n){if(!imgs[n]){const i=new Image();i.src='assets/'+n;imgs[n]=i}return imgs[n]}
+img('yb-logo.jpg');img('gsw-logo.jpg');
+function ybEnd(t,t0,brand,sub,discl){const a=oc(seg(t,t0,t0+.6));if(a<=0)return;g.save();g.globalAlpha=a;g.fillStyle='#07070f';g.fillRect(0,0,1080,1920);
+ tx(brand,540,520,260,'#ffd24a','Reem',1);tx(sub,540,720,64,'#fff','Reem');
+ tx(discl,540,860,38,'#9aa0c8','Plex');
+ const im=img('yb-logo.jpg');if(im.complete)g.drawImage(im,380,1000,320,229);
+ tx('عندك علامة وتبي لها إعلان بهذا المستوى؟',540,1330,48,'#fff','Reem');tx('واتساب · 76761808',540,1430,56,'#ffd24a','Plex');
+ tx('Yellow & Blue — WE MAKE IDEAS VISIBLE.',540,1560,34,'#d9dcff','Mont');g.restore()}
+const VID={};
+// ---- coffee
+VID.coffee={DUR:11,draw(t){
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#2a1810');bg.addColorStop(1,'#0e0805');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ const glow=g.createRadialGradient(540,1250,20,540,1250,700);glow.addColorStop(0,'rgba(209,177,119,.25)');glow.addColorStop(1,'rgba(209,177,119,0)');g.fillStyle=glow;g.fillRect(0,600,1080,1300);
+ // saucer + cup
+ g.fillStyle='#e9dfcf';g.beginPath();g.ellipse(540,1500,330,64,0,0,6.3);g.fill();
+ g.fillStyle='#fff8ec';g.beginPath();g.moveTo(330,1130);g.lineTo(750,1130);g.quadraticCurveTo(750,1480,540,1490);g.quadraticCurveTo(330,1480,330,1130);g.fill();
+ g.strokeStyle='#fff8ec';g.lineWidth=34;g.beginPath();g.arc(790,1250,95,-1.2,1.5);g.stroke();
+ g.fillStyle='#d1b177';g.fillRect(330,1136,420,8);
+ // coffee fill
+ const f=io(seg(t,3,5.6));
+ if(f>0){g.save();g.beginPath();g.moveTo(340,1150);g.lineTo(740,1150);g.quadraticCurveTo(740,1470,540,1480);g.quadraticCurveTo(340,1470,340,1150);g.clip();
+  const lvl=1480-(1480-1175)*f;const cg=g.createLinearGradient(0,lvl,0,1480);cg.addColorStop(0,'#6b3a1e');cg.addColorStop(1,'#2e170a');g.fillStyle=cg;g.fillRect(330,lvl,440,400);
+  g.restore();g.fillStyle='#8a5530';g.beginPath();g.ellipse(540,1175-(f<1?0:0),195,28,0,0,6.3);if(f>.95)g.fill()}
+ // pour stream
+ const ps=seg(t,2.8,3.4)*(1-seg(t,5.4,5.9));if(ps>0){g.strokeStyle=`rgba(80,40,18,${ps})`;g.lineWidth=26;g.lineCap='round';g.beginPath();g.moveTo(540,600);g.lineTo(540,1140+(1-f)*80);g.stroke()}
+ // beans
+ for(let i=0;i<14;i++){const st=.5+i*.17,k=seg(t,st,st+1.2);if(k<=0||k>=1)continue;const x=540+Math.sin(i*2.3)*220*(1-k*.8),y=-60+(1130+Math.sin(i)*40)*io(k*.9+.1*k);
+  g.save();g.translate(x,Math.min(y,1140));g.rotate(i+t*6*(1-k));g.fillStyle='#4a2512';g.beginPath();g.ellipse(0,0,34,22,0,0,6.3);g.fill();g.strokeStyle='#2a1408';g.lineWidth=4;g.beginPath();g.moveTo(-26,0);g.quadraticCurveTo(0,-9,26,0);g.stroke();g.restore()}
+ // steam
+ const sa=seg(t,5.4,6.4);if(sa>0)for(let i=0;i<4;i++){g.strokeStyle=`rgba(255,248,236,${.35*sa})`;g.lineWidth=12;g.lineCap='round';g.beginPath();for(let y=0;y<420;y+=10){const x=440+i*65+Math.sin(y*.03+t*2+i)*26*(y/420+.3);const yy=1110-y;(y?g.lineTo(x,yy):g.moveTo(x,yy))}g.stroke()}
+ // texts
+ tx('الصباح يبدأ بنقطة',540,300,120,'#f3ead7','Reem',oc(seg(t,.3,1.2)));
+ tx('قهوة بُنّ',540,470,110,'#d1b177','Reem',oc(seg(t,6.2,7.2)));
+ tx('علامة غير حقيقية · مفهوم إعلاني',540,1710,36,'#9a8466','Plex',oc(seg(t,7,8)));
+ ybEnd(t,8.6,'بُنّ','فكرتها: الصباح يبدأ بنقطة','علامة قهوة غير حقيقية، صنعناها لنعرض كيف نفكر');
+ g.fillStyle=`rgba(0,0,0,${1-seg(t,0,.25)*(1-seg(t,10.7,11))})`;g.fillRect(0,0,1080,1920)}};
+// ---- travel
+VID.travel={DUR:11,draw(t){
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#0b1b3a');bg.addColorStop(.6,'#c76b3a');bg.addColorStop(1,'#ffcf8a');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ for(let i=0;i<40;i++){g.fillStyle=`rgba(255,255,255,${.5*Math.abs(Math.sin(t*2+i))*(1-i/60)})`;g.beginPath();g.arc((i*173)%1080,(i*97)%800,2+(i%3),0,6.3);g.fill()}
+ g.fillStyle='#ffd88a';g.beginPath();g.arc(540,1340,160,0,6.3);g.fill();
+ g.fillStyle='#0e1a33';g.beginPath();g.moveTo(0,1500);for(let x=0;x<=1080;x+=40)g.lineTo(x,1440-Math.abs(Math.sin(x*.012))*120);g.lineTo(1080,1920);g.lineTo(0,1920);g.fill();
+ const P=[[200,1150],[540,640],[900,980]],ctl=[[300,700],[760,420]];
+ // path
+ const k=io(seg(t,1,6));g.setLineDash([18,18]);g.strokeStyle='rgba(255,255,255,.85)';g.lineWidth=7;g.lineCap='round';
+ function bz(u){const a=(1-u)**3,b=3*u*(1-u)**2,c=3*u*u*(1-u),d=u**3;return[a*P[0][0]+b*ctl[0][0]+c*ctl[1][0]+d*P[2][0],a*P[0][1]+b*ctl[0][1]+c*ctl[1][1]+d*P[2][1]]}
+ g.beginPath();for(let u=0;u<=k;u+=.01){const p=bz(u);u?g.lineTo(p[0],p[1]):g.moveTo(p[0],p[1])}g.stroke();g.setLineDash([]);
+ // pins
+ [[0,'مسقط',.0],[.5,'جبل',.5],[1,'ساحل',1]].forEach((p,i)=>{const pt=bz(p[0]);const a=bo(seg(k,p[0]-.05,p[0]+.12));if(i==0||k>=p[0]){g.save();g.translate(pt[0],pt[1]);g.scale(Math.max(a,0),Math.max(a,0));g.fillStyle='#ffd24a';g.beginPath();g.arc(0,-40,34,0,6.3);g.fill();g.beginPath();g.moveTo(-18,-20);g.lineTo(0,18);g.lineTo(18,-20);g.fill();g.fillStyle='#0b1b3a';g.beginPath();g.arc(0,-40,12,0,6.3);g.fill();g.restore();tx(p[1],pt[0],pt[1]+70,46,'#fff','Reem',a)}});
+ // plane
+ if(k>0&&k<1){const p=bz(k),q=bz(Math.min(1,k+.01));g.save();g.translate(p[0],p[1]);g.rotate(Math.atan2(q[1]-p[1],q[0]-p[0]));g.fillStyle='#fff';g.beginPath();g.moveTo(40,0);g.lineTo(-30,-26);g.lineTo(-14,0);g.lineTo(-30,26);g.fill();g.restore()}
+ tx('إلى أين؟',540,260,190,'#fff','Reem',oc(seg(t,.3,1.1)));
+ tx('وِجهة',540,470,100,'#ffd24a','Reem',oc(seg(t,6.4,7.2)));
+ tx('علامة غير حقيقية · مفهوم إعلاني',540,1710,36,'#2a1a10','Plex',oc(seg(t,7,8)));
+ ybEnd(t,8.6,'وِجهة','فكرتها: السفر يبدأ بسؤال','علامة سفر غير حقيقية، صنعناها لنعرض كيف نفكر');
+ g.fillStyle=`rgba(0,0,0,${1-seg(t,0,.25)*(1-seg(t,10.7,11))})`;g.fillRect(0,0,1080,1920)}};
+// ---- GSW AC
+VID.ac={DUR:12,draw(t){
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#0a1420');bg.addColorStop(1,'#16314a');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ tx('قبل تركيب المكيّف',540,190,96,'#f2eee6','Kufi',oc(seg(t,.2,1)));tx('ثلاثة أسئلة',540,330,120,'#d1b177','Kufi',oc(seg(t,.6,1.4)));
+ // room
+ const rx=100,ry=520,rw=880,rh=520;g.strokeStyle='#be9a4f';g.lineWidth=5;g.strokeRect(rx,ry,rw,rh);g.fillStyle='rgba(38,56,76,.5)';g.fillRect(rx,ry,rw,rh);
+ // window + sun
+ g.fillStyle='#16314a';g.fillRect(rx+rw-260,ry+80,200,240);g.strokeRect(rx+rw-260,ry+80,200,240);
+ const sun=oc(seg(t,1.2,2));g.fillStyle=`rgba(255,200,90,${sun})`;g.beginPath();g.arc(rx+rw+10,ry-20,90+Math.sin(t*3)*6,0,6.3);g.fill();
+ if(sun>0){g.strokeStyle=`rgba(255,200,90,${.5*sun})`;g.lineWidth=6;for(let i=0;i<4;i++){g.beginPath();g.moveTo(rx+rw-30,ry+60+i*60);g.lineTo(rx+rw-250+i*10,ry+130+i*70);g.stroke()}}
+ // AC unit
+ g.fillStyle='#e9e4da';g.beginPath();g.roundRect(rx+60,ry+60,360,100,20);g.fill();g.fillStyle='#be9a4f';g.fillRect(rx+80,ry+135,320,8);
+ // airflow
+ const af=seg(t,3.5,12);for(let i=0;i<5;i++){const ph=(t*1.2+i*.2)%1;g.strokeStyle=`rgba(120,200,240,${.7*(1-ph)*seg(t,3.5,4.2)})`;g.lineWidth=7;g.lineCap='round';g.beginPath();g.moveTo(rx+90+i*60,ry+170);g.quadraticCurveTo(rx+110+i*60+ph*40,ry+260+ph*120,rx+60+i*90+ph*160,ry+330+ph*190);g.stroke()}
+ // outdoor unit + drain
+ g.fillStyle='#cfd5db';g.beginPath();g.roundRect(rx+rw+20,ry+rh-100,0,0,0);g.fill();
+ // cards
+ const Q=[['01','مساحة الغرفة وتعرّضها للشمس'],['02','السعة المناسبة، لا الأكبر بالضرورة'],['03','موقع الوحدة الخارجية والتصريف']];
+ Q.forEach((q,i)=>{const a=bo(seg(t,4+i*1.6,5+i*1.6));g.save();g.translate(540,1230+i*150);g.scale(a,a);g.fillStyle='#16314a';g.beginPath();g.roundRect(-440,-58,880,116,18);g.fill();g.strokeStyle='#be9a4f';g.lineWidth=3;g.stroke();tx(q[0],395,0,48,'#d1b177','Cinz');tx(q[1],-40,0,40,'#f2eee6','Kufi');g.restore()});
+ tx('إرشاد عام وليس تصميماً لمشروعك',540,1720,34,'#9aa0b0','Plex',oc(seg(t,9,9.8)));
+ const e=oc(seg(t,10.2,10.9));if(e>0){g.save();g.globalAlpha=e;g.fillStyle='#0d1114';g.fillRect(0,0,1080,1920);const im=img('gsw-logo.jpg');if(im.complete)g.drawImage(im,60,330,960,768);tx('توريد وتركيب التكييف والتبريد',540,1360,40,'#d1b177','Plex');tx('+968 9508 7873',540,1470,70,'#d1b177','Cinz');tx('@gsw.oman · snow.wing.oman@gmail.com',540,1580,42,'#f2eee6','Plex');g.restore()}
+ g.fillStyle=`rgba(0,0,0,${1-seg(t,0,.25)*(1-seg(t,11.7,12))})`;g.fillRect(0,0,1080,1920)}};
+window.DUR=VID[V].DUR;window.render=t=>{g.setTransform(1,0,0,1,0,0);VID[V].draw(t)};
+</script></body></html>
