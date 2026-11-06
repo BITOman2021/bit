@@ -1,0 +1,45 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas>
+<div id="h1" class="p" style="top:1330px;font:700 80px/1.3 Mont;color:#fff;direction:ltr;opacity:0">WE MAKE IDEAS<br><span style="color:#ffd24a">VISIBLE.</span></div>
+<div id="h2" class="p" style="top:1610px;font:700 70px Reem;color:#f3ead7;direction:rtl;opacity:0">نصنع الأفكار… لتُرى</div>
+<div id="cta" class="p" style="top:1730px;font:600 50px Plex;color:#d9dcff;direction:rtl;opacity:0">واتساب · <span style="font:700 54px Mont;direction:ltr;display:inline-block">76761808</span> · <span style="direction:ltr;display:inline-block;font:700 50px Mont">@yellow.blue.om</span></div>
+</div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const g=document.getElementById('c').getContext('2d');
+let sd=3;const rnd=()=>(sd=(sd*16807)%2147483647)/2147483647;
+const P=[];let ready=false;
+const img=new Image();img.onload=()=>{
+ const W=1040,H=Math.round(900*img.height/img.width);const cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d');x.drawImage(img,0,0,W,H);
+ const d=x.getImageData(0,0,W,H).data;const ox=20,oy=760-H/2;
+ for(let y=0;y<H;y+=4)for(let xx=0;xx<W;xx+=4){const i=(y*W+xx)*4;const r=d[i],gg=d[i+1],b=d[i+2];const lum=.3*r+.59*gg+.11*b;
+  if(lum>92){const gold=(r>gg*0.95&&gg>b*1.15);
+   const a=rnd()*6.283,rad=700+rnd()*900;
+   P.push({tx:ox+xx,ty:oy+y,sx:540+Math.cos(a)*rad,sy:960+Math.sin(a)*rad*1.3,d:rnd()*2.2,gold:gold,ph:rnd()*6.28,sz:2+rnd()*2.4,blue:rnd()<.12})}}
+ ready=true};img.src='assets/yb-logo.jpg';
+const h1=document.getElementById('h1'),h2=document.getElementById('h2'),cta=document.getElementById('cta');
+window.DUR=14;window.isReady=()=>ready;
+window.render=t=>{
+ const bg=g.createRadialGradient(540,700,50,540,900,1300);bg.addColorStop(0,'#14172e');bg.addColorStop(1,'#05060d');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ if(!ready)return;
+ const beat=Math.exp(-6*((t%0.6)));
+ g.save();g.globalCompositeOperation='lighter';
+ for(const p of P){
+  const k=ioc(seg(t,.4+p.d,3.6+p.d));
+  const swirl=(1-k)*3.2;const cx=540,cy=960;
+  const dx=p.sx-cx,dy=p.sy-cy;const ca=Math.cos(swirl),sa=Math.sin(swirl);
+  const sx=cx+dx*ca-dy*sa,sy=cy+dx*sa+dy*ca;
+  let x=sx+(p.tx-sx)*k,y=sy+(p.ty-sy)*k;
+  const jit=(1-k)*0+ (k>.99? Math.sin(t*3+p.ph)*1.5:0);x+=jit;y+=jit;
+  const formed=seg(t,5.6,6.2);
+  const tw=.55+.45*Math.sin(t*4+p.ph);
+  const a=(.35+.5*tw)*(.4+.6*k)+formed*.25*beat;
+  g.fillStyle=p.blue?`rgba(120,150,255,${a})`:(p.gold?`rgba(255,210,100,${a})`:`rgba(220,225,255,${a*.85})`);
+  const s=p.sz*(1+formed*.6*beat);g.beginPath();g.arc(x,y,s,0,6.283);g.fill();
+ }
+ g.restore();
+ // shockwave
+ const sw=seg(t,6.2,7.4);if(sw>0&&sw<1){g.strokeStyle=`rgba(255,210,100,${.8*(1-sw)})`;g.lineWidth=10*(1-sw)+2;g.beginPath();g.arc(540,760,100+sw*900,0,6.283);g.stroke()}
+ h1.style.opacity=oc(seg(t,6.8,7.8));h2.style.opacity=oc(seg(t,8.4,9.4));cta.style.opacity=oc(seg(t,10,11));
+ document.getElementById('st').style.opacity=seg(t,0,.3)*(1-seg(t,13.6,14));
+};
+</script></body></html>

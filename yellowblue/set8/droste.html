@@ -1,0 +1,42 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas>
+<div id="h1" class="p" style="top:1380px;font:700 124px/1.2 Reem;color:#fff;direction:rtl;text-shadow:0 0 40px #000,0 0 14px #000,0 0 6px #000"></div>
+<div id="h2" class="p" style="top:1580px;font:700 66px Reem;color:#ffd24a;direction:rtl;text-shadow:0 0 30px #000">ونحن نغوص فيها لأجلك</div>
+<div id="fl" class="p" style="inset:0;background:#fff;opacity:0"></div>
+<div id="end" class="p" style="inset:0;opacity:0;background:#07070f"><img src="assets/yb-logo.jpg" style="position:absolute;left:50%;top:330px;height:420px;transform:translateX(-50%);border-radius:36px;box-shadow:0 0 120px rgba(255,210,74,.35)"><div style="position:absolute;left:0;right:0;top:860px;text-align:center;font:700 70px/1.3 Mont;color:#fff;direction:ltr">YELLOW &amp; BLUE</div><div style="position:absolute;left:0;right:0;top:960px;text-align:center;font:700 62px Mont;color:#ffd24a;direction:ltr">WE MAKE IDEAS VISIBLE.</div><div style="position:absolute;left:0;right:0;top:1180px;text-align:center;font:600 52px Plex;color:#d9dcff;direction:rtl">واتساب · <span style="font:700 56px Mont;direction:ltr;display:inline-block">76761808</span></div><div style="position:absolute;left:0;right:0;top:1290px;text-align:center;font:700 52px Mont;color:#fff;direction:ltr">@yellow.blue.om</div></div></div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const g=document.getElementById('c').getContext('2d');
+const cols=[['#ffd24a','#07070f'],['#292c4c','#ffd24a'],['#f3ead7','#292c4c'],['#0d1114','#d1b177'],['#2f5bff','#fff'],['#d1b177','#141c40']];
+const words=['فكرة','تصميم','حملة','علامة','حضور','أثر'];
+const R=.58;
+function frame(i,t,ph){
+ const k=i-ph;const s=Math.pow(R,k);const w=1100*s,h=1500*s;
+ const ang=k*0.22+Math.sin(t*.4)*.04;
+ const ox=Math.sin(k*.9+t*.3)*w*.10,oy=Math.cos(k*.7)*h*.05;
+ const ci=((i%cols.length)+cols.length)%cols.length;const [bg,fg]=cols[ci];
+ g.save();g.translate(540+ox,760+oy);g.rotate(ang);
+ const r=Math.min(w,h)*.08;
+ g.shadowColor='rgba(255,210,74,.5)';g.shadowBlur=Math.min(60,30*s+8);
+ g.fillStyle=bg;g.beginPath();g.moveTo(-w/2+r,-h/2);g.arcTo(w/2,-h/2,w/2,h/2,r);g.arcTo(w/2,h/2,-w/2,h/2,r);g.arcTo(-w/2,h/2,-w/2,-h/2,r);g.arcTo(-w/2,-h/2,w/2,-h/2,r);g.fill();
+ g.shadowBlur=0;g.lineWidth=Math.max(2,6*s);g.strokeStyle=fg;g.stroke();
+ g.fillStyle=fg;g.textAlign='center';g.textBaseline='middle';g.font=`700 ${Math.max(8,h*.07)}px Reem`;g.direction='rtl';
+ g.fillText(words[((i%words.length)+words.length)%words.length],0,-h/2+h*.075);
+ g.restore();
+}
+const h1=document.getElementById('h1'),h2=document.getElementById('h2'),fl=document.getElementById('fl'),end=document.getElementById('end');
+window.DUR=14;
+window.render=t=>{
+ g.fillStyle='#05060d';g.fillRect(0,0,1080,1920);
+ const cyc=3.6;const speed=t<1?oc(t):1;const ph=((t*speed*.9)/cyc)%1;
+ const zoomOut=t>9.6?seg(t,9.6,10.4):0;
+ const beat=Math.exp(-7*((t%0.484)));
+ g.save();g.translate(540,760);g.scale(1+.02*beat+zoomOut*.6,1+.02*beat+zoomOut*.6);g.translate(-540,-760);
+ for(let i=-3;i<=12;i++)frame(i,t,ph);
+ g.restore();
+ const txt='فكرة داخل فكرة';h1.textContent=txt.slice(0,Math.floor(txt.length*seg(t,1.2,3)));h1.style.opacity=seg(t,1,1.3)*(1-seg(t,9,9.6));
+ h2.style.opacity=oc(seg(t,4.5,5.5))*(1-seg(t,9,9.6));
+ fl.style.opacity=t<9.4?0:(t<10?seg(t,9.4,10):1-seg(t,10,10.8));
+ end.style.opacity=seg(t,10,10.5);
+ document.getElementById('st').style.opacity=seg(t,0,.3)*(1-seg(t,13.6,14));
+};
+</script></body></html>

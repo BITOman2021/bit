@@ -1,0 +1,58 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><style>
+@font-face{font-family:Cinz;font-weight:600;src:url(fonts/Cinzel-600.ttf)}
+@font-face{font-family:Kufi;font-weight:700;src:url(fonts/NotoKufi-700.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(fonts/PlexArabic-600.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#182e45}
+#st{position:absolute;inset:0;overflow:hidden}.p{position:absolute;will-change:transform,opacity}
+</style></head><body><div id="st"></div><script>
+const V=new URLSearchParams(location.search).get('v');const st=document.getElementById('st');
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));
+const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const E=(h,css)=>{const d=document.createElement('div');d.className='p';d.style.cssText=css;d.innerHTML=h;st.appendChild(d);return d};
+const frame=()=>{E('','inset:36px;border:3px solid #be9a4f');E('','inset:52px;border:1px solid rgba(190,154,79,.5)')};
+const endCard=()=>E(`<div style="position:absolute;inset:0;background:#0d1114"></div><img src="assets/gsw-logo.jpg" style="position:absolute;left:60px;top:330px;width:960px;border:2px solid #be9a4f"><div style="position:absolute;left:0;right:0;top:1460px;text-align:center;font:600 70px Cinz;color:#d1b177;direction:ltr;letter-spacing:3px">+968 9508 7873</div><div style="position:absolute;left:0;right:0;top:1575px;text-align:center;font:600 46px Plex;color:#f2eee6;direction:ltr">@gsw.oman &nbsp;·&nbsp; snow.wing.oman@gmail.com</div><div style="position:absolute;left:0;right:0;top:1800px;text-align:center;font:600 26px Plex;color:#f2eee6;opacity:.55">تصميم: Yellow &amp; Blue Advertising</div>`,'inset:0');
+let R;
+/* ===== P: project phases ===== */
+if(V==='p'){st.style.background='#f7f4ee';frame();
+ const ttl=E('مراحل أي<br>مشروع بناء','left:0;right:0;top:120px;text-align:center;font:700 110px/1.2 Kufi;color:#182e45;direction:rtl');
+ const sub=E('إرشاد عام: ست محطات تمر بها المشاريع','left:0;right:0;top:400px;text-align:center;font:600 40px Plex;color:#5a5f66;direction:rtl');
+ const ph=['الدراسة والتخطيط','التصميم والمخططات','الموافقات والتجهيز','التنفيذ والإنشاء','الفحص والمراجعة','التسليم'];
+ const rows=ph.map((s,i)=>E(`<div style="position:absolute;left:0;top:0;width:90px;height:90px;border-radius:50%;background:#182e45;color:#f7f4ee;display:flex;align-items:center;justify-content:center;font:600 38px Cinz">0${i+1}</div><div style="position:absolute;left:130px;right:0;top:12px;font:700 58px Kufi;color:#182e45;direction:rtl;text-align:right">${s}</div>`,`left:140px;right:140px;top:${520+i*148}px;height:100px`));
+ const line=E('','left:185px;width:6px;top:560px;height:0;background:#be9a4f');
+ const note=E('تتفاوت المراحل ومدتها بحسب كل مشروع','left:0;right:0;top:1470px;text-align:center;font:600 34px Plex;color:#5a5f66;direction:rtl');
+ const end=endCard();
+ R=t=>{st.style.opacity=seg(t,0,.25)*(1-seg(t,13.6,14));
+  const a=oc(seg(t,.2,1));ttl.style.opacity=a;ttl.style.transform=`translateY(${(1-a)*-40}px)`;sub.style.opacity=oc(seg(t,.7,1.4));
+  line.style.height=(5*148*ioc(seg(t,1.6,8.6)))+'px';
+  rows.forEach((r,i)=>{const s=1.6+i*1.4,k=oc(seg(t,s,s+.6));r.style.opacity=k;r.style.transform=`translateX(${(1-k)*80}px)`;
+   const n=r.children[0];n.style.background=(t>=s+1.0&&i<5)?'#be9a4f':'#182e45';n.style.color=(t>=s+1.0&&i<5)?'#182e45':'#f7f4ee'; if(i===5){n.style.background='#1e6b45'}});
+  note.style.opacity=oc(seg(t,9.6,10.2))*(1-seg(t,11,11.4));
+  end.style.opacity=seg(t,11.2,12);end.style.pointerEvents='none';
+ };}
+/* ===== W: pool layers ===== */
+if(V==='w'){st.style.background='#0d1114';frame();
+ const ttl=E('كيف يُبنى<br>حوض السباحة؟','left:0;right:0;top:120px;text-align:center;font:700 110px/1.2 Kufi;color:#f2eee6;direction:rtl');
+ const sub=E('إرشاد عام: خمس طبقات ومراحل رئيسية','left:0;right:0;top:400px;text-align:center;font:600 40px Plex;color:#d1b177;direction:rtl');
+ const dr=E('','left:0;top:520px;width:1080px;height:700px');
+ const P=[ // d,start,dur,width,color
+  ['M60 150 H1020',.8,.8,5,'#f2eee6'],
+  ['M60 150 H220 L260 560 H820 L860 150 H1020',1.6,1.8,6,'#a8adb4'],
+  ['M215 150 L262 575 H818 L865 150 M200 150 L248 590 H832 L880 150',3.6,1.8,6,'#be9a4f'],
+  ['M232 150 L274 560 H806 L848 150',5.6,1.6,4,'#5fb0ff'],
+  ['M246 160 L284 548 H796 L834 160',7.2,1.6,5,'#f2eee6']];
+ dr.innerHTML=`<svg width="1080" height="700" viewBox="0 0 1080 700" fill="none" stroke-linecap="round" stroke-linejoin="round">${P.map((p,i)=>`<path id="pw${i}" pathLength="1" d="${p[0]}" stroke="${p[4]}" stroke-width="${p[3]}" ${i===3?'stroke-dasharray="1"':''}/>`).join('')}<rect id="wt" x="270" y="150" width="540" height="0" fill="rgba(95,176,255,.35)"/><g id="pump" opacity="0"><rect x="870" y="70" width="110" height="80" stroke="#d1b177" stroke-width="5"/><circle cx="925" cy="110" r="20" stroke="#d1b177" stroke-width="4"/><path d="M870 120 H840 V300 H800" stroke="#d1b177" stroke-width="5"/></g></svg>`;
+ const ps=P.map((p,i)=>dr.querySelector('#pw'+i));const wt=dr.querySelector('#wt'),pump=dr.querySelector('#pump');
+ const L=[['01','الحفر والتأسيس',1.6],['02','الهيكل الخرساني',3.6],['03','العزل المائي',5.6],['04','التشطيب الداخلي',7.2],['05','التجهيزات والمضخات',8.8]];
+ const lb=L.map(([n,s,t0],i)=>E(`<span style="color:#d1b177;font:600 34px Cinz;margin-left:22px;direction:ltr;display:inline-block">${n}</span>${s}`,`left:100px;right:100px;top:${1290+i*70}px;text-align:right;font:700 48px Kufi;color:#f2eee6;direction:rtl`));
+ const end=endCard();
+ R=t=>{st.style.opacity=seg(t,0,.25)*(1-seg(t,13.6,14));
+  const a=oc(seg(t,.2,1));ttl.style.opacity=a;ttl.style.transform=`translateY(${(1-a)*-40}px)`;sub.style.opacity=oc(seg(t,.7,1.4));
+  ps.forEach((p,i)=>{const k=ioc(seg(t,P[i][1],P[i][1]+P[i][2]));p.style.strokeDasharray=1;p.style.strokeDashoffset=1-k});
+  const fill=ioc(seg(t,9,11));wt.setAttribute('height',fill*380);wt.setAttribute('y',160+(1-fill)*380*0);
+  wt.setAttribute('y',548-fill*380);wt.setAttribute('height',fill*380);
+  pump.setAttribute('opacity',oc(seg(t,8.8,9.6)));
+  lb.forEach((d,i)=>{const k=oc(seg(t,L[i][2],L[i][2]+.5));d.style.opacity=k;d.style.transform=`translateX(${(1-k)*-50}px)`});
+  end.style.opacity=seg(t,11.6,12.4);end.style.pointerEvents='none';
+ };}
+window.DUR=14;window.render=t=>R(t);
+</script></body></html>

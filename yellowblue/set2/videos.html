@@ -1,0 +1,147 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><style>
+@font-face{font-family:Mont;font-weight:700;src:url(fonts/Montserrat-700.ttf)}
+@font-face{font-family:Cinz;font-weight:600;src:url(fonts/Cinzel-600.ttf)}
+@font-face{font-family:Kufi;font-weight:700;src:url(fonts/NotoKufi-700.ttf)}
+@font-face{font-family:Reem;font-weight:700;src:url(fonts/ReemKufi-700.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(fonts/PlexArabic-600.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#000}
+#st{position:absolute;inset:0;overflow:hidden}
+.p{position:absolute;will-change:transform,opacity}
+.ar{direction:rtl}
+</style></head><body><div id="st"></div>
+<script>
+const V=new URLSearchParams(location.search).get('v');const st=document.getElementById('st');
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));
+const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,ob=x=>{const c=2.2;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const E=(h,css,cls)=>{const d=document.createElement('div');d.className='p '+(cls||'');d.style.cssText=css;d.innerHTML=h;st.appendChild(d);return d};
+let R,DUR;
+/* ============ V1: YELLOW & BLUE ticket offer ============ */
+if(V==='t'){DUR=14;
+ st.style.background='#efe7d6';
+ const rows=[];for(let i=0;i<13;i++){rows.push(E('FREE CONSULTATION &nbsp;·&nbsp; استشارة مجانية &nbsp;·&nbsp; FREE CONSULTATION &nbsp;·&nbsp; استشارة مجانية &nbsp;·&nbsp; FREE CONSULTATION &nbsp;·&nbsp; استشارة مجانية &nbsp;·&nbsp; FREE CONSULTATION','left:0;top:'+(i*150-20)+'px;white-space:nowrap;font:700 118px Mont;color:rgba(41,44,76,.075);direction:ltr'))}
+ const tk=E('','left:90px;top:330px;width:900px;height:1180px;filter:drop-shadow(0 40px 50px rgba(41,44,76,.35))');
+ tk.innerHTML=`<div style="position:absolute;inset:0;background:#292c4c;border-radius:34px"></div>
+ <div style="position:absolute;left:0;top:0;width:250px;height:100%;border-radius:34px 0 0 34px;background:#1f2240"></div>
+ <div style="position:absolute;left:250px;top:40px;bottom:40px;border-left:5px dashed #d1b177"></div>
+ <div style="position:absolute;left:220px;top:-30px;width:60px;height:60px;border-radius:50%;background:#efe7d6"></div>
+ <div style="position:absolute;left:220px;bottom:-30px;width:60px;height:60px;border-radius:50%;background:#efe7d6"></div>
+ <div style="position:absolute;left:55px;top:230px;width:140px;height:700px;background:repeating-linear-gradient(90deg,#d1b177 0 4px,transparent 4px 9px,#d1b177 9px 11px,transparent 11px 20px,#d1b177 20px 22px,transparent 22px 26px)"></div>
+ <div style="position:absolute;left:0;width:250px;top:960px;text-align:center;font:700 30px Mont;color:#d1b177;letter-spacing:4px;direction:ltr">ADMIT ONE</div>
+ <img src="assets/yb-logo.jpg" style="position:absolute;left:70px;top:60px;height:110px;border-radius:14px">
+ <div class="ar" style="position:absolute;left:300px;right:50px;top:60px;font:700 34px Mont;color:#d1b177;letter-spacing:3px;direction:ltr;text-align:left">YELLOW &amp; BLUE ADVERTISING</div>
+ <div class="ar" style="position:absolute;left:300px;right:50px;top:150px;font:700 124px/1.15 Reem;color:#f3ead7;text-align:right">استشارة<br>تسويقية</div>
+ <ul id="bl" class="ar" style="position:absolute;left:300px;right:50px;top:560px;list-style:none;font:600 47px/1.5 Plex;color:#f3ead7;text-align:right"></ul>
+ <div class="ar" style="position:absolute;left:300px;right:50px;bottom:70px;text-align:right;font:700 50px Reem;color:#d1b177">احجزها على الواتساب <span style="font:700 52px Mont;direction:ltr;display:inline-block">76761808</span></div>`;
+ const bl=tk.querySelector('#bl');['نحلّل حساباتك وهويتك','أفكار محتوى جاهزة','خطة إعلانات تناسب ميزانيتك'].forEach(s=>{const li=document.createElement('li');li.style.cssText='margin-bottom:22px;display:flex;align-items:center;justify-content:flex-start;gap:22px;opacity:0';li.innerHTML=`<svg width="46" height="46" viewBox="0 0 46 46"><circle cx="23" cy="23" r="21" fill="none" stroke="#d1b177" stroke-width="3"/><path d="M12 24l8 8 15-17" fill="none" stroke="#d1b177" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>${s}</span>`;bl.appendChild(li)});
+ const stamp=E('<div style="width:300px;height:300px;border-radius:50%;border:10px double #d1b177;background:rgba(31,34,64,.95);display:flex;align-items:center;justify-content:center;font:700 104px Reem;color:#d1b177;transform:rotate(-14deg)">مجانية</div>','left:55px;top:760px');
+ const end=E(`<div style="position:absolute;inset:0;background:#292c4c"></div>
+ <img src="assets/yb-logo.jpg" style="position:absolute;left:50%;top:230px;height:230px;transform:translateX(-50%);border-radius:24px">
+ <div class="ar" style="position:absolute;left:0;right:0;top:620px;text-align:center;font:700 150px/1.15 Reem;color:#f3ead7">احجز<br>تذكرتك</div>
+ <div style="position:absolute;left:0;right:0;top:1100px;text-align:center;font:700 120px Mont;color:#d1b177;direction:ltr">76761808</div>
+ <div class="ar" style="position:absolute;left:0;right:0;top:1270px;text-align:center;font:600 56px Plex;color:#f3ead7">واتساب · <span style="direction:ltr;display:inline-block">@yellow.blue.om</span></div>`,'inset:0');
+ R=t=>{
+  st.style.opacity=seg(t,0,.25)*(1-seg(t,13.6,14));
+  rows.forEach((r,i)=>{const dir=i%2?1:-1;r.style.transform=`translateX(${dir*t*55-(i%2?900:0)}px)`});
+  // ticket flight
+  const a=ob(seg(t,.3,1.5)),ex=ioc(seg(t,9.6,10.4));
+  const y=(1-a)*1500+ex*-300,rot=-4+(1-a)*14+ex*8;
+  tk.style.transform=`translateY(${y}px) rotate(${rot}deg) scale(${1-ex*.2})`;tk.style.opacity=1-ex;
+  // bullets
+  [...bl.children].forEach((li,i)=>{const s=2.8+i*.8,k=oc(seg(t,s,s+.45));li.style.opacity=k;li.style.transform=`translateX(${(1-k)*60}px)`});
+  // stamp
+  const sp=seg(t,5.5,5.78),sk=t>5.78?Math.sin((t-5.78)*60)*Math.exp(-(t-5.78)*9)*10:0;
+  stamp.style.opacity=t<5.5?0:1-ex;stamp.style.transform=`translateY(${y}px) rotate(${rot}deg) scale(${(2.8-1.8*oc(sp))*(1-ex*.2)}) translateX(${sk}px)`;
+  // tear: stub falls
+  const te=seg(t,8.6,9.6);
+  const stub=tk.children[1];stub.style.transformOrigin='100% 100%';stub.style.transform=`translate(${-te*220}px,${te*te*1100}px) rotate(${-te*34}deg)`;stub.style.opacity=1-seg(t,9.2,9.6);
+  // end card
+  end.style.opacity=seg(t,10.2,11);end.style.transform=`scale(${1.06-.06*oc(seg(t,10.2,11.2))})`;end.style.pointerEvents='none';
+ };
+}
+/* ============ V2: YELLOW & BLUE ad x-ray (red pen) ============ */
+if(V==='x'){DUR=16;
+ st.style.background='#f7f4ee';
+ const grid=E('','inset:0;background-image:linear-gradient(rgba(41,44,76,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(41,44,76,.07) 2px,transparent 2px);background-size:60px 60px');
+ const title=E('إعلانك<br>تحت المجهر','left:0;right:0;top:130px;text-align:center;font:700 130px/1.1 Reem;color:#292c4c','ar');
+ const card=E('','left:160px;top:560px;width:760px;height:980px;background:#fff;border-radius:18px;box-shadow:0 30px 70px rgba(41,44,76,.25);overflow:hidden');
+ card.innerHTML=`<div id="bad" class="ar" style="position:absolute;inset:0;padding:34px">
+   <div style="width:110px;height:44px;background:#d9d9d9;border-radius:6px;font:700 15px Mont;color:#999;display:flex;align-items:center;justify-content:center;direction:ltr">LOGO</div>
+   <div style="margin-top:34px;font:700 40px/1.2 Plex;color:#333">عروض عروض عروض!!! خصم على كل شي</div>
+   <div style="margin-top:20px;font:600 21px/1.55 Plex;color:#666">نحن الأفضل والأرخص والأجود في كل المجالات ونقدم لكم أفضل الخدمات المتميزة بأعلى جودة وأقل الأسعار لجميع العملاء الكرام في كل مكان وزمان مع ضمان شامل وخدمة سريعة وفريق عمل متخصص ومحترف ولدينا خبرة طويلة في السوق ونسعد بخدمتكم دائماً وأبداً ونتشرف بثقتكم الغالية بنا منذ سنوات عديدة وسنستمر بتقديم الأفضل لكم في كل وقت وحين مهما كانت احتياجاتكم</div>
+   <div style="margin-top:24px;font:600 21px/1.55 Plex;color:#666">خدمات متنوعة وأسعار مناسبة وعروض مستمرة وتخفيضات موسمية وهدايا قيمة لكل عميل مميز يتعامل معنا ويزورنا باستمرار في فروعنا المنتشرة</div>
+   <div style="position:absolute;left:34px;bottom:30px;font:600 16px Plex;color:#aaa">للتواصل راجع الأسفل صغير جداً</div></div>
+  <div id="good" class="ar" style="position:absolute;inset:0;background:#292c4c;padding:50px;opacity:0;text-align:center">
+   <img src="assets/yb-logo.jpg" style="height:230px;border-radius:18px;margin-top:20px">
+   <div style="margin-top:60px;font:700 118px/1.15 Reem;color:#f3ead7">رسالة<br>واحدة<br>واضحة</div>
+   <div style="margin:70px auto 0;display:inline-block;background:#d1b177;color:#292c4c;font:700 60px Reem;padding:18px 90px;border-radius:999px">راسلنا الآن</div></div>`;
+ const svg=E(`<svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none" stroke="#d6403a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+   <path id="c1" pathLength="1" d="M215 925 C205 860 330 835 560 830 C800 828 905 855 898 925 C890 1010 700 1040 520 1040 C320 1040 205 1000 215 925 Z"/>
+   <path id="c2" pathLength="1" d="M755 612 C780 585 860 585 888 612 C900 640 870 668 820 672 C770 672 735 645 755 612 Z"/>
+   <path id="c3" pathLength="1" d="M190 1385 C185 1330 420 1320 650 1325 C850 1330 905 1350 895 1395 C880 1450 640 1465 450 1462 C260 1458 195 1440 190 1385 Z"/></svg>`,'left:0;top:0');
+ const lab=[['١ كلام كثير، ولا أحد يقرأ','left:150px;top:1060px'],['٢ الشعار ما ينشاف','left:560px;top:470px'],['٣ وين الدعوة للتحرك؟','left:200px;top:1490px']].map(([s,c])=>E(s,c+';font:700 50px Plex;color:#d6403a;transform-origin:left;white-space:nowrap','ar'));
+ const badge=E('بعد','left:420px;top:1590px;width:240px;text-align:center;font:700 60px Reem;color:#292c4c;background:#d1b177;border-radius:999px;padding:6px 0','ar');
+ const cta=E(`<div style="position:absolute;inset:0;background:#292c4c"></div>
+  <div class="ar" style="position:absolute;left:0;right:0;top:420px;text-align:center;font:700 150px/1.15 Reem;color:#f3ead7">نصلّح<br>إعلانك؟</div>
+  <div style="position:absolute;left:0;right:0;top:1000px;text-align:center;font:700 120px Mont;color:#d1b177;direction:ltr">76761808</div>
+  <div class="ar" style="position:absolute;left:0;right:0;top:1170px;text-align:center;font:600 56px Plex;color:#f3ead7">واتساب · <span style="direction:ltr;display:inline-block">@yellow.blue.om</span></div>
+  <img src="assets/yb-logo.jpg" style="position:absolute;left:50%;top:1400px;height:200px;transform:translateX(-50%);border-radius:20px">`,'inset:0');
+ const paths=['c1','c2','c3'].map(i=>svg.querySelector('#'+i));
+ const T0=[2.6,5.0,7.4];
+ R=t=>{
+  st.style.opacity=seg(t,0,.25)*(1-seg(t,15.6,16));
+  const ti=oc(seg(t,.2,1.0));title.style.opacity=ti;title.style.transform=`translateY(${(1-ti)*-40}px)`;
+  const ci=ob(seg(t,.6,1.6));card.style.opacity=seg(t,.5,1);card.style.transform=`translateY(${(1-ci)*300}px) rotate(${(1-ci)*3}deg)`;
+  paths.forEach((p,i)=>{const k=seg(t,T0[i],T0[i]+.9);p.style.strokeDasharray=1;p.style.strokeDashoffset=1-k;p.style.opacity=t<10?1:1-seg(t,10,10.4)});
+  lab.forEach((l,i)=>{const k=oc(seg(t,T0[i]+.7,T0[i]+1.2));l.style.opacity=k*(t<10?1:1-seg(t,10,10.4));l.style.transform=`rotate(${-3+i*2}deg) translateX(${(1-k)*30}px)`});
+  const gk=seg(t,10.2,11.2);document.getElementById('good').style.opacity=gk;document.getElementById('bad').style.opacity=1-gk;
+  badge.style.opacity=oc(seg(t,11.2,11.8));badge.style.transform=`scale(${.7+.3*ob(seg(t,11.2,11.8))})`;
+  cta.style.opacity=seg(t,13,13.8);cta.style.pointerEvents='none';
+ };
+}
+/* ============ V3: GSW blueprint ============ */
+if(V==='b'){DUR=16;
+ st.style.background='#182e45';
+ E('','inset:0;background-image:linear-gradient(rgba(209,177,119,.10) 1.5px,transparent 1.5px),linear-gradient(90deg,rgba(209,177,119,.10) 1.5px,transparent 1.5px);background-size:54px 54px');
+ E('','inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:13.5px 13.5px');
+ E('','left:50px;top:50px;right:50px;bottom:50px;border:3px solid rgba(209,177,119,.8)');
+ E('','left:66px;top:66px;right:66px;bottom:66px;border:1px solid rgba(209,177,119,.5)');
+ const ttl=E('نبني<br>رؤيتك','left:0;right:0;top:130px;text-align:center;font:700 140px/1.15 Kufi;color:#f2eee6;direction:rtl');
+ const sub=E('WE BUILD YOUR VISION','left:0;right:0;top:500px;text-align:center;font:600 46px Cinz;color:#d1b177;letter-spacing:12px;direction:ltr');
+ const draw=E('','left:0;top:560px;width:1080px;height:820px');
+ const P=[ // [d, start, dur, stroke-width, color, dash?]
+ ['M60 700 H1020',.8,1.4,4,'#f2eee6'],
+ // crane
+ ['M130 700 V170 M170 700 V170 M130 250 L170 210 M130 330 L170 290 M130 410 L170 370 M130 490 L170 450 M130 570 L170 530 M130 650 L170 610',1.6,2.2,3.5,'#d1b177'],
+ ['M60 170 H330 M130 170 L260 118 L330 170 M60 170 L60 205 H110 V170',3.0,1.4,3.5,'#d1b177'],
+ ['M285 170 V330 M270 330 H300 V352 H270 Z',3.6,1.0,3,'#d1b177'],
+ // building
+ ['M380 700 V300 H700 V700 M365 300 H715 M380 470 H700 M440 700 V600 H500 V700',2.4,2.6,5,'#f2eee6'],
+ ['M410 350 H470 V430 H410 Z M520 350 H580 V430 H520 Z M630 350 H690 V430 H630 Z M520 520 H580 V590 H520 Z M630 520 H690 V590 H630 Z',4.4,1.6,3.5,'#f2eee6'],
+ // interior: lamp + chair (decor)
+ ['M440 470 V510 M418 535 Q440 505 462 535 Z M600 700 V660 Q600 645 615 645 H660 Q675 645 675 660 V700 M600 668 V630 H625 V645',5.6,1.5,3.5,'#d1b177'],
+ // AC outdoor unit
+ ['M730 700 V630 H810 V700 M730 650 H810 M730 670 H810 M755 690 H785',6.8,1.2,4,'#f2eee6'],
+ ['M770 595 C770 575 790 575 790 595 M770 595 C770 615 790 615 790 595',7.5,.7,3,'#d1b177'],
+ // CCTV camera + fov
+ ['M700 330 H740 M740 330 L760 318 L800 340 L780 352 Z M742 345 L820 480 M790 355 L900 470',8.0,1.6,3.5,'#d1b177'],
+ // pool section
+ ['M850 700 V780 H1000 V700 M850 700 H830 M1000 700 H1020 M850 735 Q875 722 900 735 T950 735 T1000 735',9.0,1.8,4,'#f2eee6']];
+ draw.innerHTML=`<svg width="1080" height="820" viewBox="0 0 1080 820" fill="none" stroke-linecap="round" stroke-linejoin="round">${P.map((p,i)=>`<path id="bp${i}" pathLength="1" d="${p[0]}" stroke="${p[4]}" stroke-width="${p[3]}"/>`).join('')}</svg>`;
+ const bps=P.map((p,i)=>draw.querySelector('#bp'+i));
+ const L=[['مقاولات البناء والتشييد','left:80px;top:1400px;text-align:right',4.2],['الديكورات والصيانة العامة','left:80px;top:1465px',6.0],['التكييف والتبريد','left:80px;top:1530px',7.6],['كاميرات المراقبة وأنظمة الحماية','left:80px;top:1595px',9.2],['تصميم وإنشاء أحواض السباحة','left:80px;top:1660px',10.8]];
+ const lb=L.map(([s,c,t0],i)=>{const d=E(`<span style="color:#d1b177;font:700 34px Cinz;margin-left:20px;direction:ltr;display:inline-block">0${i+1}</span>${s}`,c+';right:80px;text-align:right;font:700 50px Kufi;color:#f2eee6;direction:rtl;white-space:nowrap');return d});
+ const logoWrap=E(`<div style="position:absolute;inset:0;background:#0d1114"></div><img src="assets/gsw-logo.jpg" style="position:absolute;left:50%;top:360px;width:960px;transform:translateX(-50%)">
+  <div style="position:absolute;left:0;right:0;top:1470px;text-align:center;font:700 70px Cinz;color:#d1b177;direction:ltr;letter-spacing:4px">+968 9508 7873</div>
+  <div style="position:absolute;left:0;right:0;top:1580px;text-align:center;font:600 50px Plex;color:#f2eee6;direction:ltr">@gsw.oman &nbsp;·&nbsp; snow.wing.oman@gmail.com</div>`,'inset:0');
+ const credit=E('تصميم: Yellow &amp; Blue Advertising','left:0;right:0;top:1810px;text-align:center;font:600 28px Plex;color:#f2eee6;opacity:.55');
+ R=t=>{
+  st.style.opacity=seg(t,0,.25)*(1-seg(t,15.6,16));
+  const a=oc(seg(t,.2,1.0));ttl.style.opacity=a;ttl.style.transform=`translateY(${(1-a)*-40}px)`;sub.style.opacity=oc(seg(t,.6,1.4));
+  bps.forEach((p,i)=>{const k=ioc(seg(t,P[i][1],P[i][1]+P[i][2]));p.style.strokeDasharray=1;p.style.strokeDashoffset=1-k});
+  lb.forEach((d,i)=>{const k=oc(seg(t,L[i][2],L[i][2]+.5));d.style.opacity=k*(1-seg(t,12.4,12.9));d.style.transform=`translateX(${(1-k)*-50}px)`});
+  const lw=seg(t,12.8,13.8);logoWrap.style.opacity=lw;logoWrap.style.transform=`scale(${1.05-.05*oc(lw)})`;logoWrap.style.pointerEvents='none';credit.style.opacity=.55*lw;
+ };
+}
+window.DUR=DUR;window.render=t=>R(t);
+</script></body></html>

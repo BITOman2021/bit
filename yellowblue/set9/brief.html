@@ -1,0 +1,32 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas>
+<div id="h1" class="p" style="top:150px;font:700 108px/1.25 Reem;color:#fff;direction:rtl;opacity:0">رسالة واحدة…<br><span style="color:#ffd24a">وتبدأ الحكاية</span></div>
+<div id="end" class="p" style="inset:0;opacity:0;background:#07070f"><img src="assets/yb-logo.jpg" style="position:absolute;left:50%;top:350px;height:400px;transform:translateX(-50%);border-radius:34px;box-shadow:0 0 120px rgba(255,210,74,.35)"><div style="position:absolute;left:0;right:0;top:850px;text-align:center;font:700 72px Reem;color:#fff;direction:rtl">أرسل لنا فكرتك</div><div style="position:absolute;left:0;right:0;top:980px;text-align:center;font:700 60px Mont;color:#ffd24a;direction:ltr">WE MAKE IDEAS VISIBLE.</div><div style="position:absolute;left:0;right:0;top:1200px;text-align:center;font:600 52px Plex;color:#d9dcff;direction:rtl">واتساب · <span style="font:700 56px Mont;direction:ltr;display:inline-block">76761808</span></div></div></div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3);
+const bo=x=>{x=cl(x);const n=7.5625,d=2.75;if(x<1/d)return n*x*x;if(x<2/d)return n*(x-=1.5/d)*x+.75;if(x<2.5/d)return n*(x-=2.25/d)*x+.9375;return n*(x-=2.625/d)*x+.984375};
+const g=document.getElementById('c').getContext('2d'),$=id=>document.getElementById(id);
+function rr(x,y,w,h,r){g.beginPath();g.roundRect(x,y,w,h,r)}
+function bubble(x,y,w,h,col,tail){g.fillStyle=col;rr(x,y,w,h,40);g.fill();g.beginPath();if(tail>0){g.moveTo(x+w-30,y+h-20);g.lineTo(x+w+22,y+h+10);g.lineTo(x+w-80,y+h-4)}else{g.moveTo(x+30,y+h-20);g.lineTo(x-22,y+h+10);g.lineTo(x+80,y+h-4)}g.fill()}
+function txt(s,x,y,sz,col,f='Plex'){g.font=`600 ${sz}px ${f}`;g.fillStyle=col;g.textAlign='center';g.textBaseline='middle';g.direction='rtl';g.fillText(s,x,y)}
+const tiles=[['الهوية','#ffd24a','#292c4c'],['المنشورات','#2f5bff','#fff'],['الريلز','#f3ead7','#292c4c'],['الحملة','#292c4c','#ffd24a']];
+window.DUR=11;
+window.render=t=>{
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#14172e');bg.addColorStop(1,'#07070f');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ // chat
+ const a1=bo(seg(t,.9,1.5));
+ g.save();g.translate(960,640);g.scale(a1,a1);g.translate(-960,-640);bubble(300,560,660,170,'#128c7e',1);txt('السلام عليكم، نبي إعلان لمحلنا',630,645,46,'#fff');g.restore();
+ // typing dots
+ if(t>2.2&&t<3.4){bubble(120,800,230,110,'#2a2f55',0);for(let i=0;i<3;i++){g.fillStyle='#d9dcff';g.beginPath();g.arc(180+i*50,855-Math.abs(Math.sin(t*8+i))*14,11,0,6.3);g.fill()}}
+ const a2=bo(seg(t,3.4,4));
+ g.save();g.translate(120,860);g.scale(a2,a2);g.translate(-120,-860);bubble(120,800,640,170,'#2a2f55',0);txt('حاضر… جاهز خلال أيام',440,885,48,'#fff');g.restore();
+ // tiles fly out
+ tiles.forEach((tl,i)=>{const k=bo(seg(t,4.8+i*.45,5.6+i*.45));const col=i%2,row=Math.floor(i/2);const cx=300+col*480,cy=1220+row*330;
+  g.save();g.translate(cx+(540-cx)*(1-k)*0,cy);g.scale(k,k);g.rotate((1-k)*(i%2?.5:-.5));g.fillStyle=tl[1];rr(-200,-130,400,260,36);g.fill();g.strokeStyle='rgba(255,210,74,.7)';g.lineWidth=4;g.stroke();
+  // icon
+  g.fillStyle=tl[2];if(i==0){g.beginPath();g.arc(0,-35,38,0,6.3);g.fill()}else if(i==1){rr(-40,-70,80,70,10);g.fill()}else if(i==2){g.beginPath();g.moveTo(-26,-72);g.lineTo(40,-35);g.lineTo(-26,2);g.fill()}else{for(let j=0;j<3;j++){g.beginPath();g.arc(-45+j*45,-35,16,0,6.3);g.fill()}}
+  txt(tl[0],0,60,58,tl[2],'Reem');g.restore()});
+ $('h1').style.opacity=oc(seg(t,.2,.9))*(1-seg(t,8.4,8.9));
+ $('end').style.opacity=seg(t,8.6,9.3);
+ $('st').style.opacity=seg(t,0,.3)*(1-seg(t,10.6,11));
+};
+</script></body></html>

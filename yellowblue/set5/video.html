@@ -1,0 +1,41 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><style>
+@font-face{font-family:Cinz;font-weight:600;src:url(fonts/Cinzel-600.ttf)}
+@font-face{font-family:Kufi;font-weight:700;src:url(fonts/NotoKufi-700.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(fonts/PlexArabic-600.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#f7f4ee}
+#st{position:absolute;inset:0;overflow:hidden;background:#f7f4ee}.p{position:absolute;will-change:transform,opacity,filter}
+</style></head><body><div id="st"></div><script>
+const st=document.getElementById('st');
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));
+const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,ob=x=>{const c=2;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const E=(h,css)=>{const d=document.createElement('div');d.className='p';d.style.cssText=css;d.innerHTML=h;st.appendChild(d);return d};
+E('','inset:36px;border:3px solid #182e45');E('','inset:52px;border:1px solid #be9a4f');
+const ttl=E('اختبار<br>الخمسة أمتار','left:0;right:0;top:110px;text-align:center;font:700 118px/1.2 Kufi;color:#182e45;direction:rtl');
+const sub=E('هل تُقرأ لوحتك من بعيد؟','left:0;right:0;top:395px;text-align:center;font:600 46px Plex;color:#5a5f66;direction:rtl');
+function board(top,label,inner){const w=E(`<div class="lab" style="position:absolute;right:0;top:-62px;font:700 40px Kufi;color:#182e45;direction:rtl">${label}</div>
+ <div class="bl" style="position:absolute;inset:0;filter:blur(0px)"><div class="sc" style="position:absolute;inset:0;transform-origin:50% 50%;background:#182e45;border:6px solid #be9a4f;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;direction:rtl;overflow:hidden">${inner}</div></div>
+ <div class="vd" style="position:absolute;left:0;bottom:-70px;font:700 40px Kufi;padding:4px 26px;opacity:0;direction:rtl"></div>`,`left:100px;width:880px;top:${top}px;height:360px`);return w}
+const A=board(560,'اللوحة (أ)',`<div style="font:700 40px Kufi;color:#f2eee6">شركة المثال للتجارة والمقاولات العامة</div><div style="font:600 24px Plex;color:#d1b177">مقاولات · ديكورات · صيانة · تكييف · مراقبة · مسابح · توريدات</div><div style="font:600 22px Plex;color:#f2eee6;direction:ltr">Tel 00000000 · mail@example.com · P.O. Box 000 · Muscat</div><div style="font:600 20px Plex;color:#a8adb4">سجل تجاري · عضوية الغرفة · نخدمكم في جميع المحافظات</div>`);
+const B=board(1050,'اللوحة (ب)',`<div style="font:700 120px/1.1 Kufi;color:#f2eee6;white-space:nowrap">شركة المثال</div><div style="font:700 68px Cinz;color:#d1b177;direction:ltr;letter-spacing:4px">0000 0000</div>`);
+const ruler=E('<div id="rt" style="position:absolute;left:0;right:0;top:0;height:6px;background:#182e45"></div><div id="rl" style="position:absolute;right:0;top:-80px;font:700 54px Kufi;color:#182e45;direction:rtl"></div><div id="rm" style="position:absolute;top:-18px;width:44px;height:44px;border-radius:50%;background:#be9a4f;border:6px solid #182e45"></div>','left:100px;width:880px;top:1535px;height:10px');
+for(let i=0;i<=10;i++){const k=document.createElement('div');k.style.cssText=`position:absolute;left:${i*88}px;top:20px;width:3px;height:${i%5?16:30}px;background:#182e45`;ruler.appendChild(k);if(i%5===0){const l=document.createElement('div');l.style.cssText=`position:absolute;left:${i*88-30}px;top:58px;width:60px;text-align:center;font:600 28px Cinz;color:#182e45`;l.textContent=(i||1)+'m';ruler.appendChild(l)}}
+const note=E('محاكاة تقريبية لتوضيح الفكرة، وليست قياساً دقيقاً للمسافة','left:0;right:0;top:1700px;text-align:center;font:600 30px Plex;color:#5a5f66;direction:rtl');
+const rule=E(`<div style="position:absolute;inset:0;background:#182e45"></div><div style="position:absolute;left:92px;right:92px;top:300px;text-align:center;font:700 96px/1.4 Kufi;color:#f2eee6;direction:rtl">اسم واحد<br>تباين عالٍ<br>خط عريض</div><div style="position:absolute;left:0;right:0;top:830px;text-align:center;font:600 44px Plex;color:#d1b177;direction:rtl">ما يُقرأ من خمسة أمتار… يُتذكَّر</div><img src="assets/gsw-logo.jpg" style="position:absolute;left:210px;top:1010px;width:660px;border:2px solid #be9a4f"><div style="position:absolute;left:0;right:0;top:1580px;text-align:center;font:600 70px Cinz;color:#d1b177;direction:ltr;letter-spacing:3px">+968 9508 7873</div><div style="position:absolute;left:0;right:0;top:1690px;text-align:center;font:600 40px Plex;color:#f2eee6;direction:ltr">@gsw.oman</div><div style="position:absolute;left:0;right:0;top:1790px;text-align:center;font:600 26px Plex;color:#f2eee6;opacity:.55">تصميم: Yellow &amp; Blue Advertising</div>`,'inset:0');
+const D0=1.8,D1=9.2;
+const dist=t=>1+9*ioc(seg(t,D0,D1));
+window.DUR=14;
+window.render=t=>{
+ st.style.opacity=seg(t,0,.3)*(1-seg(t,13.6,14));
+ const a=oc(seg(t,.2,1));ttl.style.opacity=a;ttl.style.transform=`translateY(${(1-a)*-40}px)`;sub.style.opacity=oc(seg(t,.7,1.4));
+ [A,B].forEach((b,i)=>{const k=ob(seg(t,.9+i*.3,1.7+i*.3));b.style.opacity=seg(t,.9+i*.3,1.3+i*.3);b.style.transform=`translateY(${(1-k)*80}px)`});
+ const d=t<D0?1:dist(t);const s=1/(1+.22*(d-1));
+ [A,B].forEach(b=>{b.querySelector('.sc').style.transform=`scale(${s})`;b.querySelector('.bl').style.filter=`blur(${(d-1)*0.32}px)`});
+ const vA=A.querySelector('.vd'),vB=B.querySelector('.vd');
+ const showA=d>=5,showB=d>=5;
+ vA.style.opacity=showA?oc(seg(t,0,1))*1:0;vA.textContent=d<8?'التفاصيل لا تُقرأ':'غير مقروءة';vA.style.background='#a6231b';vA.style.color='#fff';
+ vB.style.opacity=showB?1:0;vB.textContent=d<8?'يُقرأ بوضوح':'الاسم ما زال يُقرأ';vB.style.background='#1e6b45';vB.style.color='#fff';
+ const mx=(d-1)/9*880;ruler.querySelector('#rm').style.left=(mx-22)+'px';ruler.querySelector('#rt').style.width=mx+'px';
+ ruler.querySelector('#rl').textContent='المسافة: '+Math.round(d)+' م';ruler.style.opacity=seg(t,1.4,2);
+ note.style.opacity=seg(t,1.8,2.4)*(1-seg(t,10,10.4));rule.style.opacity=seg(t,10.2,11);rule.style.pointerEvents='none';
+};
+</script></body></html>

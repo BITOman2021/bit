@@ -1,0 +1,65 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><style>
+@font-face{font-family:Cinz;font-weight:600;src:url(fonts/Cinzel-600.ttf)}
+@font-face{font-family:Kufi;font-weight:700;src:url(fonts/NotoKufi-700.ttf)}
+@font-face{font-family:Plex;font-weight:600;src:url(fonts/PlexArabic-600.ttf)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#0d1114}
+#st{position:absolute;inset:0;overflow:hidden}.p{position:absolute;will-change:transform,opacity}canvas{position:absolute;inset:0}
+</style></head><body><div id="st"></div><script>
+const V=new URLSearchParams(location.search).get('v');const st=document.getElementById('st');
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));
+const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2,ob=x=>{const c=1.7;return 1+(c+1)*Math.pow(x-1,3)+c*Math.pow(x-1,2)};
+const E=(h,css)=>{const d=document.createElement('div');d.className='p';d.style.cssText=css;d.innerHTML=h;st.appendChild(d);return d};
+const frame=c=>{E('',`inset:36px;border:3px solid ${c||'#be9a4f'}`);E('','inset:52px;border:1px solid rgba(190,154,79,.5)')};
+const endCard=()=>E(`<div style="position:absolute;inset:0;background:#0d1114"></div><img src="assets/gsw-logo.jpg" style="position:absolute;left:60px;top:330px;width:960px;border:2px solid #be9a4f"><div style="position:absolute;left:0;right:0;top:1460px;text-align:center;font:600 70px Cinz;color:#d1b177;direction:ltr;letter-spacing:3px">+968 9508 7873</div><div style="position:absolute;left:0;right:0;top:1575px;text-align:center;font:600 46px Plex;color:#f2eee6;direction:ltr">@gsw.oman &nbsp;·&nbsp; snow.wing.oman@gmail.com</div>`,'inset:0');
+let R;
+/* ===== M: periodic maintenance ===== */
+if(V==='m'){st.style.background='#f7f4ee';frame('#182e45');
+ const ttl=E('ما يُراجَع<br>بانتظام في المبنى','left:0;right:0;top:120px;text-align:center;font:700 92px/1.25 Kufi;color:#182e45;direction:rtl');
+ const sub=E('إرشاد عام: خمسة أنظمة تستحق فحصاً دورياً','left:0;right:0;top:400px;text-align:center;font:600 40px Plex;color:#5a5f66;direction:rtl');
+ const items=[['التكييف','نظافة الفلاتر وكفاءة التبريد'],['السباكة','التسريبات وضغط المياه'],['الكهرباء','اللوحات والمفاتيح والتوصيلات'],['الدهان','الرطوبة والتقشر والتشققات'],['الأسطح','تصريف المياه وسلامة العزل']];
+ const cards=items.map(([a,b],i)=>E(`<div style="position:absolute;inset:0;background:#fff;border:3px solid #182e45"></div><div class="ck" style="position:absolute;left:34px;top:34px;width:70px;height:70px;border:4px solid #182e45;border-radius:50%;display:flex;align-items:center;justify-content:center;font:700 44px Plex;color:#182e45"></div><div style="position:absolute;right:40px;top:18px;font:700 54px Kufi;color:#182e45;direction:rtl">${a}</div><div style="position:absolute;right:40px;top:92px;font:600 34px Plex;color:#5a5f66;direction:rtl">${b}</div>`,`left:110px;right:110px;top:${510+i*172}px;height:140px`));
+ const note=E('تختلف مدد الفحص بحسب النظام وتوصيات المصنّع','left:0;right:0;top:1405px;text-align:center;font:600 32px Plex;color:#5a5f66;direction:rtl');
+ const end=endCard();
+ R=t=>{st.style.opacity=seg(t,0,.25)*(1-seg(t,13.6,14));
+  const a=oc(seg(t,.2,1));ttl.style.opacity=a;ttl.style.transform=`translateY(${(1-a)*-40}px)`;sub.style.opacity=oc(seg(t,.7,1.4));
+  cards.forEach((c,i)=>{const s=1.6+i*1.5,k=ob(seg(t,s,s+.6));c.style.opacity=seg(t,s,s+.3);c.style.transform=`translateX(${(1-k)*(i%2?-1:1)*500}px)`;
+   const ck=c.querySelector('.ck');const on=t>=s+.9;ck.textContent=on?'✓':'';ck.style.background=on?'#be9a4f':'transparent'});
+  note.style.opacity=oc(seg(t,9.6,10.2))*(1-seg(t,11,11.4));
+  end.style.opacity=seg(t,11.2,12);end.style.pointerEvents='none';};}
+/* ===== L: lighting layers ===== */
+if(V==='l'){st.style.background='#0d1114';frame();
+ const cv=document.createElement('canvas');cv.width=1080;cv.height=1920;cv.style.cssText='position:absolute;inset:0';st.appendChild(cv);const g=cv.getContext('2d');
+ const ttl=E('ثلاث طبقات<br>للإضاءة','left:0;right:0;top:120px;text-align:center;font:700 112px/1.2 Kufi;color:#f2eee6;direction:rtl');
+ const sub=E('إرشاد عام في التصميم الداخلي','left:0;right:0;top:400px;text-align:center;font:600 40px Plex;color:#d1b177;direction:rtl');
+ const L=[['01','إضاءة عامة','تملأ الغرفة بضوء متوازن',3.2],['02','إضاءة المهام','تخدم القراءة والعمل',6.0],['03','إضاءة تزيينية','تُبرز اللوحات والتفاصيل',8.8]];
+ const lb=L.map(([n,a,b,t0],i)=>E(`<span style="color:#d1b177;font:600 34px Cinz;margin-left:22px;direction:ltr;display:inline-block">${n}</span><span style="font:700 52px Kufi;color:#f2eee6">${a}</span><div style="font:600 34px Plex;color:#a8adb4;margin-top:6px">${b}</div>`,`left:100px;right:100px;top:${1230+i*165}px;text-align:right;direction:rtl`));
+ const end=endCard();
+ function room(t){ // line drawing 
+  const x0=130,x1=950,y0=600,y1=1180;
+  g.lineCap='round';g.lineJoin='round';
+  const k=ioc(seg(t,.8,3.2));g.strokeStyle='#f2eee6';g.lineWidth=5;
+  g.beginPath();g.moveTo(x0,y1);g.lineTo(x0,y0);g.lineTo(x1,y0);g.lineTo(x1,y1);g.lineTo(x0,y1);
+  g.save();g.setLineDash([3000]);g.lineDashOffset=3000*(1-k);g.stroke();g.restore();
+  const f=oc(seg(t,2,3.2));g.globalAlpha=f;g.strokeStyle='#a8adb4';g.lineWidth=5;
+  // sofa
+  g.strokeRect(190,1020,300,110);g.strokeRect(190,950,300,70);g.beginPath();g.moveTo(210,1130);g.lineTo(210,1160);g.moveTo(470,1130);g.lineTo(470,1160);g.stroke();
+  // table + lamp
+  g.strokeRect(620,1070,200,16);g.beginPath();g.moveTo(640,1086);g.lineTo(640,1180);g.moveTo(800,1086);g.lineTo(800,1180);g.stroke();
+  g.beginPath();g.moveTo(720,1070);g.lineTo(720,1000);g.moveTo(690,1000);g.lineTo(750,1000);g.lineTo(735,950);g.lineTo(705,950);g.closePath();g.stroke();
+  // wall art
+  g.strokeStyle='#be9a4f';g.strokeRect(300,700,240,170);g.strokeRect(330,725,180,120);
+  g.globalAlpha=1}
+ function glow(x,y,r,a,col){const gr=g.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,`rgba(${col},${a})`);gr.addColorStop(1,`rgba(${col},0)`);g.fillStyle=gr;g.beginPath();g.arc(x,y,r,0,6.28);g.fill()}
+ R=t=>{st.style.opacity=seg(t,0,.25)*(1-seg(t,13.6,14));
+  g.clearRect(0,0,1080,1920);
+  const a=oc(seg(t,.2,1));ttl.style.opacity=a;ttl.style.transform=`translateY(${(1-a)*-40}px)`;sub.style.opacity=oc(seg(t,.7,1.4));
+  g.save();g.globalCompositeOperation='lighter';
+  const l1=oc(seg(t,3.2,4.6));if(l1>0){g.save();g.beginPath();g.rect(130,600,820,580);g.clip();glow(540,600,640,.38*l1,'255,214,140');g.restore();g.fillStyle=`rgba(255,230,170,${l1})`;g.fillRect(500,596,80,10)}
+  const l2=oc(seg(t,6,7.2));if(l2>0){g.save();g.beginPath();g.rect(130,600,820,580);g.clip();glow(720,1010,300,.7*l2,'255,200,110');g.restore();g.fillStyle=`rgba(255,230,170,${l2})`;g.beginPath();g.arc(720,975,18,0,6.28);g.fill()}
+  const l3=oc(seg(t,8.8,10));if(l3>0){g.save();g.beginPath();g.rect(130,600,820,580);g.clip();glow(420,785,260,.55*l3,'190,154,79');g.restore();g.strokeStyle=`rgba(255,214,140,${.9*l3})`;g.lineWidth=6;g.strokeRect(300,700,240,170)}
+  g.restore();
+  room(t);
+  lb.forEach((d,i)=>{const k=oc(seg(t,L[i][3],L[i][3]+.5));d.style.opacity=k;d.style.transform=`translateX(${(1-k)*-50}px)`});
+  end.style.opacity=seg(t,11.6,12.4);end.style.pointerEvents='none';};}
+window.DUR=14;window.render=t=>R(t);
+</script></body></html>

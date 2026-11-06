@@ -1,0 +1,64 @@
+<!doctype html><html lang="ar"><head><meta charset="utf-8"><link rel="stylesheet" href="common.css"></head><body><div id="st"><canvas id="c" width="1080" height="1920"></canvas>
+<div id="h1" class="p" style="top:130px;font:700 112px/1.25 Kufi;color:#f2eee6;direction:rtl;opacity:0">نحوّل رؤيتك</div>
+<div id="h2" class="p" style="top:260px;font:700 112px/1.25 Kufi;color:#d1b177;direction:rtl;opacity:0">إلى واقع</div>
+<div id="en" class="p" style="top:405px;font:600 31px Cinz;color:#d1b177;letter-spacing:5px;direction:ltr;opacity:0">WE TURN YOUR VISION INTO REALITY</div>
+<div id="end" class="p" style="inset:0;opacity:0;background:#0d1114"><img src="assets/gsw-logo.jpg" style="position:absolute;left:60px;top:330px;width:960px;border:2px solid #be9a4f"><div style="position:absolute;left:0;right:0;top:1460px;text-align:center;font:600 70px Cinz;color:#d1b177;direction:ltr;letter-spacing:3px">+968 9508 7873</div><div style="position:absolute;left:0;right:0;top:1575px;text-align:center;font:600 46px Plex;color:#f2eee6;direction:ltr">@gsw.oman &nbsp;·&nbsp; snow.wing.oman@gmail.com</div></div></div>
+<script>
+const cl=(x,a=0,b=1)=>Math.min(b,Math.max(a,x)),seg=(t,a,b)=>cl((t-a)/(b-a));const oc=x=>1-Math.pow(1-x,3),ioc=x=>x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;
+const g=document.getElementById('c').getContext('2d');
+// boxes: [cx,cz,w,d,y0,floors,floorH,startTime]
+const B=[[0,0,300,300,0,3,40,1.0],[0,0,210,210,120,12,44,2.2],[0,0,150,150,648,3,40,5.2],[0,0,70,70,768,1,60,6.4],[-260,160,130,130,0,5,40,1.8],[250,-170,120,120,0,4,40,2.0]];
+function rotY(x,z,a){const c=Math.cos(a),s=Math.sin(a);return [x*c-z*s,x*s+z*c]}
+function proj(x,y,z,a,t){ // camera
+ const [rx,rz]=rotY(x,z,a);const camD=1500,camY=-430+Math.sin(t*.25)*60;const dz=rz+camD;const f=1650/dz;
+ return [540+rx*f,1060-(y-300)*f,dz,f]}
+function boxFaces(b,floorsBuilt){
+ const [cx,cz,w,d,y0,nf,fh]=b;const faces=[];const h=floorsBuilt*fh;if(h<=0)return faces;
+ const x0=cx-w/2,x1=cx+w/2,z0=cz-d/2,z1=cz+d/2,ya=y0,yb=y0+h;
+ faces.push({pts:[[x0,ya,z1],[x1,ya,z1],[x1,yb,z1],[x0,yb,z1]],kind:'side',n:[0,0,1],cols:w,rows:floorsBuilt});
+ faces.push({pts:[[x1,ya,z1],[x1,ya,z0],[x1,yb,z0],[x1,yb,z1]],kind:'side',n:[1,0,0],cols:d,rows:floorsBuilt});
+ faces.push({pts:[[x1,ya,z0],[x0,ya,z0],[x0,yb,z0],[x1,yb,z0]],kind:'side',n:[0,0,-1],cols:w,rows:floorsBuilt});
+ faces.push({pts:[[x0,ya,z0],[x0,ya,z1],[x0,yb,z1],[x0,yb,z0]],kind:'side',n:[-1,0,0],cols:d,rows:floorsBuilt});
+ faces.push({pts:[[x0,yb,z1],[x1,yb,z1],[x1,yb,z0],[x0,yb,z0]],kind:'top',n:[0,1,0]});
+ return faces}
+function mix(a,b,u){return [a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u]}
+const h1=document.getElementById('h1'),h2=document.getElementById('h2'),en=document.getElementById('en'),end=document.getElementById('end');
+window.DUR=14;
+window.render=t=>{
+ const bg=g.createLinearGradient(0,0,0,1920);bg.addColorStop(0,'#05080e');bg.addColorStop(.55,'#0f1d2e');bg.addColorStop(1,'#1c2a3a');g.fillStyle=bg;g.fillRect(0,0,1080,1920);
+ // horizon glow
+ const hg=g.createRadialGradient(540,1250,0,540,1250,700);hg.addColorStop(0,'rgba(190,154,79,.35)');hg.addColorStop(1,'rgba(190,154,79,0)');g.fillStyle=hg;g.fillRect(0,600,1080,1300);
+ const a=t*.32+.6;
+ // ground grid
+ g.lineWidth=1.5;for(let i=-14;i<=14;i++){for(const dir of [0,1]){const p1=dir?[-1400,0,i*100]:[i*100,0,-1400],p2=dir?[1400,0,i*100]:[i*100,0,1400];const A=proj(p1[0],p1[1],p1[2],a,t),Bq=proj(p2[0],p2[1],p2[2],a,t);if(A[2]<200||Bq[2]<200)continue;g.strokeStyle=`rgba(190,154,79,${.22*cl(1-Math.abs(i)/16)*seg(t,0,1)})`;g.beginPath();g.moveTo(A[0],A[1]);g.lineTo(Bq[0],Bq[1]);g.stroke()}}
+ // collect faces
+ const F=[];
+ B.forEach((b,bi)=>{const nf=b[5];const built=Math.min(nf,Math.floor(nf*ioc(seg(t,b[7],b[7]+ (bi==1?3.0:1.6)))*1.0+ (seg(t,b[7],b[7]+1.6)>=1?0:0)));
+  const prog=nf*ioc(seg(t,b[7],b[7]+(bi==1?3.0:1.6)));
+  boxFaces(b,prog).forEach(f=>{f.bi=bi;f.prog=prog;F.push(f)})});
+ for(const f of F){const P=f.pts.map(p=>proj(p[0],p[1],p[2],a,t));f.P=P;f.z=(P[0][2]+P[1][2]+P[2][2]+P[3][2])/4}
+ F.sort((p,q)=>q.z-p.z);
+ for(const f of F){
+  const P=f.P;const [nx,ny,nz]=f.n;const [rx,rz]=rotY(nx,nz,a);
+  // backface: facing camera if rz<0 (normal toward -z after rotation means toward camera at +z? camera at +camD looks toward -z)
+  const light=f.kind==='top'?.9:cl(.35+.5*(-rx*.5+rz*-.8),.2,1);
+  g.beginPath();g.moveTo(P[0][0],P[0][1]);for(let i=1;i<4;i++)g.lineTo(P[i][0],P[i][1]);g.closePath();
+  const solid=seg(t,6.4,9);
+  g.fillStyle=`rgba(${Math.round(24*light+10)},${Math.round(46*light+14)},${Math.round(69*light+18)},${.25+.7*solid})`;g.fill();
+  g.strokeStyle=f.kind==='top'?'rgba(242,238,230,.9)':'rgba(190,154,79,.9)';g.lineWidth=2.2;g.stroke();
+  if(f.kind==='side'){
+   const cols=Math.max(2,Math.round(f.cols/38)),rows=Math.ceil(f.prog);
+   g.save();g.globalCompositeOperation='lighter';
+   for(let r=0;r<Math.min(rows,f.rows|0);r++)for(let c=0;c<cols;c++){
+    const u0=(c+.2)/cols,u1=(c+.8)/cols,v0=(r+.25)/f.rows,v1=(r+.75)/f.rows;
+    const bl=mix(P[0],P[1],u0),br=mix(P[0],P[1],u1);const tl=mix(P[3],P[2],u0),tr=mix(P[3],P[2],u1);
+    const q=[mix(bl,tl,v0),mix(br,tr,v0),mix(br,tr,v1),mix(bl,tl,v1)];
+    const on=Math.sin(f.bi*7.7+r*3.1+c*5.3)>-.2;const lit=seg(t,6.4+(r%5)*.15,7.4+(r%5)*.15)*(on?1:.15);
+    g.fillStyle=`rgba(255,${200+r*3},120,${.85*lit})`;g.beginPath();g.moveTo(q[0][0],q[0][1]);for(let i=1;i<4;i++)g.lineTo(q[i][0],q[i][1]);g.closePath();g.fill()}
+   g.restore()}
+ }
+ h1.style.opacity=oc(seg(t,8.4,9.2))*(1-seg(t,12.8,13.2));h2.style.opacity=oc(seg(t,9.2,10))*(1-seg(t,12.8,13.2));en.style.opacity=oc(seg(t,10,10.8))*(1-seg(t,12.8,13.2));
+ end.style.opacity=seg(t,12.8,13.6);
+ document.getElementById('st').style.opacity=seg(t,0,.3)*(1-seg(t,13.7,14));
+};
+</script></body></html>
