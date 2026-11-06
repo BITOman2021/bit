@@ -1,0 +1,38 @@
+# AI Cartoon Studio - production-style stack: nginx -> (web, api) -> postgres. Run: cp .env.example .env && docker compose up -d --build
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment: { POSTGRES_USER: acs, POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}", POSTGRES_DB: acs }
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U acs"], interval: 5s, retries: 10 }
+  api:
+    build: ./backend
+    restart: unless-stopped
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      ACS_DATABASE_URL: "postgresql+psycopg://acs:${POSTGRES_PASSWORD}@db:5432/acs"
+      ACS_SECRET_KEY: "${ACS_SECRET_KEY:?set ACS_SECRET_KEY in .env}"
+      ACS_COMFYUI_URL: "${ACS_COMFYUI_URL:-http://host.docker.internal:8188}"
+      ACS_LLM_URL: "${ACS_LLM_URL:-http://host.docker.internal:20128/v1}"
+      ACS_LLM_KEY: "${ACS_LLM_KEY:-}"
+      ACS_LLM_MODEL: "${ACS_LLM_MODEL:-auto}"
+      ACS_OLLAMA_URL: "${ACS_OLLAMA_URL:-http://host.docker.internal:11434}"
+      ACS_ALLOW_REGISTRATION: "${ACS_ALLOW_REGISTRATION:-true}"
+      ACS_DEV_RETURN_RESET_TOKEN: "false"
+      ACS_LOW_RESOURCE: "${ACS_LOW_RESOURCE:-false}"
+      ACS_CORS_ORIGINS: "${ACS_PUBLIC_URL:-http://localhost}"
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    volumes: [acs-data:/data]
+  web:
+    build: ./frontend
+    restart: unless-stopped
+    environment: { ACS_API_URL: "http://api:8000" }
+    depends_on: [api]
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    depends_on: [web, api]
+    ports: ["${ACS_HTTP_PORT:-80}:80"]
+    volumes: ["./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro"]
+volumes: { pgdata: {}, acs-data: {} }
