@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GSW Company Profile</title>
+<style>
+@font-face{font-family:'Playfair';font-weight:600;src:url('node_modules/@fontsource/playfair-display/files/playfair-display-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Playfair';font-weight:700;src:url('node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:400;src:url('node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:600;src:url('node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2') format('woff2')}
+@font-face{font-family:'Tajawal';font-weight:400;src:url('node_modules/@fontsource/tajawal/files/tajawal-arabic-400-normal.woff2') format('woff2')}
+@font-face{font-family:'Tajawal';font-weight:700;src:url('node_modules/@fontsource/tajawal/files/tajawal-arabic-700-normal.woff2') format('woff2')}
+@font-face{font-family:'Tajawal';font-weight:800;src:url('node_modules/@fontsource/tajawal/files/tajawal-arabic-800-normal.woff2') format('woff2')}
+@font-face{font-family:'Amiri';font-weight:700;src:url('node_modules/@fontsource/amiri/files/amiri-arabic-700-normal.woff2') format('woff2')}
+:root{--navy:#14254a;--navy-deep:#0b1631;--navy-mid:#22386a;--gold:#c9a24a;--gold-l:#e3c27a;--char:#3b3f46;--text:#2a2f3a;--muted:#6b7180;--rule:#eceff4;--cream:#f4efe2}
+@page{size:A4;margin:0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#fff;font-family:'Inter','Tajawal',sans-serif;color:var(--text);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;background:#fff}
+.ar{font-family:'Tajawal',sans-serif;direction:rtl;text-align:right}
+.gold{color:var(--gold)}
+/* cover */
+.cover{background:radial-gradient(120% 90% at 78% 12%,var(--navy-mid) 0%,var(--navy) 45%,var(--navy-deep) 100%);color:#fff}
+.plate{position:absolute;left:22mm;top:24mm;width:34mm;height:34mm;border-radius:7mm;background:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair',serif;font-weight:700;font-size:15mm;letter-spacing:-.8mm}
+.plate .g{color:var(--navy)}.plate .s{color:var(--char)}.plate .w{color:var(--gold)}
+.wordmark{position:absolute;left:62mm;top:30mm}
+.wordmark .en{font-family:'Playfair',serif;color:var(--gold);font-weight:600;font-size:7mm;letter-spacing:1.6mm}
+.wordmark .a{font-family:'Amiri',serif;font-size:7.5mm;color:var(--gold-l);margin-top:2mm;direction:rtl;text-align:left}
+.wing{position:absolute;right:0;top:20mm;width:110mm;opacity:.9}
+.kick{position:absolute;left:22mm;top:112mm;color:var(--gold);font-weight:600;letter-spacing:1.6mm;font-size:3.4mm}
+.kick .ar{display:block;letter-spacing:0;font-size:5mm;font-weight:700;margin-top:2mm;text-align:left;direction:rtl}
+.ctitle{position:absolute;left:22mm;top:136mm;font-family:'Playfair',serif;font-weight:700;font-size:15mm;line-height:1.08}
+.ctitle span{color:var(--gold)}
+.catitle{position:absolute;left:22mm;top:178mm;font-family:'Amiri',serif;font-size:9mm;color:var(--gold-l);direction:rtl}
+.grid2{position:absolute;left:22mm;right:22mm;top:208mm;display:grid;grid-template-columns:1fr 1fr;gap:6mm 10mm}
+.grid2 div{border-left:.9mm solid var(--gold);padding-left:4mm}
+.grid2 small{display:block;font-size:2.8mm;letter-spacing:.6mm;color:var(--gold-l);text-transform:uppercase}
+.grid2 b{font-size:4mm;font-weight:600}
+.grid2 .ar b{font-family:'Tajawal'}
+.cfoot{position:absolute;left:22mm;right:22mm;bottom:14mm;border-top:.3mm solid rgba(201,162,74,.5);padding-top:4mm;font-size:3.1mm;color:#cfd6e6;display:flex;justify-content:space-between}
+.cfoot em{font-style:normal;color:var(--gold-l);font-family:'Playfair',serif;font-size:3.8mm}
+/* inner */
+.hdr{position:absolute;left:16mm;right:16mm;top:9mm;height:12mm;border-bottom:.6mm solid var(--navy);display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:2mm}
+.hdr::after{content:'';position:absolute;left:0;bottom:-.6mm;width:22mm;height:.6mm;background:var(--gold)}
+.mono{font-family:'Playfair',serif;font-weight:700;font-size:5mm;margin-right:2mm}
+.mono .g{color:var(--navy)}.mono .s{color:var(--char)}.mono .w{color:var(--gold)}
+.hl{display:flex;align-items:center;font-size:2.9mm;line-height:1.3}
+.hl b{letter-spacing:.5mm;font-family:'Playfair',serif;color:var(--navy)}
+.hr{font-size:2.8mm;color:var(--muted);text-align:right}
+.ftr{position:absolute;left:0;right:0;bottom:0;height:12mm;background:var(--navy);border-top:.7mm solid var(--gold);color:#dfe5f2;font-size:2.7mm;display:flex;align-items:center;justify-content:space-between;padding:0 16mm}
+.body{position:absolute;left:16mm;right:16mm;top:30mm;bottom:20mm}
+h2{font-family:'Playfair',serif;color:var(--navy);font-size:7.2mm;font-weight:600;margin-bottom:5mm}
+h2 span{font-family:'Tajawal';color:var(--gold);font-weight:800;font-size:6.2mm;margin-left:2mm}
+p{font-size:4.1mm;line-height:1.6}
+p.ar{font-size:4.5mm;line-height:1.75}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:11mm}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:5mm;margin:14mm 0}
+.kpi{background:linear-gradient(160deg,var(--navy-mid),var(--navy-deep));color:#fff;border-bottom:1mm solid var(--gold);padding:10mm 4mm;text-align:center}
+.kpi b{display:block;font-family:'Playfair',serif;color:var(--gold-l);font-size:9mm;margin-bottom:2mm}
+.kpi small{display:block;font-size:3.2mm;color:#d8deec}
+.kpi .ar{font-size:3.6mm;text-align:center;color:var(--gold-l)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:7mm}
+.card{border-top:1mm solid var(--navy);background:#fbfbfd;padding:7mm;position:relative;min-height:54mm}
+.badge{position:absolute;right:4mm;top:4mm;width:8mm;height:8mm;border-radius:50%;background:var(--gold);color:var(--navy-deep);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:3.6mm}
+.card h3{font-size:4.8mm;color:var(--navy);margin-bottom:1mm;padding-right:10mm}
+.card h3.ar{color:var(--gold);font-size:5mm;margin-bottom:3mm}
+.card p{font-size:3.6mm;color:var(--muted);line-height:1.5}
+.card p.ar{font-size:3.9mm}
+.steps{margin-top:2mm}
+.step{display:grid;grid-template-columns:13mm 1fr 1fr;gap:7mm;padding:8mm 0;border-bottom:.3mm solid var(--rule);align-items:start}
+.step i{font-style:normal;width:12mm;height:12mm;border-radius:50%;background:var(--navy);color:var(--gold-l);font-family:'Playfair',serif;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:4.4mm}
+.step b{display:block;color:var(--navy);font-size:4.8mm;margin-bottom:1.5mm}
+.step .ar b{color:var(--gold);font-size:5mm}
+.step p{font-size:3.7mm;color:var(--muted)}
+.cream{background:var(--cream);border-left:1mm solid var(--gold);padding:4mm 5mm;margin:5mm 0}
+table{width:100%;border-collapse:collapse;font-size:3.8mm;margin-top:6mm}
+th{background:var(--navy);color:#fff;text-align:left;padding:4mm 4mm;font-weight:600}
+td{padding:8mm 4mm;border-bottom:.3mm solid var(--rule);color:var(--muted)}
+.note{font-size:3.4mm;color:var(--muted);margin-top:4mm}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin-top:6mm}
+.cbox{border-top:1mm solid var(--gold);background:#fbfbfd;padding:9mm 7mm;min-height:52mm}
+.cbox small{display:block;font-size:3.2mm;letter-spacing:.6mm;color:var(--muted);text-transform:uppercase;margin-bottom:1mm}
+.cbox b{display:block;font-size:4.8mm;color:var(--navy);margin-bottom:3mm}
+.thanks{margin-top:22mm;text-align:center;font-family:'Playfair',serif;color:var(--navy);font-size:7.5mm;line-height:1.5}
+.thanks span{color:var(--gold)}
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="page cover">
+  <div class="plate"><span class="g">G</span><span class="s">S</span><span class="w">W</span></div>
+  <div class="wordmark"><div class="en">GLOBAL SNOW WING</div><div class="a">شركة الجناح الثلجي العالمية</div></div>
+  <svg class="wing" viewBox="0 0 440 420" fill="none" stroke="#c9a24a" stroke-linecap="round">
+    <path d="M440 40 C330 40 230 90 150 170 C95 225 50 300 10 400" stroke-width="2.2" opacity=".9"/>
+    <path d="M440 70 C340 75 250 125 180 195 C130 245 90 310 60 400" stroke-width="1.6" opacity=".7"/>
+    <path d="M440 105 C360 112 280 156 220 220 C180 262 150 320 128 400" stroke-width="1.3" opacity=".55"/>
+    <path d="M440 142 C375 150 315 186 268 238 C238 272 216 325 200 400" stroke-width="1" opacity=".4"/>
+  </svg>
+  <div class="kick">COMPANY PROFILE<span class="ar">ملف تعريف الشركة</span></div>
+  <div class="ctitle">We Build<br><span>Your Vision</span></div>
+  <div class="catitle">نبني رؤيتك</div>
+  <div class="grid2">
+    <div><small>Registered in</small><b>Muscat, Sultanate of Oman</b></div>
+    <div class="ar"><small style="text-align:right">مسجّلة في</small><b>مسقط، سلطنة عُمان</b></div>
+    <div><small>Commercial Registration</small><b>CR No. 1361188</b></div>
+    <div><small>Edition</small><b>November 2026 · نوفمبر ٢٠٢٦</b></div>
+  </div>
+  <div class="cfoot"><em>We Build Your Vision</em><span>CR 1361188 · Muscat · Snow.wing.oman@gmail.com · +968 95087873</span></div>
+</section>
+
+<!-- 2 ABOUT -->
+<section class="page">
+  <div class="hdr"><div class="hl"><span class="mono"><span class="g">G</span><span class="s">S</span><span class="w">W</span></span><div><b>GLOBAL SNOW WING</b><br>شركة الجناح الثلجي العالمية</div></div><div class="hr">Company Profile · Page 2 / 6<br>صفحة ٢</div></div>
+  <div class="body">
+    <h2>About Us <span>· من نحن</span></h2>
+    <div class="two">
+      <div>
+        <p>Global Snow Wing International Co. is a company registered in Muscat, Sultanate of Oman. We deliver construction and civil works, interior finishes and fit-out, ELV and security systems, HVAC, swimming pools, landscaping and property management under one roof.</p>
+        <p style="margin-top:3mm">Our proposals are prepared in Omani rials with itemised quantities, clear exclusions and defined payment milestones, so that the client knows exactly what is included before work begins.</p>
+      </div>
+      <div class="ar">
+        <p class="ar">شركة الجناح الثلجي العالمية شركة مسجّلة في مسقط بسلطنة عُمان. نقدّم الإنشاءات والأعمال المدنية، والتشطيبات الداخلية، وأنظمة التيار الخفيف والأمن، والتكييف، وأحواض السباحة، والتنسيق الخارجي، وإدارة العقارات تحت سقف واحد.</p>
+        <p class="ar" style="margin-top:3mm">تُعدّ عروضنا بالريال العُماني بكميات مفصّلة واستثناءات واضحة ومراحل دفع محددة، ليعرف العميل بدقة ما يشمله العمل قبل البدء.</p>
+      </div>
+    </div>
+    <div class="kpis">
+      <div class="kpi"><b>7</b><small>Service lines</small><div class="ar">خطوط خدمة</div></div>
+      <div class="kpi"><b>OMR</b><small>Itemised pricing</small><div class="ar">تسعير مفصّل</div></div>
+      <div class="kpi"><b>AR · EN</b><small>Bilingual documents</small><div class="ar">وثائق ثنائية اللغة</div></div>
+      <div class="kpi"><b>1</b><small>Single point of contact</small><div class="ar">جهة تواصل واحدة</div></div>
+    </div>
+    <div class="cream two">
+      <div><p><b>Our promise</b><br>We Build Your Vision: from the first site visit to handover, one team accountable for scope, quality and communication.</p></div>
+      <div class="ar"><p class="ar"><b>وعدنا</b><br>نبني رؤيتك: من أول زيارة للموقع حتى التسليم، فريق واحد مسؤول عن النطاق والجودة والتواصل.</p></div>
+    </div>
+    <p class="note">[____] Founding year, team size and certifications to be added when confirmed. · تُضاف سنة التأسيس وحجم الفريق والشهادات عند تأكيدها.</p>
+  </div>
+  <div class="ftr"><span>CR 1361188 · Muscat</span><span>Snow.wing.oman@gmail.com · @GSW.OMAN</span><span>+968 95087873 · 76761808</span></div>
+</section>
+
+<!-- 3 SERVICES -->
+<section class="page">
+  <div class="hdr"><div class="hl"><span class="mono"><span class="g">G</span><span class="s">S</span><span class="w">W</span></span><div><b>GLOBAL SNOW WING</b><br>شركة الجناح الثلجي العالمية</div></div><div class="hr">Company Profile · Page 3 / 6<br>صفحة ٣</div></div>
+  <div class="body">
+    <h2>Our Services <span>· خدماتنا</span></h2>
+    <div class="cards">
+      <div class="card"><div class="badge">A</div><h3>Construction &amp; Civil Works</h3><h3 class="ar">الإنشاءات والأعمال المدنية</h3><p>New builds, extensions and civil works delivered against an approved scope and BOQ.</p><p class="ar">مبانٍ جديدة وإضافات وأعمال مدنية وفق نطاق وجدول كميات معتمدين.</p></div>
+      <div class="card"><div class="badge">B</div><h3>Interior Finishes &amp; Fit-out</h3><h3 class="ar">التشطيبات الداخلية</h3><p>Interior finishing and fit-out for residential and commercial spaces.</p><p class="ar">تشطيبات وتجهيزات داخلية للمساحات السكنية والتجارية.</p></div>
+      <div class="card"><div class="badge">C</div><h3>ELV &amp; Security Systems</h3><h3 class="ar">أنظمة التيار الخفيف والأمن</h3><p>CCTV, structured cabling, Wi-Fi, fibre and access control.</p><p class="ar">كاميرات مراقبة، وتمديدات الشبكات، وWi-Fi، والألياف، والتحكم بالدخول.</p></div>
+      <div class="card"><div class="badge">D</div><h3>HVAC Supply &amp; Installation</h3><h3 class="ar">التكييف: توريد وتركيب</h3><p>Supply and installation of air-conditioning systems.</p><p class="ar">توريد وتركيب أنظمة التكييف.</p></div>
+      <div class="card"><div class="badge">E</div><h3>Swimming Pools</h3><h3 class="ar">أحواض السباحة</h3><p>Design-and-build of swimming pools, from excavation to water.</p><p class="ar">تصميم وتنفيذ أحواض السباحة من الحفر حتى تعبئة الماء.</p></div>
+      <div class="card"><div class="badge">F</div><h3>Interlock &amp; Landscaping</h3><h3 class="ar">الإنترلوك والتنسيق الخارجي</h3><p>Paving, interlock and external landscaping works.</p><p class="ar">أعمال الرصف والإنترلوك والتنسيق الخارجي.</p></div>
+      <div class="card" style="grid-column:1 / span 2;min-height:44mm"><div class="badge">G</div><h3>Property Management &amp; Maintenance</h3><h3 class="ar">إدارة العقارات والصيانة</h3><p>Routine inspection and upkeep of buildings and their systems.</p><p class="ar">فحص دوري وصيانة للمباني وأنظمتها.</p></div>
+    </div>
+  </div>
+  <div class="ftr"><span>CR 1361188 · Muscat</span><span>Snow.wing.oman@gmail.com · @GSW.OMAN</span><span>+968 95087873 · 76761808</span></div>
+</section>
+
+<!-- 4 HOW WE WORK -->
+<section class="page">
+  <div class="hdr"><div class="hl"><span class="mono"><span class="g">G</span><span class="s">S</span><span class="w">W</span></span><div><b>GLOBAL SNOW WING</b><br>شركة الجناح الثلجي العالمية</div></div><div class="hr">Company Profile · Page 4 / 6<br>صفحة ٤</div></div>
+  <div class="body">
+    <h2>How We Work <span>· كيف نعمل</span></h2>
+    <div class="steps">
+      <div class="step"><i>1</i><div><b>Site survey &amp; requirements</b><p>We visit, measure and confirm what the client needs.</p></div><div class="ar"><b>معاينة الموقع والمتطلبات</b><p class="ar">نزور الموقع ونقيس ونؤكد احتياج العميل.</p></div></div>
+      <div class="step"><i>2</i><div><b>Technical &amp; commercial proposal</b><p>Itemised BOQ in OMR, explicit exclusions, payment milestones.</p></div><div class="ar"><b>العرض الفني والمالي</b><p class="ar">جدول كميات مفصّل بالريال العُماني، واستثناءات صريحة، ومراحل دفع.</p></div></div>
+      <div class="step"><i>3</i><div><b>Execution &amp; coordination</b><p>Work to the approved scope; no work outside the BOQ without a signed variation.</p></div><div class="ar"><b>التنفيذ والتنسيق</b><p class="ar">العمل وفق النطاق المعتمد، ولا عمل خارج الجدول دون أمر تغيير موقّع.</p></div></div>
+      <div class="step"><i>4</i><div><b>Testing, commissioning &amp; handover</b><p>Tests, as-built drawings where applicable, and a clean handover.</p></div><div class="ar"><b>الاختبار والتشغيل والتسليم</b><p class="ar">اختبارات ومخططات منفّذة (As-built) عند الحاجة وتسليم نظيف.</p></div></div>
+      <div class="step"><i>5</i><div><b>Warranty &amp; maintenance</b><p>Defined warranty terms and optional periodic maintenance.</p></div><div class="ar"><b>الضمان والصيانة</b><p class="ar">شروط ضمان واضحة وصيانة دورية اختيارية.</p></div></div>
+    </div>
+    <p class="note">This page describes our standard approach and can be adapted per project. · تصف هذه الصفحة منهجنا المعتاد وتُكيَّف حسب كل مشروع.</p>
+  </div>
+  <div class="ftr"><span>CR 1361188 · Muscat</span><span>Snow.wing.oman@gmail.com · @GSW.OMAN</span><span>+968 95087873 · 76761808</span></div>
+</section>
+
+<!-- 5 PROJECTS -->
+<section class="page">
+  <div class="hdr"><div class="hl"><span class="mono"><span class="g">G</span><span class="s">S</span><span class="w">W</span></span><div><b>GLOBAL SNOW WING</b><br>شركة الجناح الثلجي العالمية</div></div><div class="hr">Company Profile · Page 5 / 6<br>صفحة ٥</div></div>
+  <div class="body">
+    <h2>Selected Projects <span>· مشاريع مختارة</span></h2>
+    <p>A list of completed and ongoing projects with client, scope and year. <span class="ar" style="display:block;margin-top:1.5mm">قائمة بالمشاريع المنجزة والجارية مع العميل والنطاق والسنة.</span></p>
+    <table>
+      <tr><th>Project · المشروع</th><th>Client · العميل</th><th>Scope · النطاق</th><th>Year · السنة</th></tr>
+      <tr><td>[____]</td><td>[____]</td><td>[____]</td><td>[____]</td></tr>
+      <tr><td>[____]</td><td>[____]</td><td>[____]</td><td>[____]</td></tr>
+      <tr><td>[____]</td><td>[____]</td><td>[____]</td><td>[____]</td></tr>
+      <tr><td>[____]</td><td>[____]</td><td>[____]</td><td>[____]</td></tr>
+      <tr><td>[____]</td><td>[____]</td><td>[____]</td><td>[____]</td></tr>
+      <tr><td>[____]</td><td>[____]</td><td>[____]</td><td>[____]</td></tr>
+    </table>
+    <div class="cream" style="margin-top:8mm"><p class="note" style="margin:0">Placeholders are intentional: project names, clients and years must come from GSW's own records and client approvals. · العلامات المفتوحة مقصودة: أسماء المشاريع والعملاء والسنوات تُؤخذ من سجلات الشركة وبموافقة العملاء.</p></div>
+  </div>
+  <div class="ftr"><span>CR 1361188 · Muscat</span><span>Snow.wing.oman@gmail.com · @GSW.OMAN</span><span>+968 95087873 · 76761808</span></div>
+</section>
+
+<!-- 6 CONTACT -->
+<section class="page">
+  <div class="hdr"><div class="hl"><span class="mono"><span class="g">G</span><span class="s">S</span><span class="w">W</span></span><div><b>GLOBAL SNOW WING</b><br>شركة الجناح الثلجي العالمية</div></div><div class="hr">Company Profile · Page 6 / 6<br>صفحة ٦</div></div>
+  <div class="body">
+    <h2>Contact Us <span>· تواصل معنا</span></h2>
+    <div class="contact">
+      <div class="cbox"><small>Company · الشركة</small><b>Global Snow Wing International Co.</b><b class="ar" style="font-family:Tajawal">شركة الجناح الثلجي العالمية</b><small>Commercial Registration</small><b>CR No. 1361188 · Muscat, Oman</b></div>
+      <div class="cbox"><small>Chief Executive Officer · الرئيس التنفيذي</small><b>Fadi Sami Yacoub</b><b class="ar" style="font-family:Tajawal">فادي سامي يعقوب</b></div>
+      <div class="cbox"><small>Email · البريد</small><b>Snow.wing.oman@gmail.com</b><small>Instagram</small><b>@GSW.OMAN</b></div>
+      <div class="cbox"><small>Phone / WhatsApp · الهاتف / واتساب</small><b>+968 95087873</b><b>+968 76761808 · 76761807 · 94488867</b></div>
+    </div>
+    <p class="note" style="margin-top:6mm">[____] Office address to be added. · يُضاف عنوان المكتب.</p>
+    <div class="thanks">Thank you for choosing <span>Global Snow Wing</span><br>We Build Your Vision<div class="ar" style="text-align:center;font-family:Amiri;font-size:6.5mm;color:var(--gold);margin-top:2mm">نبني رؤيتك</div></div>
+  </div>
+  <div class="ftr"><span>CR 1361188 · Muscat</span><span>Snow.wing.oman@gmail.com · @GSW.OMAN</span><span>+968 95087873 · 76761808</span></div>
+</section>
+</body>
+</html>
