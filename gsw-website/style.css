@@ -66,6 +66,11 @@ p{margin:0}
 .bp-building path{stroke:var(--gold);stroke-width:2}
 .bp-building .win{stroke:rgba(214,187,127,.55);stroke-width:1.2}
 .bp-dim path{stroke:rgba(247,244,238,.35);stroke-width:1;stroke-dasharray:4 4}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;
+  -webkit-mask-image:radial-gradient(closest-side,#000 72%,transparent);mask-image:radial-gradient(closest-side,#000 72%,transparent)}
+.hero-stage .blueprint{transition:opacity .6s}
+.hero-stage.is-3d .blueprint{opacity:0}
+.hero-stage.is-3d .stage-tag{display:none}
 .stage-tag{position:absolute;bottom:0;inset-inline-start:0;font-size:12px;color:rgba(247,244,238,.5);border:1px solid var(--line);padding:2px 10px}
 
 /* Sections */
